@@ -9,3 +9,24 @@
             sans-serif;
     }
 }
+
+html, body {
+    color: #666;
+}
+
+.menu {
+    border-bottom: 1px solid #CCC !important;
+    background-color: #F1ECE9 !important;
+    box-shadow: 0 1px 1px #CCC;
+}
+.menu .pure-form {
+    margin-left: 1em;
+    display: inline-block;
+}
+.menu .menu-right {
+    float: right;
+}
+.menu .menu-border {
+    height: 5px;
+    background: linear-gradient(90deg, #FB264C, #FDD34E 25%, #6ECB9A 50%, #569AFC 75%);
+}
