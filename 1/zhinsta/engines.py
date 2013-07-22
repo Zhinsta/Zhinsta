@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from flask_sqlalchemy import SQLAlchemy
+from flaskext.sqlalchemy import SQLAlchemy
 
-from . import app
+from .app import app
 from settings import (MYSQL_USER, MYSQL_PASS, MYSQL_HOST,
                       MYSQL_PORT, MYSQL_DB)
 

@@ -3,7 +3,6 @@
 from flask import Flask
 
 from . import views
-
-app = Flask(__name__)
+from .app import app
 
 app.register_blueprint(views.blueprint)

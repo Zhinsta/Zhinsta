@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+
+from datetime import datetime
+
+from ..engines import db
+
+
+class UserModel(db.Model):
+    __tablename__ = 'user'
+    ukey = db.Column(db.CHAR(32), primary_key=True)
+    access_token = db.Column(db.VARCHAR(255), index=True, nullable=False)
+    username = db.Column(db.VARCHAR(255), index=True, nullable=False)
+    date_created = db.Column(db.DateTime(),
+                             index=True, nullable=False,
+                             default=datetime.now())
