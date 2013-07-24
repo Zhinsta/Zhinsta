@@ -7,6 +7,7 @@ from flask import request
 from flask import redirect
 from flask import url_for
 from flask import session
+from flask import render_template
 
 from ..instagram.client import InstagramAPI
 
@@ -22,7 +23,7 @@ from ..engines import db
 class HomeView(views.MethodView):
 
     def get(self):
-        return 'ok!'
+        return render_template('login.html')
 
 
 class ProfileView(views.MethodView):
