@@ -31,6 +31,9 @@ html, body {
 .menu .menu-right {
     float: right;
 }
+.menu .menu-right a {
+    display: inline-block;
+}
 .menu .menu-border {
     height: 5px;
     background-image: linear-gradient(90deg, #FB264C, #FDD34E 25%, #6ECB9A 50%, #569AFC 75%);
