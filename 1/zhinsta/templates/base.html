@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% block title %}
+    中文圈 - Zhinsta，instagram中文社区
+    {% endblock %}
+    </title>
+    <link rel="stylesheet" href="/static/css/pure-min.css"/>
+    <link rel="stylesheet" href="/static/css/g.css"/>
+    {% block style %}{% endblock %}
+    <script type="text/javascript" src="/static/js/less-1.3.3.min.js"></script>
+</head>
+<body class="{{ body_class }}">
+    {% block header %}
+    <div class="pure-menu pure-menu-open pure-menu-horizontal menu">
+        <div class="menu-border"></div>
+        <a href="{{ url_for('view.home') }}" class="pure-menu-heading">Zhinsta</a>
+        <ul>
+            <li class="pure-menu-selected"><a href="#">中文圈</a></li>
+            <li><a href="#">站台</a></li>
+        </ul>
+        <form class="pure-form" action="{{ url_for('view.search_user') }}" method="GET">
+            <input type="text" class="pure-input-rounded" placeholder="搜索" name="wd">
+        </form>
+        <div class="menu-right">
+            {% if has_login %}
+                <a href="{{ url_for('view.profile', ukey=ukey) }}">{{ username }}</a>
+                <a href="{{ url_for('view.logout') }}">注销</a>
+            {% else %}
+                <a href="{{ url_for('view.login') }}" class="menu-login">Instagram登录</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
+    {% block main %}{% endblock %}
+    {% block footer %}
+    <div class="pure-g-r footer">
+        <p class="pure-u-1-2">Zhinsta，instagram中文社区</p>
+        <p class="pure-u-1-2 copyright">
+          © All Right Reserved.2013
+        </p>
+    </div>
+    {% endblock %}
+</body>
+</html>

@@ -6,21 +6,121 @@ from flask import session
 from flask import request
 from flask import redirect
 from flask import url_for
+from flask import render_template
 
 from ..models.user import UserModel
+
+
+def has_login():
+    if not session.get('ukey', ''):
+        return False
+    if not session.get('access_token', ''):
+        return False
+    if not session.get('username', ''):
+        return False
+    user = UserModel.query.get(session['ukey'])
+    if not user:
+        return False
+    return user
 
 
 def login_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if not session.get('ukey', '') or not session.get('access_token', ''):
-            #return redirect(url_for('view.login'))
-            return 'not login'
-        user = UserModel.query.get(session['ukey'])
-        if not user:
-            #return redirect(url_for('view.login'))
-            return 'not login'
+        if not has_login():
+            return redirect(url_for('view.login'))
         request.ukey = session['ukey']
         request.access_token = session['access_token']
         return func(*args, **kwargs)
+    return wrapper
+
+
+def render(template, **argkv):
+    ukey = session.get('ukey', '')
+    if ukey:
+        argkv.update({'has_login': True,
+                      'username': session.get('username', ''),
+                      'ukey': ukey})
+    else:
+        argkv.update({'has_login': False})
+    return render_template(template, **argkv)
+
+
+def apierror(message=None, status_code=500):
+    if not message:
+        message = \
+            u'服务器不给力，勇敢的少年啊，请重新试一次吧'
+    return (render('error.html', message=message), status_code)
+
+
+def notfound(message=u'404 not found', status_code=404):
+    return apierror(message, status_code)
+
+
+class Pager(object):
+
+    def __init__(self, limit, total, url):
+        self.limit = limit
+        self.total = total
+        self.total_page = (total-1)/limit+1
+        self.current_page = 1
+        self.offset = 0
+        if '?' in url:
+            url = url+'&'
+        else:
+            if not url.endswith('/'):
+                url = url+'/'
+            url = url+'?'
+        self.url = url+'page='
+
+    def set_offset(self, offset):
+        offset = int(offset)
+        if offset < 0:
+            offset = 0
+        if offset > self.total-1:
+            offset = self.total-1
+        self.offset = offset
+        self.current_page = offset/self.limit + 1
+
+    def set_current_page(self, current_page):
+        current_page = int(current_page)
+        if current_page < 1:
+            current_page = 1
+        if current_page > self.total_page:
+            current_page = self.total_page
+        self.current_page = current_page
+        self.offset = (current_page-1)*self.limit
+
+    def __call__(self, length=5):
+        start = 1
+        if self.current_page > 2:
+            start = self.current_page - 2
+        end = start + length - 1
+        if end > self.total_page:
+            end = self.total_page
+        pager = []
+        for url in range(start, end+1):
+            active = False
+            if url == self.current_page:
+                active = True
+            pager.append({'url': self.url+str(url),
+                          'cnt': url,
+                          'active': active})
+        pre_url = self.url+str(start)
+        if self.current_page > start:
+            pre_url = self.url+str(self.current_page-1)
+        next_url = self.url+str(end)
+        if self.current_page < self.total_page:
+            next_url = self.url+str(self.current_page+1)
+        return render('pager.html', pager=pager,
+                      pre_url=pre_url, next_url=next_url)
+
+
+def error_handle(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except:
+            return apierror()
     return wrapper

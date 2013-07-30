@@ -12,4 +12,4 @@ MYSQL_PORT = sae.const.MYSQL_PORT
 INSTAGRAM_CLIENT_ID = 'f89feb5623484adf9347b12c845af9aa'
 INSTAGRAM_CLIENT_SECRET = '8f0479ee76c548889200612149cd8633'
 INSTAGRAM_REDIRECT_URI = 'http://zhinsta.sinaapp.com/instagram/redirect/'
-INSTAGRAM_SCOPE = ['basic']
+INSTAGRAM_SCOPE = ['comments', 'relationships', 'likes']

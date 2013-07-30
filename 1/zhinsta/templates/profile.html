@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% set body_class="page-profile" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet/less" href="/static/css/profile.less"/>
+{% endblock %}
+{% block main %}
+<div class="main">
+    <div class="info">
+        <div class="info-l">
+            <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
+            <div class="info-l-txt">
+                <h1>{{ user.username }}<span>正在关注</span></h1>
+                <p>{{ user.bio }}</p>
+                <p><i class="icon-cloud"></i><a href="{{ user.website }}" target="_blank">{{ user.website }}</a></p>
+                <p><i class="icon-plus"></i><a href="#" class="js-collect">收录到中文圈</a></p>
+                <p><i class="icon-bookmark"></i>已收录到中文圈</p>
+            </div>
+        </div>
+        <ul class="info-r">
+            <li>
+            <span>{{ user.counts.followed_by }}</span>
+                <a href="{{ url_for('view.follower', ukey=user.id) }}">关注者</a>
+            </li>
+            <li>
+            <span>{{ user.counts.follows }}</span>
+                <a href="{{ url_for('view.following', ukey=user.id) }}">关注中</a>
+            </li>
+        </ul>
+    </div>
+
+    <ul class="photos">
+        {% for feed in feeds %}
+        <li>
+            <a href="{{ url_for('view.media', mid=feed.id) }}" target="_blank" class="photo">
+                <img width="225" height="210" src="{{ feed.images.low_resolution.url }}" alt="" />
+                <span>{{ feed.created_time }}&nbsp;{{ feed.like_count }}<i class="icon-heart"></i>&nbsp;{{ feed.comment_count }}<i class="icon-comment"></i></span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

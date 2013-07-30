@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% set body_class="page-search-tag" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet/less" href="/static/css/search.less"/>
+{% endblock %}
+{% block main %}
+<div class="main">
+    <h1>搜索“{{ wd }}”</h1>
+    <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+            <li><a href="{{ url_for('view.search_user', wd=wd) }}">用户</a></li>
+            <li class="pure-menu-selected"><a href="{{ url_for('view.search_tag', wd=wd) }}">标签</a></li>
+        </ul>
+    </div>
+    <ul class="tag-list">
+        {% for tag in tags %}
+        <li>
+            <a href="{{ url_for('view.tag', name=tag.name) }}" target="_blank">{{ tag.name }}</a>
+            <span>{{ tag.media_count }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

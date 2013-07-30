@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set body_class="page-members" %}
+{% block style %}
+<link rel="stylesheet/less" href="/static/css/members.less"/>
+{% endblock %}
+{% block main %}
+<div class="main">
+    <h1>中文圈</h1>
+    <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+            <li><a href="{{ url_for('view.members') }}">收录的人</a></li>
+            <li class="pure-menu-selected"><a href="{{ url_for('view.members') }}">成员</a></li>
+        </ul>
+    </div>
+    <p>用instagram登录Zhinsta后，你就成为Zhinsta的成员。这里展示所有成员，来认识在玩Zhinsta的人吧。</p>
+    <ul class="people">
+        {% for user in users %}
+        <li>
+        <a href="{{ url_for('view.profile', ukey=user.ukey) }}" target="_blank">
+            <img width="150" height="150" src="{{ user.pic }}" alt="{{ user.full_name }}" />
+            <span>{{ user.username }}</span>
+        </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {{ pager()|safe }}
+</div>
+{% endblock %}

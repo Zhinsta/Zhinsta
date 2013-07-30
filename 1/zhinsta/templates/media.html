@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% set body_class="media-profile" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet/less" href="/static/css/media.less"/>
+{% endblock %}
+{% block main %}
+<div class="main">
+    <div class="info">
+        <div class="info-l">
+            <img width="50" height="50" src="{{ media.user.profile_picture }}" alt="{{ media.user.full_name }}" />
+            <div class="info-l-txt">
+                <h1>{{ media.user.username }}<span>正在关注</span></h1>
+                <p><i class="icon-plus"></i><a href="#" class="js-collect">收录到中文圈</a></p>
+                <p><i class="icon-bookmark"></i>已收录到中文圈</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="media">
+        <div class="media-l">
+            <img src="{{ media.get_standard_resolution_url() }}" alt="" />
+        </div>
+        <div class="media-r">
+            <div class="media-info">
+                <p>
+                    <span class="media-time">{{ media.created_time }}</span>
+                    <span class="media-place"></span>
+                </p>
+                <p class="media-desc">
+                    {{ media.caption.text }}
+                </p>
+                <p>
+                    <a href="#" class="tag">#sky</a>&nbsp;
+                    <a href="#" class="tag">#sola</a>&nbsp;
+                    <a href="#" class="tag">#beijing</a>&nbsp;
+                </p>
+            </div>
+
+            <div class="media-love">
+                <i class="icon-heart"></i><span>{{ media.like_count }}</span>
+                <p class="media-lovers">
+                    {% for like in likes %}
+                    <a href="{{ url_for('view.profile', ukey=like.id) }}" target="_blank">{{ like.username }}</a>
+                    {% endfor %}
+                    等人赞过
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="comments">
+        <h2>大家在说</h2>
+        <ul>
+            {% for comment in media.comments %}
+            <li>
+            <a href="{{ url_for('view.profile', ukey=comment.user.id) }}" target="_blank">
+                    <img src="{{ comment.user.profile_picture }}" alt="{{ comment.user.full_name }}" />
+                </a>
+                <div class="comments">
+                    <a href="{{ url_for('view.profile', ukey=comment.user.id) }}" target="_blank">{{ comment.user.username }}</a>
+                    <p>{{ comment.text }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

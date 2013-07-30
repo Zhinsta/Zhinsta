@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set body_class="page-search-user" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet/less" href="/static/css/search.less"/>
+{% endblock %}
+{% block main %}
+<div class="main">
+    <h1>搜索“{{ wd }}”</h1>
+    <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+            <li class="pure-menu-selected"><a href="{{ url_for('view.search_user', wd=wd) }}">用户</a></li>
+            <li><a href="{{ url_for('view.search_tag', wd=wd) }}">标签</a></li>
+        </ul>
+    </div>
+    <ul class="people">
+        {% for user in users %}
+        <li>
+            <a href="{{ url_for('view.profile', ukey=user.id) }}" target="_blank" class="people-photo">
+                <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
+                <span>{{ user.username }}</span>
+            </a>
+            <a href="#" class="people-collected"><i title="已收录到中文圈" class="icon-bookmark"></i></a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
