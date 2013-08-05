@@ -31,9 +31,9 @@
                     {{ media.caption.text }}
                 </p>
                 <p>
-                    <a href="#" class="tag">#sky</a>&nbsp;
-                    <a href="#" class="tag">#sola</a>&nbsp;
-                    <a href="#" class="tag">#beijing</a>&nbsp;
+                    {% for tag in (media.tags or []) %}
+                    <a href="{{ url_for('view.tag', name=tag.name) }}" class="tag">#{{ tag.name }}</a>&nbsp;
+                    {% endfor %}
                 </p>
             </div>
 

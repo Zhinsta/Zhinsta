@@ -5,7 +5,8 @@ from flask import Blueprint
 from .home import (HomeView, OAuthCodeView, LoginView,
                    LogoutView, ProfileView, MembersView,
                    SearchUserView, SearchTagView, MediaProfileView,
-                   TagView, FollowerView, FollowingView)
+                   TagView, FollowerView, FollowingView,
+                   WelcomeView)
 
 blueprint = Blueprint('view', __name__)
 
@@ -45,3 +46,6 @@ blueprint.add_url_rule('/follower/<ukey>/',
 blueprint.add_url_rule('/following/<ukey>/',
                        view_func=FollowingView.as_view(b'following'),
                        endpoint='following')
+blueprint.add_url_rule('/welcome/',
+                       view_func=WelcomeView.as_view(b'welcome'),
+                       endpoint='welcome')

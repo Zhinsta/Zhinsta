@@ -64,6 +64,7 @@ class OAuthCodeView(views.MethodView):
             return apierror()
         user = (UserModel.query
                 .filter_by(ukey=access_token[1]['id']).first())
+        redirect_url = 'view.members'
         if user:
             user.access_token = access_token[0]
             user.username = access_token[1]['username']
@@ -74,11 +75,12 @@ class OAuthCodeView(views.MethodView):
                              pic=access_token[1]['profile_picture'],
                              access_token=access_token[0])
             db.session.add(user)
+            redirect_url = 'view.welcome'
         db.session.commit()
         session['ukey'] = user.ukey
         session['username'] = user.username
         session['access_token'] = user.access_token
-        return redirect(url_for('view.members'))
+        return redirect(url_for(redirect_url))
 
 
 class LoginView(views.MethodView):
@@ -184,3 +186,13 @@ class FollowingView(views.MethodView):
         user = api.user(ukey)
         users = api.user_follows(ukey)[0]
         return render('follower.html', user=user, users=users)
+
+
+class WelcomeView(views.MethodView):
+
+    @error_handle
+    @login_required
+    def get(self):
+        ukey = session.get('ukey', '')
+        user = UserModel.query.get(ukey)
+        return render('welcome.html', name=user.username, img=user.pic)
