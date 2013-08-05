@@ -24,7 +24,7 @@
         <div class="media-r">
             <div class="media-info">
                 <p>
-                    <span class="media-time">{{ media.created_time }}</span>
+                    <span class="media-time">{{ media.created_time|time_since }}</span>
                     <span class="media-place"></span>
                 </p>
                 <p class="media-desc">
