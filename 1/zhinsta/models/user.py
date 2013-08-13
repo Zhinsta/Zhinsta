@@ -14,3 +14,21 @@ class UserModel(db.Model):
     date_created = db.Column(db.DateTime(),
                              index=True, nullable=False,
                              default=datetime.now())
+
+
+class FollowModel(db.Model):
+    __tablename__ = 'follow'
+    ukey = db.Column(db.VARCHAR(128), primary_key=True)
+    follow_ukey = db.Column(db.VARCHAR(128), primary_key=True)
+    date_created = db.Column(db.DateTime(),
+                             index=True, nullable=False,
+                             default=datetime.now())
+
+
+class LikeModel(db.Model):
+    __tablename__ = 'like'
+    ukey = db.Column(db.VARCHAR(128), primary_key=True)
+    media = db.Column(db.VARCHAR(128), primary_key=True)
+    date_created = db.Column(db.DateTime(),
+                             index=True, nullable=False,
+                             default=datetime.now())

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import json
 from functools import wraps
 
 from flask import session
@@ -8,7 +9,9 @@ from flask import redirect
 from flask import url_for
 from flask import render_template
 
-from ..models.user import UserModel
+from .instagram.client import InstagramAPI
+
+from .models.user import UserModel
 
 
 def has_login():
@@ -124,3 +127,16 @@ def error_handle(func):
         except:
             return apierror()
     return wrapper
+
+
+def isfollow(ukey):
+    api = InstagramAPI(access_token=session.get('access_token', ''))
+    data = api.user_relationship(user_id=ukey)
+    outgoing = data.outgoing_status
+    if outgoing == 'follows':
+        return True
+    return False
+
+
+def json_response(ret):
+    return json.dumps({'result': ret})

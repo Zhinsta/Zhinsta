@@ -12,7 +12,15 @@
             <img width="50" height="50" src="{{ media.user.profile_picture }}" alt="{{ media.user.full_name }}" />
             </a>
             <div class="info-l-txt">
-                <h1>{{ media.user.username }}<span>正在关注</span></h1>
+                <h1>{{ media.user.username }}
+                    {% if not isme %}
+                    {% if isfollow %}
+                    <span>正在关注</span>
+                    {% else %}
+                    <span>未关注</span>
+                    {% endif %}
+                    {% endif %}
+                </h1>
                 <!--
                 <p><i class="icon-plus"></i><a href="#" class="js-collect">收录到中文圈</a></p>
                 <p><i class="icon-bookmark"></i>已收录到中文圈</p>

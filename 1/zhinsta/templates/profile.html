@@ -12,7 +12,15 @@
             <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
             </a>
             <div class="info-l-txt">
-                <h1>{{ user.username }}<span>正在关注</span></h1>
+                <h1>{{ user.username }}
+                    {% if not isme %}
+                    {% if isfollow %}
+                    <span>正在关注</span>
+                    {% else %}
+                    <span>未关注</span>
+                    {% endif %}
+                    {% endif %}
+                </h1>
                 <p>{{ user.bio }}</p>
                 <p><i class="icon-cloud"></i><a href="{{ user.website }}">{{ user.website }}</a></p>
                 <!--
