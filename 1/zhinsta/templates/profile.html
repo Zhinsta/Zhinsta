@@ -8,13 +8,17 @@
 <div class="main">
     <div class="info">
         <div class="info-l">
+            <a href="{{ url_for('view.profile', ukey=user.id) }}">
             <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
+            </a>
             <div class="info-l-txt">
                 <h1>{{ user.username }}<span>正在关注</span></h1>
                 <p>{{ user.bio }}</p>
-                <p><i class="icon-cloud"></i><a href="{{ user.website }}" target="_blank">{{ user.website }}</a></p>
+                <p><i class="icon-cloud"></i><a href="{{ user.website }}">{{ user.website }}</a></p>
+                <!--
                 <p><i class="icon-plus"></i><a href="#" class="js-collect">收录到中文圈</a></p>
                 <p><i class="icon-bookmark"></i>已收录到中文圈</p>
+                -->
             </div>
         </div>
         <ul class="info-r">
@@ -32,7 +36,7 @@
     <ul class="photos">
         {% for feed in feeds %}
         <li>
-            <a href="{{ url_for('view.media', mid=feed.id) }}" target="_blank" class="photo">
+            <a href="{{ url_for('view.media', mid=feed.id) }}" class="photo">
                 <img width="225" height="210" src="{{ feed.images.low_resolution.url }}" alt="" />
                 <span>{{ feed.created_time|time_since }}&nbsp;{{ feed.like_count }}<i class="icon-heart"></i>&nbsp;{{ feed.comment_count }}<i class="icon-comment"></i></span>
             </a>

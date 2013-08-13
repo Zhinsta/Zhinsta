@@ -8,13 +8,17 @@
 <div class="main">
     <div class="info">
         <div class="info-l">
+            <a href="{{ url_for('view.profile', ukey=user.id) }}">
             <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
+            </a>
             <div class="info-l-txt">
                 <h1>{{ user.username }}<span>正在关注</span></h1>
                 <p>{{ user.bio }}</p>
-                <p><i class="icon-cloud"></i><a href="{{ user.website }}" target="_blank">{{ user.website }}</a></p>
+                <p><i class="icon-cloud"></i><a href="{{ user.website }}">{{ user.website }}</a></p>
+                <!--
                 <p><i class="icon-plus"></i><a href="#" class="js-collect">收录到中文圈</a></p>
                 <p><i class="icon-bookmark"></i>已收录到中文圈</p>
+                -->
             </div>
         </div>
         <ul class="info-r">
@@ -28,15 +32,17 @@
             </li>
         </ul>
     </div>
-    <h2>关注中</h2>
+    <h2>{{ message }}</h2>
     <ul class="people">
         {% for u in users %}
         <li>
-            <a href="{{ url_for('view.profile', ukey=u.id) }}" target="_blank" class="people-photo">
+            <a href="{{ url_for('view.profile', ukey=u.id) }}" class="people-photo">
                 <img width="150" height="150" src="{{ u.profile_picture }}" alt="{{ u.full_name }}" />
                 <span>{{ u.username }}</span>
             </a>
+            <!--
             <a href="#" class="people-collected"><i title="已收录到中文圈" class="icon-bookmark"></i></a>
+            -->
         </li>
         {% endfor %}
     </ul>

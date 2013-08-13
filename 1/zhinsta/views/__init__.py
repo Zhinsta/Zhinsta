@@ -6,7 +6,7 @@ from .home import (HomeView, OAuthCodeView, LoginView,
                    LogoutView, ProfileView, MembersView,
                    SearchUserView, SearchTagView, MediaProfileView,
                    TagView, FollowerView, FollowingView,
-                   WelcomeView)
+                   WelcomeView, ShowView, AboutView)
 
 blueprint = Blueprint('view', __name__)
 
@@ -49,3 +49,9 @@ blueprint.add_url_rule('/following/<ukey>/',
 blueprint.add_url_rule('/welcome/',
                        view_func=WelcomeView.as_view(b'welcome'),
                        endpoint='welcome')
+blueprint.add_url_rule('/show/',
+                       view_func=ShowView.as_view(b'show'),
+                       endpoint='show')
+blueprint.add_url_rule('/about/',
+                       view_func=AboutView.as_view(b'about'),
+                       endpoint='about')

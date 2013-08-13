@@ -33,7 +33,7 @@ def time_since(dt, default='刚刚'):
     diff = diff - timedelta(seconds=28800)
     total_seconds = int(diff.total_seconds())
     if total_seconds > 0:
-        if total_seconds < 604800:
+        if total_seconds < 315360000:
             periods = (
                 (total_seconds / 86400, '天'),
                 (total_seconds / 3600, '小时'),

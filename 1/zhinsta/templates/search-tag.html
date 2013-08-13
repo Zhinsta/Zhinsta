@@ -16,7 +16,7 @@
     <ul class="tag-list">
         {% for tag in tags %}
         <li>
-            <a href="{{ url_for('view.tag', name=tag.name) }}" target="_blank">{{ tag.name }}</a>
+            <a href="{{ url_for('view.tag', name=tag.name) }}">{{ tag.name }}</a>
             <span>{{ tag.media_count }}</span>
         </li>
         {% endfor %}

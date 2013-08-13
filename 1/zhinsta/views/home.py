@@ -174,7 +174,8 @@ class FollowerView(views.MethodView):
         api = InstagramAPI(access_token=session.get('access_token', ''))
         user = api.user(ukey)
         users = api.user_followed_by(ukey)[0]
-        return render('follower.html', user=user, users=users)
+        return render('follower.html', user=user, users=users,
+                      message=u'关注者')
 
 
 class FollowingView(views.MethodView):
@@ -185,7 +186,8 @@ class FollowingView(views.MethodView):
         api = InstagramAPI(access_token=session.get('access_token', ''))
         user = api.user(ukey)
         users = api.user_follows(ukey)[0]
-        return render('follower.html', user=user, users=users)
+        return render('follower.html', user=user, users=users,
+                      message=u'关注中')
 
 
 class WelcomeView(views.MethodView):
@@ -196,3 +198,19 @@ class WelcomeView(views.MethodView):
         ukey = session.get('ukey', '')
         user = UserModel.query.get(ukey)
         return render('welcome.html', name=user.username, img=user.pic)
+
+
+class ShowView(views.MethodView):
+
+    @error_handle
+    @login_required
+    def get(self):
+        return render('show.html')
+
+
+class AboutView(views.MethodView):
+
+    @error_handle
+    @login_required
+    def get(self):
+        return render('about.html')

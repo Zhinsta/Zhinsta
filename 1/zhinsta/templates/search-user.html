@@ -16,11 +16,13 @@
     <ul class="people">
         {% for user in users %}
         <li>
-            <a href="{{ url_for('view.profile', ukey=user.id) }}" target="_blank" class="people-photo">
+            <a href="{{ url_for('view.profile', ukey=user.id) }}" class="people-photo">
                 <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
                 <span>{{ user.username }}</span>
             </a>
+            <!--
             <a href="#" class="people-collected"><i title="已收录到中文圈" class="icon-bookmark"></i></a>
+            -->
         </li>
         {% endfor %}
     </ul>

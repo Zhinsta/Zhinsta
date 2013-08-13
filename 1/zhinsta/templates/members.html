@@ -16,7 +16,7 @@
     <ul class="people">
         {% for user in users %}
         <li>
-        <a href="{{ url_for('view.profile', ukey=user.ukey) }}" target="_blank">
+        <a href="{{ url_for('view.profile', ukey=user.ukey) }}">
             <img width="150" height="150" src="{{ user.pic }}" alt="{{ user.full_name }}" />
             <span>{{ user.username }}</span>
         </a>
