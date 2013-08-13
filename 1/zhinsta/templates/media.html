@@ -8,7 +8,9 @@
 <div class="main">
     <div class="info">
         <div class="info-l">
+            <a href="{{ url_for('view.profile', ukey=media.user.id) }}">
             <img width="50" height="50" src="{{ media.user.profile_picture }}" alt="{{ media.user.full_name }}" />
+            </a>
             <div class="info-l-txt">
                 <h1>{{ media.user.username }}<span>正在关注</span></h1>
                 <!--
