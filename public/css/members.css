@@ -1,0 +1,61 @@
+.people {
+  margin: 30px 20px 30px 0;
+  padding: 0;
+  overflow: auto;
+  zoom: 1;
+}
+.people li {
+  position: relative;
+  float: left;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  _display: inline;
+  list-style: none;
+}
+.people .people-photo {
+  float: left;
+  padding: 10px;
+  color: inherit;
+  text-decoration: inherit;
+  border: 1px solid #CCC;
+  box-shadow: 1px 1px 2px #CCC;
+  background: #FFF;
+}
+.people .people-photo span {
+  display: block;
+  margin-top: 0.5em;
+  text-align: center;
+  word-wrap: break-word;
+}
+.people .people-collected,
+.people .people-collect {
+  position: absolute;
+  top: -7px;
+  right: -5px;
+  padding: 5px;
+  font-size: 2em;
+  text-decoration: none;
+  color: #77cc33;
+}
+.people .people-collected i,
+.people .people-collect i {
+  display: block;
+}
+.people .people-collect {
+  top: 0;
+  right: 0;
+  font-size: 1em;
+  color: #FFF;
+  background-color: #00ceff;
+}
+.main-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0;
+  line-height: 24px;
+}
+.main-menu ul li {
+  margin-right: 1em;
+  display: inline-block;
+  vertical-align: middle;
+}

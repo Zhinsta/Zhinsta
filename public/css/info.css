@@ -1,0 +1,49 @@
+.info {
+  margin: 2em 0 0;
+  overflow: hidden;
+  zoom: 1;
+}
+.info .info-l {
+  float: left;
+  width: 600px;
+}
+.info .info-l img {
+  float: left;
+  margin-right: 20px;
+}
+.info .info-l .info-l-txt {
+  font-size: 14px;
+  overflow: hidden;
+}
+.info .info-l .info-l-txt h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+.info .info-l .info-l-txt h1 span {
+  margin-left: 0.5em;
+  padding: 0.25em;
+  vertical-align: middle;
+  font-size: 0.5em;
+  color: #FFF;
+  background-color: #77cc33;
+}
+.info .info-l .info-l-txt i {
+  margin-right: 0.5em;
+}
+.info .info-r {
+  float: right;
+  padding: 0;
+  border: 1px solid #CCC;
+  background: #FFF;
+}
+.info .info-r li {
+  float: right;
+  list-style: none;
+  padding: 10px;
+}
+.info .info-r li span,
+.info .info-r li a {
+  padding: 5px;
+  display: block;
+  text-align: center;
+}
