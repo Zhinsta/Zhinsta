@@ -32,7 +32,7 @@ do
     uglifyjs $file > "./js/${f}"
 done
 
-cp css/*.css ../../svn-zhinsta/1/zhinsta/static/css/
-cp js/*.js ../../svn-zhinsta/1/zhinsta/static/js/
+cp css/*.css ../1/zhinsta/static/css/
+cp js/*.js ../1/zhinsta/static/js/
 
 echo "DONE"

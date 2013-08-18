@@ -1,0 +1,48 @@
+/* errror */
+.page-show .error,
+.page-error .error {
+  margin: 3em auto 0;
+  padding: 1em;
+  width: 600px;
+  line-height: 2;
+  border: 3px dashed #83C7DA;
+}
+.page-show .error :first-child,
+.page-error .error :first-child {
+  margin-top: 0;
+}
+.page-show .error :last-child,
+.page-error .error :last-child {
+  margin-bottom: 0;
+}
+.page-about .about {
+  margin: 3em auto 0;
+  padding: 1em;
+  width: 600px;
+  line-height: 2;
+  border: 3px dashed #CCC;
+  border-radius: 1em;
+}
+.page-about .about :first-child {
+  margin-top: 0;
+}
+.page-about .about :last-child {
+  margin-bottom: 0;
+}
+.page-about .about em {
+  position: relative;
+  font-style: normal;
+  font-size: 1.5em;
+}
+.page-about .about em:before {
+  position: absolute;
+  bottom: -1em;
+  left: 0;
+  width: 100%;
+  height: 1em;
+  overflow: hidden;
+  font-size: 0.5em;
+  line-height: 1;
+  letter-spacing: 0.5em;
+  content: '●●●●●●●●●●●';
+}
