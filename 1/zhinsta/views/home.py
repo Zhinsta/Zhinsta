@@ -161,12 +161,18 @@ class MediaProfileView(views.MethodView):
     def get(self, mid):
         api = InstagramAPI(access_token=session.get('access_token', ''))
         media = api.media(mid)
+        likes = api.media_likes(media_id=mid)
+        isstar = False
+        for i in likes:
+            if session.get('ukey', '') == i.id:
+                isstar = True
         ukey = media.user.id
         isfollows = isfollow(ukey)
         isme = False
         if ukey == session.get('ukey', ''):
             isme = True
-        return render('media.html', media=media, isme=isme, isfollow=isfollows)
+        return render('media.html', media=media, isme=isme,
+                      isfollow=isfollows, likes=likes[:5], isstar=isstar)
 
 
 class TagView(views.MethodView):

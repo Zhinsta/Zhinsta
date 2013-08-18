@@ -15,10 +15,10 @@
                 <h1>{{ media.user.username }}
                     {% if not isme %}
                     {% if isfollow %}
-                    <a href="#" class="jsFollow" data-ukey="{{ user.id }}" data-action="unfollow" title="取消关注">正在关注</a>
+                    <a href="#" class="jsFollow" data-ukey="{{ media.user.id }}" data-action="unfollow" title="取消关注">正在关注</a>
                     {% else %}
                     <span></span>
-                    <a href="#" class="jsFollow" data-ukey="{{ user.id }}" data-action="follow" title="关注TA">未关注</a>
+                    <a href="#" class="jsFollow" data-ukey="{{ media.user.id }}" data-action="follow" title="关注TA">未关注</a>
                     {% endif %}
                     {% endif %}
                 </h1>
@@ -51,14 +51,15 @@
             </div>
 
             <div class="media-love">
+                {% if not isstar %}
                 <a href="#" class="jsLove" data-action="like" data-num="{{ media.like_count }}" data-mid="{{ media.id}}">
                         <i class="icon-heart"></i><span>{{ media.like_count }}</span>
                 </a>
-                <!--
+                {% else %}
                 <a href="#" class="jsLove" data-action="unlike" data-num="{{ media.like_count }}" data-mid="{{ media.id}}">
                         <i class="icon-heart loved"></i><span class="loved">{{ media.like_count }}</span>
                 </a>
-                -->
+                {% endif %}
                 <p class="media-lovers">
                     {% for like in likes %}
                     <a href="{{ url_for('view.profile', ukey=like.id) }}">{{ like.username }}</a>
