@@ -1,5 +1,5 @@
-.people {
-  margin: 30px 20px 30px 0;
+.people ul {
+  margin: 30px 0 30px -30px;
   padding: 0;
   overflow: auto;
   zoom: 1;
@@ -7,7 +7,7 @@
 .people li {
   position: relative;
   float: left;
-  margin-left: 20px;
+  margin-left: 30px;
   margin-bottom: 20px;
   _display: inline;
   list-style: none;
@@ -20,12 +20,16 @@
   border: 1px solid #CCC;
   box-shadow: 1px 1px 2px #CCC;
   background: #FFF;
+  width: 150px;
 }
 .people .people-photo span {
   display: block;
   margin-top: 0.5em;
+  overflow: hidden;
+  width: 100%;
   text-align: center;
-  word-wrap: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .people .people-collected,
 .people .people-collect {

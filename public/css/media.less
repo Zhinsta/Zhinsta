@@ -1,2 +1,44 @@
 @import "./info.less";
 @import "./comments.less";
+
+.page-media {
+    .media {
+        margin: 2em 0 0 0;
+        overflow: auto;
+    }
+    .media-l {
+        float: left;
+    }
+    .media-r {
+        float: right;
+        width: 350px;
+    }
+    .media-info {
+        border-bottom: 1px dashed #CCC;
+        margin-bottom: 1em;
+        p {
+            margin: 0 0 1em 0;
+        }
+    }
+    .media-time,
+    .media-place {
+        font-size: 14px;
+    }
+    .media-desc {
+        &:before {
+            content: '\275D';
+        }
+        &:after {
+            content: '\275E';
+        }
+    }
+    .media-love {
+        p {
+            display: inline;
+        }
+        i,
+        span {
+            color: #FB264C;
+        }
+    }
+}

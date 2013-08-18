@@ -27,6 +27,9 @@
   color: #FFF;
   background-color: #77cc33;
 }
+.info .info-l .info-l-txt p {
+  margin: 0.5em 0;
+}
 .info .info-l .info-l-txt i {
   margin-right: 0.5em;
 }

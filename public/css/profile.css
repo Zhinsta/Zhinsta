@@ -1,5 +1,5 @@
-.photos {
-  margin: 30px 20px 30px 0;
+.photos ul {
+  margin: 30px 0 30px -30px;
   padding: 0;
   overflow: auto;
   zoom: 1;
@@ -7,8 +7,8 @@
 .photos li {
   position: relative;
   float: left;
-  margin-left: 20px;
-  margin-bottom: 20px;
+  margin-left: 30px;
+  margin-bottom: 1em;
   _display: inline;
   list-style: none;
 }
@@ -59,6 +59,9 @@
   font-size: 0.5em;
   color: #FFF;
   background-color: #77cc33;
+}
+.info .info-l .info-l-txt p {
+  margin: 0.5em 0;
 }
 .info .info-l .info-l-txt i {
   margin-right: 0.5em;

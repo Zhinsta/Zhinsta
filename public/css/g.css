@@ -18,6 +18,9 @@ a {
 a:hover {
     text-decoration: underline;
 }
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
 .main {
     width: 980px;
     min-height: 500px;
@@ -27,6 +30,8 @@ a:hover {
 
 /* menu */
 .menu {
+    height: 40px;
+    overflow: auto;
     padding-bottom: 1px;
     border-bottom: 1px solid #CCC !important;
     background: #FFF;
@@ -37,21 +42,19 @@ a:hover {
     color: #666;
 }
 .menu .menu-heading {
-    display: inline-block;
+    float: left;
     margin: 0 0.5em;
-    vertical-align: middle;
     color: #565d64;
     text-transform: uppercase;
     text-decoration: none;
     font-size: 90%;
+    height: 34px;
+    line-height: 34px;
 }
 .menu ul {
-    position: relative;
-    visibility: visible;
+    float: left;
     margin: 0;
     padding: 0;
-    display: inline-block;
-    vertical-align: middle;
     height: 34px;
     list-style: none;
 }
@@ -65,31 +68,33 @@ a:hover {
     line-height: 1.5em;
     text-decoration: none;
     white-space: nowrap;
-    border-bottom: 1px solid transparent;
+    border-bottom: 2px solid transparent;
 }
 .menu li.menu-selected:nth-child(1) a,
 .menu li:nth-child(1) a:hover,
 .menu li:nth-child(1) a:focus {
-    border-bottom: 1px solid #FB264C;
+    border-bottom: 2px solid #FB264C;
 }
 .menu li.menu-selected:nth-child(2) a,
 .menu li:nth-child(2) a:hover,
 .menu li:nth-child(2) a:focus {
-    border-bottom: 1px solid #FDD34E;
+    border-bottom: 2px solid #FDD34E;
 }
 .menu li.menu-selected:nth-child(3) a,
 .menu li:nth-child(3) a:hover,
 .menu li:nth-child(3) a:focus {
-    border-bottom: 1px solid #6ECB9A;
+    border-bottom: 2px solid #6ECB9A;
 }
 .menu li.menu-selected:nth-child(4) a,
 .menu li:nth-child(4) a:hover,
 .menu li:nth-child(4) a:focus {
-    border-bottom: 1px solid #83C7DA;
+    border-bottom: 2px solid #83C7DA;
 }
 
 /* menu-form */
 .menu .menu-form {
+    float: left;
+    margin-top: 2px;
     margin-left: 1em;
     display: inline-block;
 }
@@ -125,10 +130,10 @@ a:hover {
     line-height: 1.5em;
     text-decoration: none;
     white-space: nowrap;
-    border-bottom: 1px solid transparent;
+    border-bottom: 2px solid transparent;
 }
 .menu-right a:hover {
-    border-bottom: 1px solid #83C7DA;
+    border-bottom: 2px solid #83C7DA;
 }
 
 /* menu-border */

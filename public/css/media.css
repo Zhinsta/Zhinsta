@@ -27,6 +27,9 @@
   color: #FFF;
   background-color: #77cc33;
 }
+.info .info-l .info-l-txt p {
+  margin: 0.5em 0;
+}
 .info .info-l .info-l-txt i {
   margin-right: 0.5em;
 }
@@ -48,6 +51,7 @@
   text-align: center;
 }
 .comments {
+  width: 600px;
   margin-top: 2em;
 }
 .comments ul {
@@ -74,4 +78,39 @@
 .comments ul li .comment div,
 .comments ul li .comment p {
   margin: 0;
+}
+.page-media .media {
+  margin: 2em 0 0 0;
+  overflow: auto;
+}
+.page-media .media-l {
+  float: left;
+}
+.page-media .media-r {
+  float: right;
+  width: 350px;
+}
+.page-media .media-info {
+  border-bottom: 1px dashed #CCC;
+  margin-bottom: 1em;
+}
+.page-media .media-info p {
+  margin: 0 0 1em 0;
+}
+.page-media .media-time,
+.page-media .media-place {
+  font-size: 14px;
+}
+.page-media .media-desc:before {
+  content: '\275D';
+}
+.page-media .media-desc:after {
+  content: '\275E';
+}
+.page-media .media-love p {
+  display: inline;
+}
+.page-media .media-love i,
+.page-media .media-love span {
+  color: #FB264C;
 }
