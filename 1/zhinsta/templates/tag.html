@@ -17,8 +17,8 @@
                     <img width="200" height="200" src="{{ pic.images.low_resolution.url }}" alt="" />
                     <!-- TODO -->
                     <p class="photo-author">
-                        <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
-                        敏明君敏明君敏明君敏明君
+                        <img src="{{ pic.user.profile_picture }}" alt="{{ pic.user.full_name }}" width="32" height="32" />
+                        {{ pic.user.username }}
                     </p>
                     <span>{{ pic.created_time|time_since }}&nbsp;{{ pic.like_count }}<i class="icon-heart"></i>&nbsp;{{ pic.comment_count }}<i class="icon-comment"></i></span>
                 </a>
