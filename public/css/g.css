@@ -43,13 +43,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 .menu .menu-heading {
     float: left;
-    margin: 0 0.5em;
+    margin: 0 20px 0 10px;
     color: #565d64;
     text-transform: uppercase;
     text-decoration: none;
     font-size: 90%;
-    height: 34px;
-    line-height: 34px;
+    height: 36px;
+    line-height: 36px;
 }
 .menu ul {
     float: left;
@@ -126,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
 .menu-right a {
     display: inline-block;
     vertical-align: middle;
-    padding: 5px 20px;
+    padding: 5px 10px;
     line-height: 1.5em;
     text-decoration: none;
     white-space: nowrap;

@@ -30,6 +30,9 @@
   text-align: center;
   word-wrap: break-word;
 }
+.photos .photo .icon-heart {
+  color: #FB264C;
+}
 .info {
   margin: 2em 0 0;
   overflow: hidden;
