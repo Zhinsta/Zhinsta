@@ -94,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
 /* menu-form */
 .menu .menu-form {
     float: left;
-    margin-top: 3px;
+    margin-top: 2px;
     margin-left: 1em;
     display: inline-block;
 }
@@ -135,6 +135,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 .menu-right a:hover {
     border-bottom: 2px solid #83C7DA;
+}
+
+/* menu-border */
+.menu .menu-border {
+    /* height: 25px;
+    background-image: linear-gradient(90deg, #FB264C, #FDD34E 20%, #6ECB9A 50%, #83C7DA 75%); */
 }
 
 /* footer */
@@ -179,3 +185,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0.5em;
 }
 
+/* loved */
+.loved {
+    color: #FB264C !important;
+}

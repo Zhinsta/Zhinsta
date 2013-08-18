@@ -32,8 +32,8 @@
   text-align: center;
   word-wrap: break-word;
 }
-.photos .photo .icon-heart {
-  color: #FB264C;
+.photos .photo i {
+  margin-left: 2px;
 }
 .photos .photo:hover .photo-author {
   display: block;

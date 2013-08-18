@@ -74,7 +74,7 @@
   overflow: hidden;
 }
 .info .info-l .info-l-txt h1 {
-  margin: 0;
+  margin: -4px 0 0 0;
   font-size: 1.5em;
 }
 .info .info-l .info-l-txt h1 span {
