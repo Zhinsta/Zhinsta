@@ -7,6 +7,7 @@ from flask import url_for
 from flask import session
 
 from ..instagram.client import InstagramAPI
+from ..instagram.bind import InstagramAPIError
 
 from ..settings import INSTAGRAM_CLIENT_ID
 from ..settings import INSTAGRAM_CLIENT_SECRET
@@ -43,8 +44,10 @@ class ProfileView(views.MethodView):
         api = InstagramAPI(access_token=session.get('access_token', ''))
         try:
             user = api.user(user_id=ukey)
-        except:
-            return notfound(u'貌似这个用户你不能查看或者服务器暂时出问题了')
+        except InstagramAPIError, e:
+            if e.error_type == 'APINotAllowedError':
+                return render('profile-noauth.html', ukey=ukey)
+            return notfound(u'服务器暂时出问题了')
         feeds = api.user_recent_media(user_id=ukey)[0]
         isfollows = isfollow(ukey)
         isme = False
