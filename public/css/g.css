@@ -8,6 +8,8 @@ html, body {
         "Microsoft YaHei",
         "wenquanyi micro hei",
         sans-serif;
+    font-size: 100%;
+    line-height: 1.5;
 }
 a {
     color: #069;
@@ -114,9 +116,16 @@ a:hover {
     background-image: linear-gradient(90deg, #FB264C, #FDD34E 25%, #6ECB9A 50%, #569AFC 75%);
 }
 
-
-.footer {
+/* footer */
+.page-login .footer {
+    width: auto;
+    margin: 0;
     padding: 10px 2em;
+}
+.footer {
+    width: 980px;
+    padding: 0 10px;
+    margin: 0 auto 30px;
     height: 60px;
     line-height: 60px;
 }

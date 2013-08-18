@@ -15,4 +15,6 @@ do
     lessc -c $file > "./css/${f}"
 done
 
+cp css/*.css ../../svn-zhinsta/1/zhinsta/static/css/
+
 echo "DONE"
