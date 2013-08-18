@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .menu .menu-heading {
     float: left;
-    margin: 0 20px 0 10px;
+    margin: 0 20px 0 30px;
     color: #565d64;
     text-transform: uppercase;
     text-decoration: none;
@@ -122,6 +122,7 @@ h1, h2, h3, h4, h5, h6 {
 /* menu-right */
 .menu .menu-right {
     float: right;
+    margin-right: 20px;
 }
 .menu-right a {
     display: inline-block;

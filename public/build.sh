@@ -16,5 +16,6 @@ do
 done
 
 cp css/*.css ../../svn-zhinsta/1/zhinsta/static/css/
+cp js/*.js ../../svn-zhinsta/1/zhinsta/static/js/
 
 echo "DONE"

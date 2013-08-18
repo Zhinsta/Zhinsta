@@ -1,10 +1,10 @@
-.page-search-user .people ul {
+.people ul {
   margin: 30px 0 30px -30px;
   padding: 0;
   overflow: auto;
   zoom: 1;
 }
-.page-search-user .people li {
+.people li {
   position: relative;
   float: left;
   margin-left: 30px;
@@ -12,17 +12,22 @@
   _display: inline;
   list-style: none;
 }
-.page-search-user .people .people-photo {
+.people .people-photo {
   float: left;
+  width: 150px;
   padding: 10px;
   color: inherit;
   text-decoration: inherit;
   border: 1px solid #CCC;
   box-shadow: 1px 1px 2px #CCC;
   background: #FFF;
-  width: 150px;
+  border-radius: 5px;
 }
-.page-search-user .people .people-photo span {
+.people .people-photo img {
+  display: block;
+}
+.people .people-photo span {
+  margin-top: 0.5em;
   display: block;
   overflow: hidden;
   width: 100%;
@@ -30,8 +35,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.page-search-user .people .people-collected,
-.page-search-user .people .people-collect {
+.people .people-collected,
+.people .people-collect {
   position: absolute;
   top: -7px;
   right: -5px;
@@ -40,24 +45,24 @@
   text-decoration: none;
   color: #77cc33;
 }
-.page-search-user .people .people-collected i,
-.page-search-user .people .people-collect i {
+.people .people-collected i,
+.people .people-collect i {
   display: block;
 }
-.page-search-user .people .people-collect {
+.people .people-collect {
   top: 0;
   right: 0;
   font-size: 1em;
   color: #FFF;
   background-color: #00ceff;
 }
-.page-search-user .main-menu ul {
+.main-menu ul {
   list-style: none;
   padding: 0;
   margin: 1em 0;
   line-height: 24px;
 }
-.page-search-user .main-menu ul li {
+.main-menu ul li {
   margin-right: 1em;
   display: inline-block;
   vertical-align: middle;

@@ -13,25 +13,47 @@
   list-style: none;
 }
 .photos .photo {
+  position: relative;
   float: left;
   padding: 10px;
   color: inherit;
   text-decoration: inherit;
   border: 1px solid #CCC;
   box-shadow: 1px 1px 2px #CCC;
+  border-radius: 5px;
   background: #FFF;
 }
 .photos .photo img {
-  width: 200px;
-  height: 210px;
+  display: block;
 }
 .photos .photo span {
+  margin-top: 0.5em;
   display: block;
   text-align: center;
   word-wrap: break-word;
 }
 .photos .photo .icon-heart {
   color: #FB264C;
+}
+.photos .photo:hover .photo-author {
+  display: block;
+}
+.photos .photo-author {
+  margin: 0.5em 0 0 0;
+  padding-bottom: 0.5em;
+  width: 200px;
+  height: 32px;
+  line-height: 32px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid #CCC;
+}
+.photos .photo-author img {
+  float: left;
+  margin-right: 10px;
+  height: 32px;
+  width: 32px;
 }
 .info {
   margin: 2em 0 0;
