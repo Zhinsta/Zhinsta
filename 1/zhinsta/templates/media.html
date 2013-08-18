@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% set body_class="media-profile" %}
+{% set body_class="page-media" %}
 {% block style %}
 <link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet/less" href="/static/css/media.less"/>
+<link rel="stylesheet" href="/static/css/media.css"/>
 {% endblock %}
 {% block main %}
 <div class="main">
@@ -15,9 +15,10 @@
                 <h1>{{ media.user.username }}
                     {% if not isme %}
                     {% if isfollow %}
-                    <span>正在关注</span>
+                    <a href="#" class="jsFollow" data-ukey="{{ user.id }}" data-action="unfollow" title="取消关注">正在关注</a>
                     {% else %}
-                    <span>未关注</span>
+                    <span></span>
+                    <a href="#" class="jsFollow" data-ukey="{{ user.id }}" data-action="follow" title="关注TA">未关注</a>
                     {% endif %}
                     {% endif %}
                 </h1>
@@ -50,7 +51,14 @@
             </div>
 
             <div class="media-love">
-                <i class="icon-heart"></i><span>{{ media.like_count }}</span>
+                <a href="#" class="jsLove" data-action="like" data-num="{{ media.like_count }}" data-mid="{{ media.id}}">
+                        <i class="icon-heart"></i><span>{{ media.like_count }}</span>
+                </a>
+                <!--
+                <a href="#" class="jsLove" data-action="unlike" data-num="{{ media.like_count }}" data-mid="{{ media.id}}">
+                        <i class="icon-heart loved"></i><span class="loved">{{ media.like_count }}</span>
+                </a>
+                -->
                 <p class="media-lovers">
                     {% for like in likes %}
                     <a href="{{ url_for('view.profile', ukey=like.id) }}">{{ like.username }}</a>
@@ -61,6 +69,7 @@
         </div>
     </div>
 
+    {% if media.comments %}
     <div class="comments">
         <h2>大家在说</h2>
         <ul>
@@ -77,5 +86,9 @@
             {% endfor %}
         </ul>
     </div>
+    {% endif %}
 </div>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/g.min.js"></script>
 {% endblock %}

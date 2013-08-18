@@ -1,11 +1,11 @@
-<ul class="pure-paginator">
-    <li><a class="pure-button prev" href="{{ pre_url }}">&#171;</a></li>
+<ul class="pagination">
+    <li><a href="{{ pre_url }}">&#171;</a></li>
     {% for url in pager %}
         {% if url.active %}
-        <li><a class="pure-button pure-button-active" href="{{ url.url }}">{{ url.cnt }}</a></li>
+        <li><a href="{{ url.url }}">{{ url.cnt }}</a></li>
         {% else %}
-        <li><a class="pure-button" href="{{ url.url }}">{{ url.cnt }}</a></li>
+        <li><a href="{{ url.url }}">{{ url.cnt }}</a></li>
         {% endif %}
     {% endfor %}
-    <li><a class="pure-button next" href="{{ next_url }}">&#187;</a></li>
+    <li><a href="{{ next_url }}">&#187;</a></li>
 </ul>

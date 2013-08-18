@@ -1,7 +1,30 @@
 {% extends "base.html" %}
 {% set body_class="page-about" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/other.css"/>
+{% endblock %}
 {% block main %}
 <div class="main">
-    关于？
+    <div class="about">
+        <p><em>ZHINSTA</em> 是一个中文Instagram社区，旨在帮助人们发现懂生活的人。</p>
+        <p>我们将带领你：</p>
+        <ul>
+            <li>更轻易的找到你喜欢的中文用户。</li>
+            <li>更轻松的展示你优秀的图片</li>
+            <li>更友好的讨论你感兴趣的话题。</li>
+        </ul>
+
+        <p>你可以通过以下途径了解我们的最新动向</p>
+        <ul>
+            <li>博客：<a href="http://zhinsta.diandian.com">http://zhinsta.diandian.com</a></li>
+            <li>weibo：<a href="http://weibo.com/zhinsta">http://weibo.com/zhinsta</a></li>
+            <li>豆瓣小站：<a href="http://site.douban.com/215856/">http://site.douban.com/215856/</a></li>
+            <li>QQ群：33165199（申请时注明你的InstagramID）</li>
+            <li>instagram：<a href="http://zhinsta.sinaapp.com/profile/448621019/">http://zhinsta.sinaapp.com/profile/448621019/</a></li>
+        </ul>
+
+        <p>你可以通过邮箱联系我们
+        zhinsta#gmail.com（请将#替换成@）</p>
+    </div>
 </div>
 {% endblock %}

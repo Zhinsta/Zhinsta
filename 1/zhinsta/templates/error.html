@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% set body_class="page-error" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/other.css"/>
+{% endblock %}
 {% block main %}
 <div class="main">
+    <div class="error">
     {{ message }}
+    </div>
 </div>
 {% endblock %}

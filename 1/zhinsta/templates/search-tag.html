@@ -2,17 +2,18 @@
 {% set body_class="page-search-tag" %}
 {% block style %}
 <link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet/less" href="/static/css/search.less"/>
+<link rel="stylesheet" href="/static/css/search.css"/>
 {% endblock %}
 {% block main %}
 <div class="main">
     <h1>搜索“{{ wd }}”</h1>
-    <div class="pure-menu pure-menu-open pure-menu-horizontal">
+    <div class="main-menu">
         <ul>
             <li><a href="{{ url_for('view.search_user', wd=wd) }}">用户</a></li>
-            <li class="pure-menu-selected"><a href="{{ url_for('view.search_tag', wd=wd) }}">标签</a></li>
+            <li class="main-menu-selected">标签</li>
         </ul>
     </div>
+    {% if tags %}
     <ul class="tag-list">
         {% for tag in tags %}
         <li>
@@ -21,5 +22,10 @@
         </li>
         {% endfor %}
     </ul>
+    {% else %}
+    <div class="error">
+    抱歉没有搜到任何结果......
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

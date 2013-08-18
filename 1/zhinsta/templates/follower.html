@@ -2,7 +2,7 @@
 {% set body_class="page-profile" %}
 {% block style %}
 <link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet/less" href="/static/css/follower.less"/>
+<link rel="stylesheet" href="/static/css/follower.css"/>
 {% endblock %}
 {% block main %}
 <div class="main">
@@ -15,14 +15,17 @@
                 <h1>{{ user.username }}
                     {% if not isme %}
                     {% if isfollow %}
-                    <span>正在关注</span>
+                    <a href="#" class="jsFollow" data-ukey="{{ user.id }}" data-action="unfollow" title="取消关注">正在关注</a>
                     {% else %}
-                    <span>未关注</span>
+                    <span></span>
+                    <a href="#" class="jsFollow" data-ukey="{{ user.id }}" data-action="follow" title="关注TA">未关注</a>
                     {% endif %}
                     {% endif %}
                 </h1>
                 <p>{{ user.bio }}</p>
+                {% if user.website %}
                 <p><i class="icon-cloud"></i><a href="{{ user.website }}">{{ user.website }}</a></p>
+                {% endif %}
                 <!--
                 <p><i class="icon-plus"></i><a href="#" class="js-collect">收录到中文圈</a></p>
                 <p><i class="icon-bookmark"></i>已收录到中文圈</p>
@@ -41,18 +44,23 @@
         </ul>
     </div>
     <h2>{{ message }}</h2>
-    <ul class="people">
-        {% for u in users %}
-        <li>
-            <a href="{{ url_for('view.profile', ukey=u.id) }}" class="people-photo">
-                <img width="150" height="150" src="{{ u.profile_picture }}" alt="{{ u.full_name }}" />
-                <span>{{ u.username }}</span>
-            </a>
-            <!--
-            <a href="#" class="people-collected"><i title="已收录到中文圈" class="icon-bookmark"></i></a>
-            -->
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="people">
+        <ul>
+            {% for u in users %}
+            <li>
+                <a href="{{ url_for('view.profile', ukey=u.id) }}" class="people-photo">
+                    <img width="150" height="150" src="{{ u.profile_picture }}" alt="{{ u.full_name }}" />
+                    <span>{{ u.username }}</span>
+                </a>
+                <!--
+                <a href="#" class="people-collected"><i title="已收录到中文圈" class="icon-bookmark"></i></a>
+                -->
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/g.min.js"></script>
 {% endblock %}
