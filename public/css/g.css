@@ -20,7 +20,9 @@ a:hover {
 }
 .main {
     width: 980px;
-    margin: 0 auto 30px;
+    min-height: 500px;
+    overflow: auto;
+    margin: 0 auto 3em;
 }
 
 /* menu */
@@ -113,7 +115,7 @@ a:hover {
 /* menu-border */
 .menu .menu-border {
     height: 5px;
-    background-image: linear-gradient(90deg, #FB264C, #FDD34E 25%, #6ECB9A 50%, #569AFC 75%);
+    background-image: linear-gradient(90deg, #FB264C, #FDD34E 20%, #6ECB9A 50%, #83C7DA 75%);
 }
 
 /* footer */
@@ -121,6 +123,7 @@ a:hover {
     width: auto;
     margin: 0;
     padding: 10px 2em;
+    border-top: none;
 }
 .footer {
     width: 980px;
@@ -128,6 +131,7 @@ a:hover {
     margin: 0 auto 30px;
     height: 60px;
     line-height: 60px;
+    border-top: 1px solid #CCC;
 }
 .footer-name {
     float: left;
