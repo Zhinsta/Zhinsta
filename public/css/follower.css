@@ -77,13 +77,17 @@
   margin: -4px 0 0 0;
   font-size: 1.5em;
 }
-.info .info-l .info-l-txt h1 span {
+.info .info-l .info-l-txt h1 a {
   margin-left: 0.5em;
   padding: 0.25em;
   vertical-align: middle;
   font-size: 0.5em;
   color: #FFF;
   background-color: #77cc33;
+  text-decoration: none;
+}
+.info .info-l .info-l-txt h1 a:hover {
+  background-color: #6ECB9A;
 }
 .info .info-l .info-l-txt p {
   margin: 0.5em 0;

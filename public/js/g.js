@@ -99,6 +99,10 @@ $(function() {
      */
     $('body').on('click', '.jsLove', function(e) {
         e.preventDefault();
+        if (this.sign) {
+            return;
+        }
+        this.sign = true;
         var $me = $(this);
         var action = $me.data('action');
         var number = parseInt($me.data('num'), 10);
@@ -136,40 +140,33 @@ $(function() {
 
     /**
      * follow & unfollow
+     */
     $('body').on('click', '.jsFollow', function(e) {
         e.preventDefault();
+        if (this.sign) {
+            return;
+        }
+        this.sign = true;
         var $me = $(this);
         var action = $me.data('action');
-        var mid = $me.data('ukey');
+        var ukey = $me.data('ukey');
         var api = Apis[action];
         var template = {
-            like: '<a href="#" class="jsLove" ' +
-                    'data-action="unlike" data-num="{n}" data-mid="{mid}">' +
-                    '<i class="icon-heart loved"></i>' +
-                    '<span class="loved">{n}</span>' +
-                  '</a>',
-            unlike: '<a href="#" class="jsLove" ' +
-                    'data-action="like" data-num="{n}" data-mid="{mid}">' +
-                    '<i class="icon-heart"></i><span>{n}</span>' +
-                  '</a>'
+            follow: '<a href="#" class="jsFollow" ' +
+                        'data-action="unfollow" data-ukey="{v}" ' +
+                        'title="取消关注">正在关注</a>',
+            unfollow: '<a href="#" class="jsFollow" ' +
+                        'data-action="follow" data-ukey="{v}" ' +
+                        'title="关注TA">未关注</a>'
         };
 
-        api(mid, function() {
-            if (action === 'like') {
-                number++;
-            } else {
-                number--;
-            }
+        api(ukey, function() {
             $me.replaceWith(
                 Utils.format(
                     template[action],
-                    {
-                        mid: mid,
-                        n: number
-                    }
+                    ukey
                 )
             );
         });
     });
-     */
 });
