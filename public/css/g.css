@@ -20,14 +20,21 @@ a:hover {
 }
 .main {
     width: 980px;
-    margin: 0 auto 30px;
+    min-height: 500px;
+    overflow: auto;
+    margin: 0 auto 3em;
 }
 
 /* menu */
 .menu {
+    padding-bottom: 1px;
     border-bottom: 1px solid #CCC !important;
-    // background-image: linear-gradient(0deg, #EEE, #FFF 40%, #FFF 100%) !important;
-    box-shadow: 0 1px 1px #CCC;
+    background: #FFF;
+    background-image: linear-gradient(0deg, #F6F6F6, #FFF 100%);
+    box-shadow: 0 1px 0 #EEE;
+}
+.menu a {
+    color: #666;
 }
 .menu .menu-heading {
     display: inline-block;
@@ -58,14 +65,27 @@ a:hover {
     line-height: 1.5em;
     text-decoration: none;
     white-space: nowrap;
+    border-bottom: 1px solid transparent;
 }
-.menu li a:hover,
-.menu li a:focus {
-    background: #eee;
+.menu li.menu-selected:nth-child(1) a,
+.menu li:nth-child(1) a:hover,
+.menu li:nth-child(1) a:focus {
+    border-bottom: 1px solid #FB264C;
 }
-.menu .menu-selected {
-    /* color: #000; */
-    background: #eee;
+.menu li.menu-selected:nth-child(2) a,
+.menu li:nth-child(2) a:hover,
+.menu li:nth-child(2) a:focus {
+    border-bottom: 1px solid #FDD34E;
+}
+.menu li.menu-selected:nth-child(3) a,
+.menu li:nth-child(3) a:hover,
+.menu li:nth-child(3) a:focus {
+    border-bottom: 1px solid #6ECB9A;
+}
+.menu li.menu-selected:nth-child(4) a,
+.menu li:nth-child(4) a:hover,
+.menu li:nth-child(4) a:focus {
+    border-bottom: 1px solid #83C7DA;
 }
 
 /* menu-form */
@@ -105,15 +125,16 @@ a:hover {
     line-height: 1.5em;
     text-decoration: none;
     white-space: nowrap;
+    border-bottom: 1px solid transparent;
 }
 .menu-right a:hover {
-    background: #eee;
+    border-bottom: 1px solid #83C7DA;
 }
 
 /* menu-border */
 .menu .menu-border {
     height: 5px;
-    background-image: linear-gradient(90deg, #FB264C, #FDD34E 25%, #6ECB9A 50%, #569AFC 75%);
+    background-image: linear-gradient(90deg, #FB264C, #FDD34E 20%, #6ECB9A 50%, #83C7DA 75%);
 }
 
 /* footer */
@@ -121,6 +142,7 @@ a:hover {
     width: auto;
     margin: 0;
     padding: 10px 2em;
+    border-top: none;
 }
 .footer {
     width: 980px;
@@ -128,6 +150,7 @@ a:hover {
     margin: 0 auto 30px;
     height: 60px;
     line-height: 60px;
+    border-top: 1px solid #CCC;
 }
 .footer-name {
     float: left;
