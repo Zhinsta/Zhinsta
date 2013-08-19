@@ -35,6 +35,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 1px;
     border-bottom: 1px solid #CCC !important;
     background: #FFF;
+    -webkit-background-image: linear-gradient(0deg, #F6F6F6, #FFF 100%);
+    -moz-background-image: linear-gradient(0deg, #F6F6F6, #FFF 100%);
+    -ms-background-image: linear-gradient(0deg, #F6F6F6, #FFF 100%);
+    -o-background-image: linear-gradient(0deg, #F6F6F6, #FFF 100%);
     background-image: linear-gradient(0deg, #F6F6F6, #FFF 100%);
     box-shadow: 0 1px 0 #EEE;
 }
@@ -63,12 +67,24 @@ h1, h2, h3, h4, h5, h6 {
     vertical-align: middle;
 }
 .menu li a {
+    position: relative;
     display: block;
     padding: 5px 20px;
     line-height: 1.5em;
     text-decoration: none;
     white-space: nowrap;
     border-bottom: 2px solid transparent;
+}
+.menu li.menu-selected a:before,
+.menu li a:hover:before,
+.menu li a:focus:before {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    content: '';
+    margin-left: -4px;
+    border: 4px dashed transparent;
+    border-bottom: 4px solid #FB264C;
 }
 .menu li.menu-selected:nth-child(1) a,
 .menu li:nth-child(1) a:hover,
@@ -80,15 +96,30 @@ h1, h2, h3, h4, h5, h6 {
 .menu li:nth-child(2) a:focus {
     border-bottom: 2px solid #FDD34E;
 }
+.menu li.menu-selected:nth-child(2) a:before,
+.menu li:nth-child(2) a:hover:before,
+.menu li:nth-child(2) a:focus:before {
+    border-bottom-color: #FDD34E;
+}
 .menu li.menu-selected:nth-child(3) a,
 .menu li:nth-child(3) a:hover,
 .menu li:nth-child(3) a:focus {
     border-bottom: 2px solid #6ECB9A;
 }
+.menu li.menu-selected:nth-child(3) a:before,
+.menu li:nth-child(3) a:hover:before,
+.menu li:nth-child(3) a:focus:before {
+    border-bottom-color: #6ECB9A;
+}
 .menu li.menu-selected:nth-child(4) a,
 .menu li:nth-child(4) a:hover,
 .menu li:nth-child(4) a:focus {
     border-bottom: 2px solid #83C7DA;
+}
+.menu li.menu-selected:nth-child(4) a:before,
+.menu li:nth-child(4) a:hover:before,
+.menu li:nth-child(4) a:focus:before {
+    border-bottom-color: #83C7DA;
 }
 
 /* menu-form */
@@ -125,6 +156,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 20px;
 }
 .menu-right a {
+    position: relative;
     display: inline-block;
     vertical-align: middle;
     padding: 5px 10px;
@@ -133,7 +165,18 @@ h1, h2, h3, h4, h5, h6 {
     white-space: nowrap;
     border-bottom: 2px solid transparent;
 }
-.menu-right a:hover {
+.menu-right a:hover:before,
+.menu-right a:focus:before {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    content: '';
+    margin-left: -4px;
+    border: 4px dashed transparent;
+    border-bottom: 4px solid #83C7DA;
+}
+.menu-right a:hover,
+.menu-right a:focus {
     border-bottom: 2px solid #83C7DA;
 }
 
