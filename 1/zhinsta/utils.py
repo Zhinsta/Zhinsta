@@ -127,11 +127,11 @@ def error_handle(func):
         try:
             return func(*args, **kwargs)
         except InstagramAPIError, e:
-            trackback.print_exc()
+            traceback.print_exc()
             print e.error_message
             return apierror()
         except Exception, e:
-            trackback.print_exc()
+            traceback.print_exc()
             print e.message
             return apierror()
     return wrapper
@@ -143,11 +143,11 @@ def api_error_handle(func):
         try:
             return func(*args, **kwargs)
         except InstagramAPIError, e:
-            trackback.print_exc()
+            traceback.print_exc()
             print e.error_message
             raise e
         except Exception, e:
-            trackback.print_exc()
+            traceback.print_exc()
             print e.message
             raise
     return wrapper
