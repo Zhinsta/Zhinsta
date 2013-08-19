@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import traceback
 from functools import wraps
 
 from flask import session
@@ -10,6 +11,7 @@ from flask import url_for
 from flask import render_template
 
 from .instagram.client import InstagramAPI
+from .instagram.bind import InstagramAPIError
 
 from .models.user import UserModel
 
@@ -124,10 +126,32 @@ def error_handle(func):
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except:
+        except InstagramAPIError, e:
+            trackback.print_exc()
+            print e.error_message
+            return apierror()
+        except Exception, e:
+            trackback.print_exc()
+            print e.message
             return apierror()
     return wrapper
 
+
+def api_error_handle(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except InstagramAPIError, e:
+            trackback.print_exc()
+            print e.error_message
+            raise e
+        except Exception, e:
+            trackback.print_exc()
+            print e.message
+            raise
+    return wrapper
+        
 
 def isfollow(ukey):
     api = InstagramAPI(access_token=session.get('access_token', ''))

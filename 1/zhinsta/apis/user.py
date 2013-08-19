@@ -11,13 +11,14 @@ from ..instagram.client import InstagramAPI
 from ..engines import db
 from ..utils import login_required
 from ..utils import json_response
+from ..utils import api_error_handle
 from ..models.user import FollowModel
 from ..models.user import LikeModel
 
 
 class HelloWorldView(views.MethodView):
 
-    @login_required
+    @api_error_handle
     def get(self):
         ret_type = request.args.get('type', '')
         if ret_type == 'json':
@@ -29,6 +30,7 @@ class HelloWorldView(views.MethodView):
 
 class FollowView(views.MethodView):
 
+    @api_error_handle
     @login_required
     def get(self):
         action = request.args.get('action', 'follow')
@@ -50,6 +52,7 @@ class FollowView(views.MethodView):
 
 class LikeView(views.MethodView):
 
+    @api_error_handle
     @login_required
     def get(self):
         action = request.args.get('action', 'like')

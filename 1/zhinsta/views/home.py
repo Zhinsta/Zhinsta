@@ -239,6 +239,5 @@ class ShowView(views.MethodView):
 class AboutView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self):
         return render('about.html')
