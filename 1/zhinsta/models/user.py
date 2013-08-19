@@ -13,7 +13,7 @@ class UserModel(db.Model):
     pic = db.Column(db.VARCHAR(255), index=True, nullable=False)
     date_created = db.Column(db.DateTime(),
                              index=True, nullable=False,
-                             default=datetime.now())
+                             default=datetime.now)
 
 
 class FollowModel(db.Model):
@@ -22,7 +22,7 @@ class FollowModel(db.Model):
     follow_ukey = db.Column(db.VARCHAR(128), primary_key=True)
     date_created = db.Column(db.DateTime(),
                              index=True, nullable=False,
-                             default=datetime.now())
+                             default=datetime.now)
 
 
 class LikeModel(db.Model):
@@ -31,4 +31,4 @@ class LikeModel(db.Model):
     media = db.Column(db.VARCHAR(128), primary_key=True)
     date_created = db.Column(db.DateTime(),
                              index=True, nullable=False,
-                             default=datetime.now())
+                             default=datetime.now)
