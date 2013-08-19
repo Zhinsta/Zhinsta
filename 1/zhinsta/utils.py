@@ -149,7 +149,7 @@ def api_error_handle(func):
         except Exception, e:
             traceback.print_exc()
             print e.message
-            raise
+            raise e
     return wrapper
         
 
