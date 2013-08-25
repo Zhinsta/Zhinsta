@@ -85,39 +85,39 @@ h1, h2, h3, h4, h5, h6 {
     border: 4px dashed transparent;
     border-bottom: 4px solid #FB264C;
 }
-.menu li.menu-selected:nth-child(1) a,
-.menu li:nth-child(1) a:hover,
-.menu li:nth-child(1) a:focus {
+.menu li.menu-selected.red a,
+.menu li.red a:hover,
+.menu li.red a:focus {
     border-bottom-color: #FB264C;
 }
-.menu li.menu-selected:nth-child(2) a,
-.menu li:nth-child(2) a:hover,
-.menu li:nth-child(2) a:focus {
+.menu li.menu-selected.yellow a,
+.menu li.yellow a:hover,
+.menu li.yellow a:focus {
     border-bottom-color: #FDD34E;
 }
-.menu li.menu-selected:nth-child(2) a:before,
-.menu li:nth-child(2) a:hover:before,
-.menu li:nth-child(2) a:focus:before {
+.menu li.menu-selected.yellow a:before,
+.menu li.yellow a:hover:before,
+.menu li.yellow a:focus:before {
     border-bottom-color: #FDD34E;
 }
-.menu li.menu-selected:nth-child(3) a,
-.menu li:nth-child(3) a:hover,
-.menu li:nth-child(3) a:focus {
+.menu li.menu-selected.green a,
+.menu li.green a:hover,
+.menu li.green a:focus {
     border-bottom-color: #6ECB9A;
 }
-.menu li.menu-selected:nth-child(3) a:before,
-.menu li:nth-child(3) a:hover:before,
-.menu li:nth-child(3) a:focus:before {
+.menu li.menu-selected.green a:before,
+.menu li.green a:hover:before,
+.menu li.green a:focus:before {
     border-bottom-color: #6ECB9A;
 }
-.menu li.menu-selected:nth-child(4) a,
-.menu li:nth-child(4) a:hover,
-.menu li:nth-child(4) a:focus {
+.menu li.menu-selected.blue a,
+.menu li.blue a:hover,
+.menu li.blue a:focus {
     border-bottom-color: #83C7DA;
 }
-.menu li.menu-selected:nth-child(4) a:before,
-.menu li:nth-child(4) a:hover:before,
-.menu li:nth-child(4) a:focus:before {
+.menu li.menu-selected.blue a:before,
+.menu li.blue a:hover:before,
+.menu li.blue a:focus:before {
     border-bottom-color: #83C7DA;
 }
 
