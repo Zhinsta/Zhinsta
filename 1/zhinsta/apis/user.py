@@ -39,7 +39,8 @@ class FollowView(views.MethodView):
         if action == 'follow':
             api.follow_user(user_id=ukey)
             m = FollowModel(ukey=session.get('ukey', ''),
-                            follow_ukey=ukey)
+                            follow_ukey=ukey,
+                            username=session.get('username', ''))
             db.session.add(m)
         if action == 'unfollow':
             api.unfollow_user(user_id=ukey)
@@ -60,7 +61,8 @@ class LikeView(views.MethodView):
         api = InstagramAPI(access_token=session.get('access_token', ''))
         if action == 'like':
             api.like_media(media_id=mid)
-            m = LikeModel(ukey=session.get('ukey', ''), media=mid)
+            m = LikeModel(ukey=session.get('ukey', ''), media=mid,
+                          username=session.get('username', ''))
             db.session.add(m)
         if action == 'unlike':
             api.unlike_media(media_id=mid)
