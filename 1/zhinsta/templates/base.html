@@ -17,9 +17,9 @@
         <div class="menu-border"></div>
         <a href="{{ url_for('view.home') }}" class="menu-heading">Zhinsta</a>
         <ul>
-            <li{% if menu_selected==0 %} class="menu-selected"{% endif %}><a href="{{ url_for('view.members') }}">中文圈</a></li>
-            <li{% if menu_selected==1 %} class="menu-selected"{% endif %}><a href="{{ url_for('view.show') }}">展台</a></li>
-            <li{% if menu_selected==2 %} class="menu-selected"{% endif %}><a href="{{ url_for('view.about') }}">关于</a></li>
+            <li class="red {% if menu_selected==0 %}menu-selected{% endif %}"><a href="{{ url_for('view.members') }}">中文圈</a></li>
+            <li class="yellow {% if menu_selected==1 %}menu-selected{% endif %}"><a href="{{ url_for('view.show') }}">展台</a></li>
+            <li class="green {% if menu_selected==2 %}menu-selected{% endif %}"><a href="{{ url_for('view.about') }}">关于</a></li>
         </ul>
         <form class="menu-form" action="{{ url_for('view.search_user') }}" method="GET">
             <input type="text" placeholder="搜索" name="wd">
