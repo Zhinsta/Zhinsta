@@ -169,4 +169,83 @@ $(function() {
             );
         });
     });
+
+
+    /**
+     * loading style
+     */
+    function Stopwatch() {
+        this.$stopwatch =
+            $('<span id="stopwatch" class="stopwatch" style="display:none;">' +
+                '<span class="stopwatch-tp"></span>' +
+                '<span class="stopwatch-hd"></span>' +
+                '<span class="stopwatch-ft"></span>' +
+                '<span class="stopwatch-back"></span>' +
+                '<span class="stopwatch-fore"></span>' +
+                '<span class="stopwatch-point"></span>' +
+            '</span>');
+        this.$stopwatch.appendTo('body');
+        if (this.useTween()) {
+            this._transform = Modernizr.prefixed('transform');
+        }
+    }
+
+    Stopwatch.prototype.useTween = function() {
+        return !Modernizr.cssanimations && typeof TWEEN !== 'undefined';
+    };
+
+    Stopwatch.prototype.start = function() {
+        var me = this;
+        if (me.starting) {
+            return;
+        }
+        me.starting = true;
+        me.$stopwatch
+            .removeClass('stopwatch-done')
+            .css('display', 'block')
+            .addClass('bounceInDown');
+        if (me.useTween()) {
+            var $point = me.$stopwatch.find('.stopwatch-point');
+            var tween = new TWEEN.Tween({ deg: -90 })
+                .to({deg: 3510}, 10000)
+                .onUpdate(function () {
+                    $point.css(
+                        me._transform,
+                        'rotate(' + this.deg + 'deg)'
+                    );
+                })
+                .start();
+
+            (function animate() {
+                me._timeout = setTimeout(animate, 50);
+                TWEEN.update();
+            })();
+        }
+    };
+
+    Stopwatch.prototype.stop = function() {
+        var me = this;
+        if (!me.starting) {
+            return;
+        }
+        me.starting = false;
+        me.$stopwatch
+            .removeClass('bounceInDown')
+            .addClass('stopwatch-done')
+            .fadeOut();
+        if (me.useTween()) {
+            TWEEN.removeAll();
+            clearTimeout(me._timeout);
+        }
+    };
+
+    var watch = new Stopwatch();
+    $(document)
+        .ajaxStart(function() {
+            console.log('a');
+            watch.start();
+        })
+        .ajaxStop(function() {
+            watch.stop();
+        });
 });

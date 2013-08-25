@@ -231,3 +231,262 @@ h1, h2, h3, h4, h5, h6 {
 .loved {
     color: #FB264C !important;
 }
+
+
+
+/* loading */
+@-webkit-keyframes stopwatch-rotate {
+  0% {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+}
+@-webkit-keyframes bounceInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-2000px);
+    transform: translateY(-2000px);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(30px);
+    transform: translateY(-2000px);
+  }
+  80% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-2000px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(-2000px);
+  }
+}
+
+.stopwatch {
+    position: relative;
+    width: 1em;
+    height: 1em;
+    font-size: 40px;
+
+    position: absolute;
+    top: 50px;
+    right: 100px;
+}
+.stopwatch .stopwatch-point {
+    content: '';
+    position: absolute;
+    z-index: 6;
+    top: 0.5em;
+    left: 0.5em;
+    margin-top: -0.04em;
+    width: 0.45em;
+    height: 0.08em;
+    font-size: inherit;
+    background-color: #ffffff;
+    border-radius: 0.5em;
+    -webkit-transform: rotate(0deg);
+    -webkit-transform-origin: 0% 50%;
+    -moz-transform: rotate(0deg);
+    -moz-transform-origin: 0% 50%;
+    -ms-transform: rotate(0deg);
+    -ms-transform-origin: 0% 50%;
+    -o-transform: rotate(0deg);
+    -o-transform-origin: 0% 50%;
+    transform: rotate(0deg);
+    transform-origin: 0% 50%;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.stopwatch:before {
+    content: '';
+    position: absolute;
+    z-index: 6;
+    top: 0.4em;
+    left: 0.4em;
+    width: 0.2em;
+    height: 0.2em;
+    border-radius: 0.2em;
+    background-color: #ffffff;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.stopwatch.stopwatch-done:before {
+    z-index: 6;
+    top: 0.6em;
+    left: 0.25em;
+    margin-left: -0.05em;
+    width: 0.25em;
+    height: 0.1em;
+    border-radius: 0.3em 0 0 0.3em;
+    -webkit-transform: rotate(45deg);
+    -webkit-transform-origin: 100% 50%;
+    -moz-transform: rotate(45deg);
+    -moz-transform-origin: 100% 50%;
+    -ms-transform: rotate(45deg);
+    -ms-transform-origin: 100% 50%;
+    -o-transform: rotate(45deg);
+    -o-transform-origin: 100% 50%;
+    transform: rotate(45deg);
+    transform-origin: 100% 50%;
+}
+.stopwatch.stopwatch-done:after {
+    content: '';
+    position: absolute;
+    z-index: 6;
+    top: 0.6em;
+    left: 0.45em;
+    margin-left: -0.05em;
+    width: 0.1em;
+    height: 0.1em;
+    border-radius: 0.3em;
+    background-color: #fff;
+}
+.stopwatch.stopwatch-done .stopwatch-point {
+    z-index: 6;
+    top: 0.6em;
+    margin-top: 0;
+    margin-left: -0.05em;
+    width: 0.5em;
+    height: 0.1em;
+    border-radius: 0 0.3em 0.3em 0;
+    -webkit-animation-name: none;
+    animation-name: none;
+    -webkit-transform: rotate(-45deg) !important;
+    -webkit-transform-origin: 0% 50% !important;
+    -moz-transform: rotate(-45deg) !important;
+    -moz-transform-origin: 0% 50% !important;
+    -ms-transform: rotate(-45deg) !important;
+    -ms-transform-origin: 0% 50% !important;
+    -o-transform: rotate(-45deg) !important;
+    -o-transform-origin: 0% 50% !important;
+    transform: rotate(-45deg) !important;
+    transform-origin: 0% 50% !important;
+}
+.stopwatch .stopwatch-tp {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    top: -0.06em;
+    left: 50%;
+    margin-left: -0.075em;
+    width: 0.15em;
+    height: 0.2em;
+    border-radius: 0.2em;
+    background-color: #5cb5ce;
+}
+.stopwatch .stopwatch-hd:before,
+.stopwatch .stopwatch-hd:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    font-size: inherit;
+    width: 0.4em;
+    height: 0.4em;
+    background: #5cb5ce;
+    border-radius: 0.4em;
+}
+.stopwatch .stopwatch-hd:before {
+    left: 0;
+}
+.stopwatch .stopwatch-hd:after {
+    right: 0;
+}
+.stopwatch .stopwatch-ft:before,
+.stopwatch .stopwatch-ft:after {
+    content: '';
+    position: absolute;
+    z-index: 4;
+    bottom: 0.1em;
+    font-size: inherit;
+    width: 0.15em;
+    height: 0.3em;
+    background: #5cb5ce;
+    border-radius: 0.4em;
+}
+.stopwatch .stopwatch-ft:before {
+    left: 0;
+    -webkit-transform: rotate(45deg);
+    -webkit-transform-origin: left bottom;
+    -moz-transform: rotate(45deg);
+    -moz-transform-origin: left bottom;
+    -ms-transform: rotate(45deg);
+    -ms-transform-origin: left bottom;
+    -o-transform: rotate(45deg);
+    -o-transform-origin: left bottom;
+    transform: rotate(45deg);
+    transform-origin: left bottom;
+}
+.stopwatch .stopwatch-ft:after {
+    right: 0;
+    -webkit-transform: rotate(-45deg);
+    -webkit-transform-origin: right bottom;
+    -moz-transform: rotate(-45deg);
+    -moz-transform-origin: right bottom;
+    -ms-transform: rotate(-45deg);
+    -ms-transform-origin: right bottom;
+    -o-transform: rotate(-45deg);
+    -o-transform-origin: right bottom;
+    transform: rotate(-45deg);
+    transform-origin: right bottom;
+}
+.stopwatch .stopwatch-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 1em;
+    height: 1em;
+    font-size: inherit;
+    border-radius: 0.5em;
+    background-color: #ffffff;
+}
+.stopwatch .stopwatch-fore {
+    position: absolute;
+    top: 0.03125em;
+    left: 0.03125em;
+    z-index: 4;
+    width: 0.9375em;
+    height: 0.9375em;
+    font-size: inherit;
+    border-radius: 0.5em;
+    background-color: #5cb5ce;
+    background-image: radial-gradient(circle, #70bed4 35%, #5cb5ce 70%);
+}
+.stopwatch .stopwatch-point {
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-delay: 0;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: stopwatch-rotate;
+    animation-timing-function: linear;
+    animation-delay: 0;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-name: stopwatch-rotate;
+}
+.bounceInDown {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: bounceInDown;
+    animation-name: bounceInDown;
+}
+
