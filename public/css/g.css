@@ -31,7 +31,6 @@ h1, h2, h3, h4, h5, h6 {
 /* menu */
 .menu {
     height: 35px;
-    overflow: auto;
     padding-bottom: 1px;
     border-bottom: 1px solid #CCC !important;
     background: #FFF;
@@ -89,12 +88,12 @@ h1, h2, h3, h4, h5, h6 {
 .menu li.menu-selected:nth-child(1) a,
 .menu li:nth-child(1) a:hover,
 .menu li:nth-child(1) a:focus {
-    border-bottom: 2px solid #FB264C;
+    border-bottom-color: #FB264C;
 }
 .menu li.menu-selected:nth-child(2) a,
 .menu li:nth-child(2) a:hover,
 .menu li:nth-child(2) a:focus {
-    border-bottom: 2px solid #FDD34E;
+    border-bottom-color: #FDD34E;
 }
 .menu li.menu-selected:nth-child(2) a:before,
 .menu li:nth-child(2) a:hover:before,
@@ -104,7 +103,7 @@ h1, h2, h3, h4, h5, h6 {
 .menu li.menu-selected:nth-child(3) a,
 .menu li:nth-child(3) a:hover,
 .menu li:nth-child(3) a:focus {
-    border-bottom: 2px solid #6ECB9A;
+    border-bottom-color: #6ECB9A;
 }
 .menu li.menu-selected:nth-child(3) a:before,
 .menu li:nth-child(3) a:hover:before,
@@ -114,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
 .menu li.menu-selected:nth-child(4) a,
 .menu li:nth-child(4) a:hover,
 .menu li:nth-child(4) a:focus {
-    border-bottom: 2px solid #83C7DA;
+    border-bottom-color: #83C7DA;
 }
 .menu li.menu-selected:nth-child(4) a:before,
 .menu li:nth-child(4) a:hover:before,
