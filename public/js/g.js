@@ -242,7 +242,6 @@ $(function() {
     var watch = new Stopwatch();
     $(document)
         .ajaxStart(function() {
-            console.log('a');
             watch.start();
         })
         .ajaxStop(function() {
