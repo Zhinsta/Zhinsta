@@ -64,12 +64,14 @@ def notfound(message=u'404 not found', status_code=404):
 
 class Pager(object):
 
-    def __init__(self, limit, total, url):
+    def __init__(self, limit, total, url=None):
         self.limit = limit
         self.total = total
         self.total_page = (total-1)/limit+1
         self.current_page = 1
         self.offset = 0
+        if not url:
+            url = url_for(request.endpoint)
         if '?' in url:
             url = url+'&'
         else:
@@ -80,19 +82,19 @@ class Pager(object):
 
     def set_offset(self, offset):
         offset = int(offset)
-        if offset < 0:
-            offset = 0
         if offset > self.total-1:
             offset = self.total-1
+        if offset < 0:
+            offset = 0
         self.offset = offset
         self.current_page = offset/self.limit + 1
 
     def set_current_page(self, current_page):
         current_page = int(current_page)
-        if current_page < 1:
-            current_page = 1
         if current_page > self.total_page:
             current_page = self.total_page
+        if current_page < 1:
+            current_page = 1
         self.current_page = current_page
         self.offset = (current_page-1)*self.limit
 

@@ -34,3 +34,16 @@ class LikeModel(db.Model):
     date_created = db.Column(db.DateTime(),
                              index=True, nullable=False,
                              default=datetime.now)
+    
+
+class ShowModel(db.Model):
+    __tablename__ = 'show'
+    mid = db.Column(db.VARCHAR(128), primary_key=True)
+    pic = db.Column(db.VARCHAR(255), index=True, nullable=False)
+    user_pic = db.Column(db.VARCHAR(255), index=True, nullable=False)
+    ukey = db.Column(db.VARCHAR(128), index=True, nullable=False)
+    username = db.Column(db.VARCHAR(255), index=True, nullable=False)
+    date_created = db.Column(db.DateTime(),
+                             index=True, nullable=False)
+    showable = db.Column(db.Integer(), index=True, nullable=False,
+                         server_default='0')

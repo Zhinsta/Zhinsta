@@ -6,7 +6,8 @@ from .home import (HomeView, OAuthCodeView, LoginView,
                    LogoutView, ProfileView, MembersView,
                    SearchUserView, SearchTagView, MediaProfileView,
                    TagView, FollowerView, FollowingView,
-                   WelcomeView, ShowView, AboutView)
+                   WelcomeView, AboutView)
+from .show import (RealtimeView, ShowView)
 
 blueprint = Blueprint('view', __name__)
 
@@ -52,6 +53,13 @@ blueprint.add_url_rule('/welcome/',
 blueprint.add_url_rule('/show/',
                        view_func=ShowView.as_view(b'show'),
                        endpoint='show')
+blueprint.add_url_rule('/show/time/',
+                       view_func=ShowView.as_view(b'show_time'),
+                       endpoint='show_time',
+                       defaults={'time_order': True})
 blueprint.add_url_rule('/about/',
                        view_func=AboutView.as_view(b'about'),
                        endpoint='about')
+blueprint.add_url_rule('/instagram/realtime/',
+                       view_func=RealtimeView.as_view(b'realtime'),
+                       endpoint='realtime')

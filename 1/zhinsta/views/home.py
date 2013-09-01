@@ -132,7 +132,7 @@ class MembersView(views.MethodView):
     def get(self):
         total = UserModel.query.count()
         current_page = request.args.get('page', 1)
-        pager = Pager(members_per_page, total, url_for('view.members'))
+        pager = Pager(members_per_page, total)
         pager.set_current_page(current_page)
         users = (UserModel.query
                  .order_by(UserModel.date_created.desc())
