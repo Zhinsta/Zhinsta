@@ -5,14 +5,14 @@ echo "START"
 for file in ./css/*.less
 do
     f=${file:6}
-    printf "lessc -c"
+    printf "lessc -c --yui-compress"
     printf " "
     printf $f
     printf " "
     printf ${f/%\.less/\.css}
     printf "\n"
     f=${f/%\.less/\.css}
-    lessc -c $file > "./css/${f}"
+    lessc -c --yui-compress $file > "./css/${f}"
 done
 
 for file in ./js/*.js
