@@ -2,13 +2,13 @@ html, body {
     min-width: 1000px;
     color: #666;
     font-family:
-        "Apple Color Emoji",
         "ff-tisa-web-pro-1","ff-tisa-web-pro-2",
         "Lucida Grande",
         "Hiragino Sans GB","Hiragino Sans GB W3",
         "Microsoft YaHei",
         "wenquanyi micro hei",
-        sans-serif;
+        sans-serif,
+        "Apple Color Emoji";
     font-size: 100%;
     line-height: 1.5;
 }
