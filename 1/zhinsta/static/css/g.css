@@ -524,3 +524,16 @@ h1, h2, h3, h4, h5, h6 {
     animation-name: bounceInDown;
 }
 
+/* tooltip */
+.tooltip {
+    font-size: 14px;
+}
+.tooltip a {
+    display: inline !important;
+    padding: 0 !important;
+    margin: 0 5px !important;
+    vertical-align: baseline !important;
+    font-size: inherit !important;
+    color: #069 !important;
+    background: none !important;
+}

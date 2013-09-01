@@ -28,6 +28,7 @@
             {% if has_login %}
                 <a href="{{ url_for('view.profile', ukey=ukey) }}">{{ username }}</a>
                 <a href="{{ url_for('view.logout') }}">注销</a>
+                <script>gLogined = true;</script>
             {% else %}
                 <a href="{{ url_for('view.login') }}" class="menu-login">Instagram登录</a>
             {% endif %}
