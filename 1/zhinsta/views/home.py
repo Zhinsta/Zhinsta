@@ -48,13 +48,17 @@ class ProfileView(views.MethodView):
             if e.error_type == 'APINotAllowedError':
                 return render('profile-noauth.html', ukey=ukey)
             return notfound(u'服务器暂时出问题了')
-        feeds = api.user_recent_media(user_id=ukey)[0]
+        next_url = request.args.get('next_url', None)
+        feeds = api.user_recent_media(user_id=ukey,
+                                      with_next_url=next_url)
+        next_url = feeds[1]
+        feeds = feeds[0]
         isfollows = isfollow(ukey)
         isme = False
         if ukey == session.get('ukey', ''):
             isme = True
         return render('profile.html', user=user, feeds=feeds,
-                      isme=isme, isfollow=isfollows)
+                      isme=isme, isfollow=isfollows, next_url=next_url)
 
 
 class OAuthCodeView(views.MethodView):
@@ -182,8 +186,12 @@ class TagView(views.MethodView):
     def get(self, name):
         api = InstagramAPI(access_token=session.get('access_token', ''))
         tag = api.tag(name)
-        media = api.tag_recent_media(tag_name=name)[0]
-        return render('tag.html', tag=tag, media=media)
+        next_url = request.args.get('next_url', None)
+        media = api.tag_recent_media(tag_name=name,
+                                     with_next_url=next_url)
+        next_url = media[1]
+        media = media[0]
+        return render('tag.html', tag=tag, media=media, next_url=next_url)
 
 
 class FollowerView(views.MethodView):
@@ -193,13 +201,17 @@ class FollowerView(views.MethodView):
     def get(self, ukey):
         api = InstagramAPI(access_token=session.get('access_token', ''))
         user = api.user(ukey)
-        users = api.user_followed_by(ukey)[0]
+        next_url = request.args.get('next_url', None)
+        users = api.user_followed_by(ukey, with_next_url=next_url)
+        next_url = users[1]
+        users = users[0]
         isfollows = isfollow(ukey)
         isme = False
         if ukey == session.get('ukey', ''):
             isme = True
         return render('follower.html', user=user, users=users,
-                      message=u'关注者', isme=isme, isfollow=isfollows)
+                      message=u'关注者', isme=isme, isfollow=isfollows,
+                      next_url=next_url)
 
 
 class FollowingView(views.MethodView):
@@ -209,13 +221,17 @@ class FollowingView(views.MethodView):
     def get(self, ukey):
         api = InstagramAPI(access_token=session.get('access_token', ''))
         user = api.user(ukey)
-        users = api.user_follows(ukey)[0]
+        next_url = request.args.get('next_url', None)
+        users = api.user_follows(ukey, with_next_url=next_url)
+        next_url = users[1]
+        users = users[0]
         isfollows = isfollow(ukey)
         isme = False
         if ukey == session.get('ukey', ''):
             isme = True
         return render('follower.html', user=user, users=users,
-                      message=u'关注中', isme=isme, isfollow=isfollows)
+                      message=u'关注中', isme=isme, isfollow=isfollows,
+                      next_url=next_url)
 
 
 class WelcomeView(views.MethodView):

@@ -25,6 +25,9 @@
             </li>
             {% endfor %}
         </ul>
+        {% if next_url %}
+        <a href="{{ url_for('view.tag', name=tag.name, next_url=next_url) }}" class="more"><span>更多</span></a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
