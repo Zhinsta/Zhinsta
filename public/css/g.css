@@ -7,7 +7,8 @@ html, body {
         "Hiragino Sans GB","Hiragino Sans GB W3",
         "Microsoft YaHei",
         "wenquanyi micro hei",
-        sans-serif;
+        sans-serif,
+        "Apple Color Emoji";
     font-size: 100%;
     line-height: 1.5;
 }
