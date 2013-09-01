@@ -60,7 +60,7 @@
             {% endfor %}
         </ul>
         {% if next_url %}
-        <a href="{{ url_for(request.endpoint, ukey=user.id, next_url=next_url) }}"><span>更多</span></a>
+        <a href="{{ url_for(request.endpoint, ukey=user.id, next_url=next_url) }}" class="more"><span>更多</span></a>
         {% endif %}
     </div>
 </div>

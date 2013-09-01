@@ -13,6 +13,7 @@ from ..settings import INSTAGRAM_CLIENT_ID
 from ..settings import INSTAGRAM_CLIENT_SECRET
 from ..settings import INSTAGRAM_REDIRECT_URI
 from ..settings import INSTAGRAM_SCOPE
+from ..settings import OPEN_ACCESS_TOKEN
 from ..models.user import UserModel
 from ..engines import db
 from ..utils import login_required
@@ -39,9 +40,12 @@ class HomeView(views.MethodView):
 class ProfileView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self, ukey):
-        api = InstagramAPI(access_token=session.get('access_token', ''))
+        login_user = has_login()
+        if login_user:
+            api = InstagramAPI(access_token=session.get('access_token', ''))
+        else:
+            api = InstagramAPI(access_token=OPEN_ACCESS_TOKEN)
         try:
             user = api.user(user_id=ukey)
         except InstagramAPIError, e:
@@ -53,9 +57,11 @@ class ProfileView(views.MethodView):
                                       with_next_url=next_url)
         next_url = feeds[1]
         feeds = feeds[0]
-        isfollows = isfollow(ukey)
+        isfollows = False
+        if login_user:
+            isfollows = isfollow(ukey)
         isme = False
-        if ukey == session.get('ukey', ''):
+        if login_user and ukey == session.get('ukey', ''):
             isme = True
         return render('profile.html', user=user, feeds=feeds,
                       isme=isme, isfollow=isfollows, next_url=next_url)
@@ -123,7 +129,6 @@ class LogoutView(views.MethodView):
 class MembersView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self):
         total = UserModel.query.count()
         current_page = request.args.get('page', 1)
@@ -139,10 +144,13 @@ class MembersView(views.MethodView):
 class SearchUserView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self):
         wd = request.args.get('wd', '')
-        api = InstagramAPI(access_token=session.get('access_token', ''))
+        login_user = has_login()
+        if login_user:
+            api = InstagramAPI(access_token=session.get('access_token', ''))
+        else:
+            api = InstagramAPI(access_token=OPEN_ACCESS_TOKEN)
         users = api.user_search(wd)
         return render('search-user.html', users=users, wd=wd)
 
@@ -150,10 +158,13 @@ class SearchUserView(views.MethodView):
 class SearchTagView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self):
         wd = request.args.get('wd', '')
-        api = InstagramAPI(access_token=session.get('access_token', ''))
+        login_user = has_login()
+        if login_user:
+            api = InstagramAPI(access_token=session.get('access_token', ''))
+        else:
+            api = InstagramAPI(access_token=OPEN_ACCESS_TOKEN)
         tags = api.tag_search(wd)[0]
         return render('search-tag.html', tags=tags, wd=wd)
 
@@ -161,19 +172,24 @@ class SearchTagView(views.MethodView):
 class MediaProfileView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self, mid):
-        api = InstagramAPI(access_token=session.get('access_token', ''))
+        login_user = has_login()
+        if login_user:
+            api = InstagramAPI(access_token=session.get('access_token', ''))
+        else:
+            api = InstagramAPI(access_token=OPEN_ACCESS_TOKEN)
         media = api.media(mid)
         likes = api.media_likes(media_id=mid)
         isstar = False
         for i in likes:
-            if session.get('ukey', '') == i.id:
+            if login_user and session.get('ukey', '') == i.id:
                 isstar = True
         ukey = media.user.id
-        isfollows = isfollow(ukey)
+        isfollows = False
+        if login_user:
+            isfollows = isfollow(ukey)
         isme = False
-        if ukey == session.get('ukey', ''):
+        if login_user and ukey == session.get('ukey', ''):
             isme = True
         return render('media.html', media=media, isme=isme,
                       isfollow=isfollows, likes=likes[:5], isstar=isstar)
@@ -182,9 +198,12 @@ class MediaProfileView(views.MethodView):
 class TagView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self, name):
-        api = InstagramAPI(access_token=session.get('access_token', ''))
+        login_user = has_login()
+        if login_user:
+            api = InstagramAPI(access_token=session.get('access_token', ''))
+        else:
+            api = InstagramAPI(access_token=OPEN_ACCESS_TOKEN)
         tag = api.tag(name)
         next_url = request.args.get('next_url', None)
         media = api.tag_recent_media(tag_name=name,
@@ -197,17 +216,22 @@ class TagView(views.MethodView):
 class FollowerView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self, ukey):
-        api = InstagramAPI(access_token=session.get('access_token', ''))
+        login_user = has_login()
+        if login_user:
+            api = InstagramAPI(access_token=session.get('access_token', ''))
+        else:
+            api = InstagramAPI(access_token=OPEN_ACCESS_TOKEN)
         user = api.user(ukey)
         next_url = request.args.get('next_url', None)
         users = api.user_followed_by(ukey, with_next_url=next_url)
         next_url = users[1]
         users = users[0]
-        isfollows = isfollow(ukey)
+        isfollows = False
+        if login_user:
+            isfollows = isfollow(ukey)
         isme = False
-        if ukey == session.get('ukey', ''):
+        if login_user and ukey == session.get('ukey', ''):
             isme = True
         return render('follower.html', user=user, users=users,
                       message=u'关注者', isme=isme, isfollow=isfollows,
@@ -217,17 +241,22 @@ class FollowerView(views.MethodView):
 class FollowingView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self, ukey):
-        api = InstagramAPI(access_token=session.get('access_token', ''))
+        login_user = has_login()
+        if login_user:
+            api = InstagramAPI(access_token=session.get('access_token', ''))
+        else:
+            api = InstagramAPI(access_token=OPEN_ACCESS_TOKEN)
         user = api.user(ukey)
         next_url = request.args.get('next_url', None)
         users = api.user_follows(ukey, with_next_url=next_url)
         next_url = users[1]
         users = users[0]
-        isfollows = isfollow(ukey)
+        isfollows = False
+        if login_user:
+            isfollows = isfollow(ukey)
         isme = False
-        if ukey == session.get('ukey', ''):
+        if login_user and ukey == session.get('ukey', ''):
             isme = True
         return render('follower.html', user=user, users=users,
                       message=u'关注中', isme=isme, isfollow=isfollows,
@@ -247,7 +276,6 @@ class WelcomeView(views.MethodView):
 class ShowView(views.MethodView):
 
     @error_handle
-    @login_required
     def get(self):
         return render('show.html')
 
