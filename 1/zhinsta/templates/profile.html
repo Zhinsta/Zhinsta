@@ -16,10 +16,10 @@
                 <h1>{{ user.username }}
                     {% if not isme %}
                     {% if isfollow %}
-                    <a href="#" class="jsFollow" data-ukey="{{ user.id }}" data-action="unfollow" title="取消关注">正在关注</a>
+                    <a href="javascript:void(0);" class="jsFollow" data-ukey="{{ user.id }}" data-action="unfollow" title="取消关注">正在关注</a>
                     {% else %}
                     <span></span>
-                    <a href="#" class="jsFollow" data-ukey="{{ user.id }}" data-action="follow" title="关注TA">未关注</a>
+                    <a href="javascript:void(0);" class="jsFollow" data-ukey="{{ user.id }}" data-action="follow" title="关注TA">未关注</a>
                     {% endif %}
                     {% endif %}
                 </h1>
@@ -28,7 +28,7 @@
                 <p><i class="icon-cloud"></i><a href="{{ user.website }}">{{ user.website }}</a></p>
                 {% endif %}
                 <!--
-                <p><i class="icon-plus"></i><a href="#" class="js-collect">收录到中文圈</a></p>
+                <p><i class="icon-plus"></i><a href="javascript:void(0);" class="js-collect">收录到中文圈</a></p>
                 <p><i class="icon-bookmark"></i>已收录到中文圈</p>
                 -->
             </div>
