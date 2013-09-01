@@ -105,13 +105,9 @@ $('#log').ajaxError(function(e) {
  *          direction: 小箭头的方向:up,down,left,right，默认为up
  *          offset: 小箭头与提示框的偏移距离，用于调整小箭头位置，默认为0
  *          width: 宽度
- *          noscroll: 是否不滚动
  *      },
  *      closeCallback 关闭时候的回调函数
  *
- * @log 0.1 fix z-index bug;
- *          fix show在scroll完成之后导致的bug
- *      0.2 添加了是否不滚动参数
  */
 (function() {
     var html = '<div class="tooltip" style="position:absolute;z-index:999;padding:9px;background-color:#FFFED8;border:1px solid #B2B196;box-shadow:3px 3px 0 rgba(0,0,0,0.15);border-radius:1px;color:#666;font-size:14px;">' +
@@ -174,12 +170,6 @@ $('#log').ajaxError(function(e) {
                 position[1] += coordinates.left;
             }
             show();
-            if ( !option.noscroll ) {
-                scrollTo({
-                    top: position[0]+conOffset.top + (direction === 'up' ? (-10) : 0),      // 处理箭头的位置
-                    left: position[1]+conOffset.left + (direction === 'left' ? (-10) : 0)
-                }); // NOTE： 注意不能设置成scroll结束后显示，因为会与其他的scroll冲突。导致show之前去获取新增html节点，会产生bug
-            }
             return {
                 remove: remove,
                 $toolTip: $toolTip

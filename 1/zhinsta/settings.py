@@ -16,8 +16,8 @@ try:
 except ImportError:
     SECRET_KEY = 'SteinsGate' #生产环境应该保密
     MYSQL_DB = 'zhinsta'
-    MYSQL_USER = 'user'
-    MYSQL_PASS = 'pass'
+    MYSQL_USER = 'root'
+    MYSQL_PASS = ''
     MYSQL_HOST = '127.0.0.1'
     MYSQL_PORT = '3306'
     INSTAGRAM_CLIENT_ID = '30fc02241ccb410fbf7fe5508c650c78'
