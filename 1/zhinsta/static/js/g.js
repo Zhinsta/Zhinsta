@@ -195,11 +195,11 @@ $(function() {
         this.sign = true;
 
         if (typeof gLogined === 'undefined' || !gLogined) {
-            var after = $('<span>&nbsp;</span>').insertAfter(this);
+            var after = $('<span></span>').insertBefore(this);
             $(this).tooltip(after, {
                 msg: '请<a href="/">登录</a>后再like~',
-                position: [32, -60],
-                offset: 12,
+                position: [32, -10],
+                offset: 8,
                 width: 130
             });
             return;
