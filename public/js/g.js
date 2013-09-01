@@ -194,7 +194,7 @@ $(function() {
         }
         this.sign = true;
 
-        if (typeof gLogined === 'undefined') {
+        if (typeof gLogined === 'undefined' || !gLogined) {
             var after = $('<span>&nbsp;</span>').insertAfter(this);
             $(this).tooltip(after, {
                 msg: '请<a href="/">登录</a>后再like~',
@@ -250,7 +250,7 @@ $(function() {
         }
         this.sign = true;
 
-        if (typeof gLogined === 'undefined') {
+        if (typeof gLogined === 'undefined' || !gLogined) {
             var after = $('<span>&nbsp;</span>').insertAfter(this);
             $(this).tooltip(after, {
                 msg: '请<a href="/">登录</a>后再关注~',
