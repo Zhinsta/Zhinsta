@@ -47,3 +47,7 @@ class ShowModel(db.Model):
                              index=True, nullable=False)
     showable = db.Column(db.Integer(), index=True, nullable=False,
                          server_default='0')
+    hour_tagged = db.Column(db.Integer(), index=True, nullable=False)
+    date_tagged = db.Column(db.DateTime(),
+                            index=True, nullable=False,
+                            default=datetime.now)

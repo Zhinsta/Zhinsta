@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
-from datetime import timedelta
+import time
 
 from flask import views
 from flask import request
 from flask import session
 from sqlalchemy.sql import func
+from sqlalchemy.sql import expression
 
 from ..instagram.client import InstagramAPI
 
@@ -33,21 +33,23 @@ class ShowView(views.MethodView):
         if time_order:
             medias =\
                 (q
+                 .order_by(ShowModel.date_tagged.desc())
                  .order_by(ShowModel.date_created.desc())
                  .offset(pager.offset)
                  .limit(pager.limit).all())
         else:
-            size = datetime.now() - timedelta(days=2)
             subquery = (db.session.query(LikeModel.media,
                                          func.count(1).label('count'))
-                        .filter(LikeModel.date_created>=size)
                         .group_by(LikeModel.media).subquery())
+            now = int(time.time()/7200)
+            order = expression.label('hacker', (subquery.c.count+1.0)/(now-ShowModel.hour_tagged+2.0)/(now-ShowModel.hour_tagged+2.0))
             medias =\
                 (db.session.query(ShowModel)
                  .filter(ShowModel.showable==0)
                  .outerjoin(subquery, ShowModel.mid==subquery.c.media)
                  .filter(ShowModel.mid!=None)
-                 .order_by(subquery.c.count.desc())
+                 .order_by(order.desc())
+                 .order_by(ShowModel.date_tagged.desc())
                  .order_by(ShowModel.date_created.desc())
                  .offset(pager.offset)
                  .limit(pager.limit).all())
@@ -77,12 +79,14 @@ class RealtimeView(views.MethodView):
                 if showm:
                     done = True
                 else:
+                    hour = int(time.time()/7200)
                     showm = ShowModel(mid=m.id,
                                       pic=m.images['low_resolution'].url,
                                       user_pic=m.user.profile_picture,
                                       ukey=m.user.id,
                                       username=m.user.username,
-                                      date_created=m.created_time)
+                                      date_created=m.created_time,
+                                      hour_tagged=hour)
                     db.session.add(showm)
                     db.session.commit()
             if not next_url:
