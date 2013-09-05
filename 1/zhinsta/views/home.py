@@ -96,6 +96,7 @@ class OAuthCodeView(views.MethodView):
             db.session.add(user)
             redirect_url = 'view.welcome'
         db.session.commit()
+        session.permanent = True
         session['ukey'] = user.ukey
         session['username'] = user.username
         session['access_token'] = user.access_token
