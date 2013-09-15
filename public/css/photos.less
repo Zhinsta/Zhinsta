@@ -39,12 +39,6 @@
         img {
             display: block;
         }
-        span {
-            margin-top: 0.5em;
-            display: block;
-            text-align: center;
-            word-wrap: break-word;
-        }
         i {
             margin-left: 2px;
         }
@@ -55,6 +49,7 @@
         }
     }
     .photo-author {
+        display: block;
         margin: 0.5em 0 0 0;
         padding-bottom: 0.5em;
         width: 200px;
@@ -63,12 +58,28 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        color: inherit;
         border-bottom: 1px solid #CCC;
+        &:hover {
+            text-decoration: none;
+        }
         img {
             float: left;
             margin-right: 10px;
             height: 32px;
             width: 32px;
+        }
+    }
+    .photo-info {
+        margin-top: 0.5em;
+        display: block;
+        text-align: center;
+        word-wrap: break-word;
+        a {
+            color: inherit;
+            &:hover {
+                text-decoration: none;
+            }
         }
     }
 }
