@@ -187,7 +187,7 @@ $(function() {
     /**
      * like & unlike
      */
-    $('body').on('click', '.jsLove', function(e) {
+    $('body').on('click', '.jsLove,.jsLove2', function(e) {
         e.preventDefault();
         if (this.sign) {
             return;
@@ -210,17 +210,32 @@ $(function() {
         var number = parseInt($me.data('num'), 10);
         var mid = $me.data('mid');
         var api = Apis[action];
-        var template = {
-            like: '<a href="#" class="jsLove" ' +
-                    'data-action="unlike" data-num="{n}" data-mid="{mid}">' +
-                    '<i class="icon-heart loved"></i>' +
-                    '<span class="loved">{n}</span>' +
-                  '</a>',
-            unlike: '<a href="#" class="jsLove" ' +
-                    'data-action="like" data-num="{n}" data-mid="{mid}">' +
-                    '<i class="icon-heart"></i><span>{n}</span>' +
-                  '</a>'
-        };
+        var template;
+        if ($me.hasClass('jsLove')) {
+            template = {
+                like: '<a href="javascript:void(0);" class="jsLove" ' +
+                        'data-action="unlike" data-num="{n}" data-mid="{mid}">' +
+                        '<i class="icon-heart loved"></i>' +
+                        '<span class="loved">{n}</span>' +
+                      '</a>',
+                unlike: '<a href="javascript:void(0);" class="jsLove" ' +
+                        'data-action="like" data-num="{n}" data-mid="{mid}">' +
+                        '<i class="icon-heart"></i><span>{n}</span>' +
+                      '</a>'
+            };
+        } else {
+            template = {
+                like: '<a href="javascript:void(0);" class="jsLove2" ' +
+                        'data-action="unlike" data-num="{n}" data-mid="{mid}">' +
+                        '<span class="loved">{n}</span>' +
+                        '<i class="icon-heart loved"></i>' +
+                      '</a>',
+                unlike: '<a href="javascript:void(0);" class="jsLove2" ' +
+                        'data-action="like" data-num="{n}" data-mid="{mid}">' +
+                        '<span>{n}</span><i class="icon-heart"></i>' +
+                      '</a>'
+            };
+        }
 
         api(mid, function() {
             if (action === 'like') {
