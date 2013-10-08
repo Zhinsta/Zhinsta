@@ -50,7 +50,7 @@
             {% for u in users %}
             <li>
                 <a href="{{ url_for('view.profile', ukey=u.id) }}" class="people-photo">
-                    <img width="150" height="150" src="{{ u.profile_picture }}" alt="{{ u.full_name }}" />
+                    <img width="165" height="165" src="{{ u.profile_picture }}" alt="{{ u.full_name }}" />
                     <span>{{ u.username }}</span>
                 </a>
                 <!--

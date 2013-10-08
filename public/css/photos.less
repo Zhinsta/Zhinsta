@@ -35,7 +35,7 @@
         color: inherit;
         text-decoration: inherit;
         border: 1px solid #CCC;
-        box-shadow: 1px 1px 2px #EEE;
+        box-shadow: 1px 1px 1px #EEE;
         background: #FFF;
         i {
             margin-left: 2px;
@@ -56,27 +56,33 @@
         position: absolute;
         bottom: -64px;
         background-color: #FFF;
-        // ie8- 不显示
         filter:alpha(opacity=0);
         opacity: 0;
         -webkit-transition: all 0.25s ease;
         transition: all 0.25s ease;
     }
     .photo:hover {
+        .photo-pic img {
+            -webkit-filter: blur(1px);
+            filter: blur(1px);
+        }
         .photo-author {
+            filter:alpha(opacity=100);
             opacity: 1;
             bottom: 32px;
         }
         .photo-info {
+            filter:alpha(opacity=100);
             opacity: 1;
             bottom: 0;
         }
     }
     .photo-author {
+        left: 0;
         bottom: -32px;
         margin: 0;
         padding: 0.25em 9px 6px;
-        width: 198px;
+        width: 200px;
         height: 24px;
         line-height: 24px;
         overflow: hidden;
@@ -105,9 +111,10 @@
         }
     }
     .photo-info {
+        left: 0;
         margin: 0;
         padding: 0.25em 0;
-        width: 216px;
+        width: 218px;
         text-align: center;
         word-wrap: break-word;
         a {
