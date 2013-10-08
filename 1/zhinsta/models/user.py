@@ -31,6 +31,7 @@ class LikeModel(db.Model):
     ukey = db.Column(db.VARCHAR(128), primary_key=True)
     media = db.Column(db.VARCHAR(128), primary_key=True)
     username = db.Column(db.VARCHAR(255), index=True, nullable=False)
+    media_username = db.Column(db.VARCHAR(255), index=True, nullable=False)
     date_created = db.Column(db.DateTime(),
                              index=True, nullable=False,
                              default=datetime.now)

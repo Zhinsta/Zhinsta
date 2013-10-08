@@ -17,6 +17,7 @@ from ..engines import db
 from ..utils import error_handle
 from ..utils import render
 from ..utils import Pager
+from ..utils import add_show
 
 members_per_page = 20
 
@@ -75,20 +76,9 @@ class RealtimeView(views.MethodView):
                                           with_next_url=next_url)
             next_url = medias[1]
             for m in medias[0]:
-                showm = ShowModel.query.get(m.id)
-                if showm:
+                tmp = add_show(m)
+                if tmp:
                     done = True
-                else:
-                    hour = int(time.time()/7200)
-                    showm = ShowModel(mid=m.id,
-                                      pic=m.images['low_resolution'].url,
-                                      user_pic=m.user.profile_picture,
-                                      ukey=m.user.id,
-                                      username=m.user.username,
-                                      date_created=m.created_time,
-                                      hour_tagged=hour)
-                    db.session.add(showm)
-                    db.session.commit()
             if not next_url:
                 break
         return 'ok'

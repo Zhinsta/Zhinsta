@@ -2,7 +2,8 @@
 
 from flask import Blueprint
 
-from .user import (HelloWorldView, FollowView, LikeView)
+from .user import (HelloWorldView, FollowView, LikeView,
+                   IslikeView)
 
 blueprint = Blueprint('apis', __name__)
 
@@ -17,3 +18,7 @@ blueprint.add_url_rule('/follow/',
 blueprint.add_url_rule('/like/',
                        view_func=LikeView.as_view(b'like'),
                        endpoint='like')
+
+blueprint.add_url_rule('/islike/',
+                       view_func=IslikeView.as_view(b'islike'),
+                       endpoint='islike')

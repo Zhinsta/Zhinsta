@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import time
 import traceback
 from functools import wraps
 
@@ -13,7 +14,10 @@ from flask import render_template
 from .instagram.client import InstagramAPI
 from .instagram.bind import InstagramAPIError
 
+from .engines import db
+
 from .models.user import UserModel
+from .models.user import ShowModel
 
 
 def has_login():
@@ -166,3 +170,22 @@ def isfollow(ukey):
 
 def json_response(ret):
     return json.dumps({'result': ret})
+
+
+def add_show(m):
+    ret = False
+    showm = ShowModel.query.get(m.id)
+    if showm:
+        ret = True
+    else:
+        hour = int(time.time()/7200)
+        showm = ShowModel(mid=m.id,
+                          pic=m.images['low_resolution'].url,
+                          user_pic=m.user.profile_picture,
+                          ukey=m.user.id,
+                          username=m.user.username,
+                          date_created=m.created_time,
+                          hour_tagged=hour)
+        db.session.add(showm)
+        db.session.commit()
+    return ret
