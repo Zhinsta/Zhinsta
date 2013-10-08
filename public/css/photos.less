@@ -2,7 +2,8 @@
     ul {
         margin: 30px 0 30px -30px;
         padding: 0;
-        overflow: auto;
+        overflow-x: visible;
+        overflow-y: hidden;
         zoom: 1;
     }
     li {
@@ -28,17 +29,14 @@
     }
     .photo {
         position: relative;
+        padding: 1px;
         float: left;
-        padding: 10px;
+        height: 216px;
         color: inherit;
         text-decoration: inherit;
         border: 1px solid #CCC;
-        box-shadow: 1px 1px 2px #CCC;
-        border-radius: 5px;
+        box-shadow: 1px 1px 2px #EEE;
         background: #FFF;
-        img {
-            display: block;
-        }
         i {
             margin-left: 2px;
         }
@@ -48,31 +46,68 @@
             }
         }
     }
-    .photo-author {
+    .photo-pic img {
         display: block;
-        margin: 0.5em 0 0 0;
-        padding-bottom: 0.5em;
-        width: 200px;
-        height: 32px;
-        line-height: 32px;
+        width: 216px;
+        height: 216px;
+    }
+    .photo-author,
+    .photo-info {
+        position: absolute;
+        bottom: -64px;
+        background-color: #FFF;
+        // ie8- 不显示
+        filter:alpha(opacity=0);
+        opacity: 0;
+        -webkit-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
+    .photo:hover {
+        .photo-author {
+            opacity: 1;
+            bottom: 32px;
+        }
+        .photo-info {
+            opacity: 1;
+            bottom: 0;
+        }
+    }
+    .photo-author {
+        bottom: -32px;
+        margin: 0;
+        padding: 0.25em 9px 6px;
+        width: 198px;
+        height: 24px;
+        line-height: 24px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         color: inherit;
-        border-bottom: 1px solid #CCC;
         &:hover {
             text-decoration: none;
+        }
+        &:after {
+            content: '';
+            height: 1px;
+            width: 200px;
+            background: #DDD;
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            margin-left: -100px;
+            z-index: 2;
         }
         img {
             float: left;
             margin-right: 10px;
-            height: 32px;
-            width: 32px;
+            height: 24px;
+            width: 24px;
         }
     }
     .photo-info {
-        margin-top: 0.5em;
-        display: block;
+        margin: 0;
+        padding: 0.25em 0;
+        width: 216px;
         text-align: center;
         word-wrap: break-word;
         a {
@@ -80,6 +115,9 @@
             &:hover {
                 text-decoration: none;
             }
+        }
+        .tooltip {
+            padding: 2px !important;
         }
     }
 }

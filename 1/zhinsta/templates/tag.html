@@ -12,16 +12,18 @@
     <div class="photos">
         <ul>
             {% for pic in media %}
-            <li>
-                <a href="{{ url_for('view.media', mid=pic.id) }}" class="photo">
+            <li class="photo">
+                <a href="{{ url_for('view.media', mid=pic.id) }}" class="photo-pic">
                     <img width="200" height="200" src="{{ pic.images.low_resolution.url }}" alt="" />
-                    <!-- TODO -->
-                    <p class="photo-author">
-                        <img src="{{ pic.user.profile_picture }}" alt="{{ pic.user.full_name }}" width="32" height="32" />
-                        {{ pic.user.username }}
-                    </p>
-                    <span>{{ pic.created_time|time_since }}&nbsp;{{ pic.like_count }}<i class="icon-heart"></i>&nbsp;{{ pic.comment_count }}<i class="icon-comment"></i></span>
                 </a>
+                <!-- TODO -->
+                <a href="{{ url_for('view.profile', ukey=pic.user.id) }}" class="photo-author">
+                    <img src="{{ pic.user.profile_picture }}" alt="{{ pic.user.full_name }}" width="32" height="32" />
+                    {{ pic.user.username }}
+                </a>
+                <p class="photo-info">
+                    {{ pic.created_time|time_since }}&nbsp;{{ pic.like_count }}<i class="icon-heart"></i>&nbsp;{{ pic.comment_count }}<i class="icon-comment"></i>
+                </p>
             </li>
             {% endfor %}
         </ul>

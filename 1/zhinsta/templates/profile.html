@@ -48,11 +48,13 @@
     <div class="photos">
         <ul>
             {% for feed in feeds %}
-            <li>
-                <a href="{{ url_for('view.media', mid=feed.id) }}" class="photo">
+            <li class="photo">
+                <a href="{{ url_for('view.media', mid=feed.id) }}" class="photo-pic">
                     <img width="200" height="200" src="{{ feed.images.low_resolution.url }}" alt="" />
-                    <span>{{ feed.created_time|time_since }}&nbsp;{{ feed.like_count }}<i class="icon-heart"></i>&nbsp;{{ feed.comment_count }}<i class="icon-comment"></i></span>
                 </a>
+                <p class="photo-info">
+                    {{ feed.created_time|time_since }}&nbsp;{{ feed.like_count }}<i class="icon-heart"></i>&nbsp;{{ feed.comment_count }}<i class="icon-comment"></i>
+                </p>
             </li>
             {% endfor %}
         </ul>

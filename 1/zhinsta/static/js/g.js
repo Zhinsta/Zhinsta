@@ -197,10 +197,11 @@ $(function() {
         if (typeof gLogined === 'undefined' || !gLogined) {
             var after = $('<span></span>').insertBefore(this);
             $(this).tooltip(after, {
-                msg: '请<a href="/">登录</a>后再like~',
-                position: [32, -10],
+                msg: '请先<a href="/">登录</a>',
+                position: [-36, 0],
                 offset: 8,
-                width: 130
+                width: 80,
+                direction: 'down'
             });
             return;
         }
@@ -268,10 +269,10 @@ $(function() {
         if (typeof gLogined === 'undefined' || !gLogined) {
             var after = $('<span>&nbsp;</span>').insertAfter(this);
             $(this).tooltip(after, {
-                msg: '请<a href="/">登录</a>后再关注~',
+                msg: '请先<a href="/">登录</a>',
                 position: [32, -60],
                 offset: 10,
-                width: 130
+                width: 80
             });
             return;
         }

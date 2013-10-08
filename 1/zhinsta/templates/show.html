@@ -26,15 +26,17 @@
     <div class="photos">
         <ul>
             {% for m in medias %}
-            <li>
-                <a href="{{ url_for('view.media', mid=m.mid) }}" class="photo">
+            <li class="photo">
+                <a href="{{ url_for('view.media', mid=m.mid) }}" class="photo-pic">
                     <img width="200" height="200" src="{{ m.pic }}" alt="" />
-                    <p class="photo-author">
-                        <img src="{{ m.user_pic }}" alt="{{ m.username }}" width="32" height="32" />
-                        {{ m.username }}
-                    </p>
-                    <span>{{ m.date_created|time_since }}&nbsp;</span>
                 </a>
+                <a href="{{ url_for('view.profile', ukey=m.ukey) }}" class="photo-author">
+                    <img src="{{ m.user_pic }}" alt="{{ m.username }}" width="32" height="32" />
+                    {{ m.username }}
+                </a>
+                <span class="photo-info">
+                    {{ m.date_created|time_since }}&nbsp;
+                </span>
             </li>
             {% endfor %}
         </ul>

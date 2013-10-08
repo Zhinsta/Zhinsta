@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% set body_class="page-media" %}
+{% block title %}
+{{ media.user.full_name }}的instagram照片|zhinsta.com，中文instagram社区
+{% endblock %}
 {% block style %}
 <script src="/static/js/modernizr.js"></script>
 <link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
@@ -68,6 +71,8 @@
                     等人赞过
                 </p>
             </div>
+
+            <div class="bshare-custom"><div class="bsPromo bsPromo2"></div><a title="分享到新浪微博" class="bshare-sinaminiblog" href="javascript:void(0);"></a><a title="分享到豆瓣" class="bshare-douban" href="javascript:void(0);"></a><a title="分享到微信" class="bshare-weixin" href="javascript:void(0);"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count" style="float: none;">11.5K</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=3ab3c1ab-bb78-4268-b687-95e2d70e974a&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
         </div>
     </div>
 
