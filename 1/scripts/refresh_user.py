@@ -20,20 +20,26 @@ api = InstagramAPI(client_id=INSTAGRAM_CLIENT_ID,
 def refresh_user_pic():
     users = UserModel.query.all()
     for user in users:
-        ret = urllib.urlopen(user.pic)
-        if ret.code != 200:
-            api = InstagramAPI(access_token=user.access_token)
-            new = api.user(user_id=user.ukey)
-            user.pic = new['profile_picture']
+        try:
+            ret = urllib.urlopen(user.pic)
+            if ret.code != 200:
+                api = InstagramAPI(access_token=user.access_token)
+                new = api.user(user_id=user.ukey)
+                user.pic = new.profile_picture
+        except:
+            pass
     db.session.commit()
 
 
 def remove_unavailable_show_pic():
     shows = ShowModel.query.all()
     for show in shows:
-        ret = urllib.urlopen(show.pic)
-        if ret.code != 200:
-            show.showable = 1
+        try:
+            ret = urllib.urlopen(show.pic)
+            if ret.code != 200:
+                show.showable = 1
+        except:
+            pass
     db.session.commit()
 
 
