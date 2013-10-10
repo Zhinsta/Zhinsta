@@ -1,7 +1,12 @@
+#!/usr/bin/env python
+
 import os
 import sys
 import urllib
-sys.path.insert(0, os.getcwd())
+home_dir = os.path.abspath(__file__)
+home_dir = home_dir[:home_dir.rindex('/')]
+home_dir = home_dir[:home_dir.rindex('/')]
+sys.path.insert(0, home_dir)
 
 from zhinsta.instagram.client import InstagramAPI
 
