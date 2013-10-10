@@ -14,7 +14,7 @@ api = InstagramAPI(client_id=INSTAGRAM_CLIENT_ID,
 
 
 def main():
-    api.list_subscriptions()
+    print api.list_subscriptions()
 
 
 if __name__ == '__main__':
