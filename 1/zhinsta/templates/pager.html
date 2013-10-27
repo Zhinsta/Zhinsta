@@ -2,7 +2,7 @@
     <li><a href="{{ pre_url }}">&#171;</a></li>
     {% for url in pager %}
         {% if url.active %}
-        <li><a href="{{ url.url }}">{{ url.cnt }}</a></li>
+        <li><span>{{ url.cnt }}</span></li>
         {% else %}
         <li><a href="{{ url.url }}">{{ url.cnt }}</a></li>
         {% endif %}
