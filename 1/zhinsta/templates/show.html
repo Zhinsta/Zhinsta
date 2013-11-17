@@ -2,6 +2,8 @@
 {% set body_class="page-show" %}
 {% set menu_selected=1 %}
 {% block style %}
+<script src="/js/modernizr.min.js"></script>
+<link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="/static/css/show.css"/>
 {% endblock %}
 {% block main %}
@@ -44,4 +46,8 @@
     </div>
     {{ pager()|safe }}
 </div>
+
+<script src="/static/js/tween.min.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/g.min.js"></script>
 {% endblock %}
