@@ -5,6 +5,11 @@ var Apis = {
     unlike: function(mid, success) {
         success();
     },
+    islike: function(mid, success) {
+        setTimeout(function () {
+            success(true);
+        }, 1000);
+    },
     follow: function(ukey, success) {
         success();
     },

@@ -27,6 +27,9 @@ var Apis = {
             'json'
         );
     },
+    islike: function(mid, success) {
+        
+    },
     follow: function(ukey, success) {
         $.get(
             '/apis/follow/',
@@ -184,6 +187,52 @@ $('#log').ajaxError(function(e) {
 
 
 $(function() {
+    if (typeof gLogined !== 'undefined' && gLogined) {
+        var loading = false;
+        var jsLove3Tpl = {
+            like: '<a href="javascript:void(0);" class="jsLove3" ' +
+                'data-action="unlike" data-mid="{mid}">' +
+                '<i class="icon-heart loved"></i>' +
+            '</a>',
+            unlike: '<a href="javascript:void(0);" class="jsLove3" ' +
+                'data-action="like" data-mid="{mid}">' +
+                '<i class="icon-heart"></i>' +
+            '</a>'
+        };
+
+        $('#photoList')
+            .on('mouseenter', 'li', function(e) {
+                var $me = $(this);
+                if ($me.data('loaded') || loading) {
+                    return;
+                }
+                $me.data('loaded', true);
+                loading = true;
+
+                var $love = $(this).find('.jsLove3');
+                var mid = $love.data('mid');
+                if (mid) {
+                    Apis.islike(mid, function(result) {
+                        var tpl = result ? jsLove3Tpl.like : jsLove3Tpl.unlike;
+                        $love.replaceWith(Utils.format(tpl, {mid: mid}));
+                        loading = false;
+                    });
+                }
+            })
+            .on('click', '.jsLove3', function(e) {
+                var $me = $(this);
+                var action = $me.data('action');
+                var mid = $me.data('mid');
+                var api = Apis[action];
+
+                api(mid, function() {
+                    $me.replaceWith(
+                        Utils.format(jsLove3Tpl[action],{mid: mid})
+                    );
+                });
+            });
+    }
+
     /**
      * like & unlike
      */
