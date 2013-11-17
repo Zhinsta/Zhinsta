@@ -28,7 +28,16 @@ var Apis = {
         );
     },
     islike: function(mid, success) {
-        
+        $.get(
+            '/apis/islike/',
+            {mid: mid},
+            function(data) {
+                if (success) {
+                    success(data.result);
+                }
+            },
+            'json'
+        );
     },
     follow: function(ukey, success) {
         $.get(
