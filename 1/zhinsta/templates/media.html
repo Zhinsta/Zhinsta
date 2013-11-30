@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% set body_class="page-media" %}
 {% block title %}
-{{ media.user.full_name }}的instagram照片|zhinsta.com，中文instagram社区
+{{ media.user.username }}的instagram照片
+{{ super() }}
 {% endblock %}
 {% block style %}
 <script src="/static/js/modernizr.js"></script>

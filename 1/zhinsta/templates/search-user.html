@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% set body_class="page-search-user" %}
+{% block title %}
+搜索{{ wd }}用户
+{{ super() }}
+{% endblock %}
 {% block style %}
 <link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="/static/css/search.css"/>
 {% endblock %}
 {% block main %}
 <div class="main">
-    <h1>搜索“{{ wd }}”</h1>
+    <h1>搜索“{{ wd }}”用户</h1>
     <div class="main-menu">
         <ul>
             <li class="main-menu-selected">用户</li>

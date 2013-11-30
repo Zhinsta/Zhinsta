@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% set body_class="page-error" %}
+{% block title %}
+错误
+{{ super() }}
+{% endblock %}
 {% block style %}
 <link rel="stylesheet" href="/static/css/other.css"/>
 {% endblock %}

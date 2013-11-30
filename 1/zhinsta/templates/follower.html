@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% set body_class="page-profile" %}
+{% block title %}
+{{ user.username }}
+{% if request.endpoint == 'view.follower' %}
+被关注
+{% else %}
+正在关注
+{% endif %}
+{{ super() }}
+{% endblock %}
 {% block style %}
 <script src="/static/js/modernizr.min.js"></script>
 <link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
