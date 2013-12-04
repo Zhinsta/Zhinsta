@@ -18,6 +18,7 @@ from .engines import db
 
 from .models.user import UserModel
 from .models.user import ShowModel
+from .settings import OPEN_ACCESS_TOKEN
 
 
 def has_login():
@@ -33,23 +34,36 @@ def has_login():
     return user
 
 
+def open_visit(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs): 
+        request.access_token = OPEN_ACCESS_TOKEN
+        return func(*args, **kwargs)
+    return wrapper
+
+
 def login_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         if not has_login():
-            return redirect(url_for('view.login'))
-        request.ukey = session['ukey']
-        request.access_token = session['access_token']
+            if not request.access_token:
+                return redirect(url_for('view.login'))
+        else:
+            request.ukey = session['ukey']
+            request.access_token = session['access_token']
         return func(*args, **kwargs)
     return wrapper
 
 
 def render(template, **argkv):
-    ukey = session.get('ukey', '')
+    ukey = ''
+    if request.ukey:
+        ukey = request.ukey
     if ukey:
         argkv.update({'has_login': True,
                       'username': session.get('username', ''),
-                      'ukey': ukey})
+                      'ukey': ukey,
+                      'request': request})
     else:
         argkv.update({'has_login': False})
     return render_template(template, **argkv)
@@ -130,6 +144,8 @@ class Pager(object):
 def error_handle(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
+        request.ukey = session.get('ukey', '')
+        request.access_token = session.get('access_token', '')
         try:
             return func(*args, **kwargs)
         except InstagramAPIError, e:
