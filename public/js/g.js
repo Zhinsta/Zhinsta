@@ -224,7 +224,7 @@ $(function() {
                     timeout = null;
                     $me.data('loaded', true);
 
-                    var $love = $(this).find('.jsLove3');
+                    var $love = $me.find('.jsLove3');
                     var mid = $love.data('mid');
                     if (mid) {
                         Apis.islike(mid, function(result) {
