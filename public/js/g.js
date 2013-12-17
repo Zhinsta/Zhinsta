@@ -197,7 +197,7 @@ $('#log').ajaxError(function(e) {
 
 $(function() {
     if (typeof gLogined !== 'undefined' && gLogined) {
-        var loading = false;
+        var timeout;
         var jsLove3Tpl = {
             like: '<a href="javascript:void(0);" class="jsLove3" ' +
                 'data-action="unlike" data-mid="{mid}">' +
@@ -212,21 +212,27 @@ $(function() {
         $('#photoList')
             .on('mouseenter', 'li', function(e) {
                 var $me = $(this);
-                if ($me.data('loaded') || loading) {
+                if ($me.data('loaded')) {
                     return;
                 }
-                $me.data('loaded', true);
-                loading = true;
 
-                var $love = $(this).find('.jsLove3');
-                var mid = $love.data('mid');
-                if (mid) {
-                    Apis.islike(mid, function(result) {
-                        var tpl = result ? jsLove3Tpl.like : jsLove3Tpl.unlike;
-                        $love.replaceWith(Utils.format(tpl, {mid: mid}));
-                        loading = false;
-                    });
+                if (timeout) {
+                    clearTimeout(timeout);
                 }
+
+                timeout = setTimeout(function() {
+                    timeout = null;
+                    $me.data('loaded', true);
+
+                    var $love = $(this).find('.jsLove3');
+                    var mid = $love.data('mid');
+                    if (mid) {
+                        Apis.islike(mid, function(result) {
+                            var tpl = result ? jsLove3Tpl.like : jsLove3Tpl.unlike;
+                            $love.replaceWith(Utils.format(tpl, {mid: mid}));
+                        });
+                    }
+                }, 1000);
             })
             .on('click', '.jsLove3', function(e) {
                 var $me = $(this);
