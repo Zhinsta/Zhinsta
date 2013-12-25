@@ -298,3 +298,16 @@ class MembersRecommendView(views.MethodView):
                  .offset(pager.offset)
                  .limit(pager.limit).all())
         return render('members.html', users=users, pager=pager)
+
+
+class FeedView(views.MethodView):
+
+    @error_handle
+    @login_required
+    def get(self):
+        api = InstagramAPI(access_token=request.access_token)
+        next_url = request.args.get('next_url', None)
+        feed = api.user_media_feed(with_next_url=next_url)
+        next_url = feed[1]
+        media = feed[0]
+        return render('feed.html', media=media, next_url=next_url)

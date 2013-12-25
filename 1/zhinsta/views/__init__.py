@@ -6,7 +6,7 @@ from .home import (HomeView, OAuthCodeView, LoginView,
                    LogoutView, ProfileView, MembersView,
                    SearchUserView, SearchTagView, MediaProfileView,
                    TagView, FollowerView, FollowingView,
-                   WelcomeView, AboutView,
+                   WelcomeView, AboutView, FeedView,
                    MembersRecommendView)
 from .show import (RealtimeView, ShowView)
 
@@ -67,3 +67,6 @@ blueprint.add_url_rule('/about/',
 blueprint.add_url_rule('/instagram/realtime/',
                        view_func=RealtimeView.as_view(b'realtime'),
                        endpoint='realtime')
+blueprint.add_url_rule('/feed/',
+                       view_func=FeedView.as_view(b'feed'),
+                       endpoint='feed')

@@ -23,6 +23,9 @@
         <ul>
             <li class="yellow {% if menu_selected==1 %}menu-selected{% endif %}"><a href="{{ url_for('view.show') }}">展台</a></li>
             <li class="red {% if menu_selected==0 %}menu-selected{% endif %}"><a href="{{ url_for('view.recommend') }}">中文圈</a></li>
+            {% if has_login %}
+            <li class="green {% if menu_selected==3 %}menu-selected{% endif %}"><a href="{{ url_for('view.feed') }}">新鲜事</a></li>
+            {% endif %}
             <li class="green {% if menu_selected==2 %}menu-selected{% endif %}"><a href="{{ url_for('view.about') }}">关于</a></li>
         </ul>
         <form class="menu-form" action="{{ url_for('view.search_user') }}" method="GET">
