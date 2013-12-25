@@ -346,10 +346,10 @@ $(function() {
         var ukey = $me.data('ukey');
         var api = Apis[action];
         var template = {
-            follow: '<a href="#" class="jsFollow" ' +
+            follow: '<a href="#" class="jsFollow info-follow" ' +
                         'data-action="unfollow" data-ukey="{v}" ' +
                         'title="取消关注">正在关注</a>',
-            unfollow: '<a href="#" class="jsFollow" ' +
+            unfollow: '<a href="#" class="jsFollow info-follow" ' +
                         'data-action="follow" data-ukey="{v}" ' +
                         'title="关注TA">未关注</a>'
         };

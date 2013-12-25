@@ -17,13 +17,14 @@
             <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
             </a>
             <div class="info-l-txt">
-                <h1>{{ user.username }}
+                <h1>
+                    <a href="{{ url_for('view.profile', ukey=user.id) }}">{{ user.username }}</a>
                     {% if not isme %}
                     {% if isfollow %}
-                    <a href="javascript:void(0);" class="jsFollow" data-ukey="{{ user.id }}" data-action="unfollow" title="取消关注">正在关注</a>
+                    <a href="javascript:void(0);" class="jsFollow info-follow" data-ukey="{{ user.id }}" data-action="unfollow" title="取消关注">正在关注</a>
                     {% else %}
                     <span></span>
-                    <a href="javascript:void(0);" class="jsFollow" data-ukey="{{ user.id }}" data-action="follow" title="关注TA">未关注</a>
+                    <a href="javascript:void(0);" class="jsFollow info-follow" data-ukey="{{ user.id }}" data-action="follow" title="关注TA">未关注</a>
                     {% endif %}
                     {% endif %}
                 </h1>
