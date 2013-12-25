@@ -52,3 +52,11 @@ class ShowModel(db.Model):
     date_tagged = db.Column(db.DateTime(),
                             index=True, nullable=False,
                             default=datetime.now)
+
+
+class RecommendModel(db.Model):
+    __tablename__ = 'recommend'
+    ukey = db.Column(db.VARCHAR(128), primary_key=True)
+    pic = db.Column(db.VARCHAR(255), nullable=False)
+    username = db.Column(db.VARCHAR(255), index=True, nullable=False)
+    order = db.Column(db.Integer(), index=True, nullable=False)

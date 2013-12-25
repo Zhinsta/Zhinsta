@@ -6,7 +6,8 @@ from .home import (HomeView, OAuthCodeView, LoginView,
                    LogoutView, ProfileView, MembersView,
                    SearchUserView, SearchTagView, MediaProfileView,
                    TagView, FollowerView, FollowingView,
-                   WelcomeView, AboutView)
+                   WelcomeView, AboutView,
+                   MembersRecommendView)
 from .show import (RealtimeView, ShowView)
 
 blueprint = Blueprint('view', __name__)
@@ -29,6 +30,9 @@ blueprint.add_url_rule('/profile/<ukey>/',
 blueprint.add_url_rule('/members/',
                        view_func=MembersView.as_view(b'members'),
                        endpoint='members')
+blueprint.add_url_rule('/members/recommend/',
+                       view_func=MembersRecommendView.as_view(b'recommend'),
+                       endpoint='recommend')
 blueprint.add_url_rule('/search/user/',
                        view_func=SearchUserView.as_view(b'search_user'),
                        endpoint='search_user')

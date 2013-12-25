@@ -10,16 +10,28 @@
 {% endblock %}
 {% block main %}
 <div class="main">
-    <h1>中文圈</h1>
-    <!--
+    {% if request.endpoint == 'view.recommend' %}
+    <h1>华人推荐</h1>
+    <p>这里展示instagram上的优秀华人，由zhinsta官方推荐。</p>
+    {% endif %}
+    {% if request.endpoint == 'view.members' %}
+    <h1>zhinsta成员</h1>
+    <p>用instagram登录Zhinsta后，你就成为Zhinsta的成员。这里展示所有成员，来认识在玩Zhinsta的人吧。</p>
+    {% endif %}
     <div class="main-menu">
         <ul>
-            <li><a href="{{ url_for('view.members') }}">收录的人</a></li>
-            <li class="main-menu-selected"><a href="{{ url_for('view.members') }}">成员</a></li>
+            {% if request.endpoint == 'view.recommend' %}
+            <li class="main-menu-selected">华人推荐</li>
+            {% else %}
+            <li><a href="{{ url_for('view.recommend') }}">华人推荐</a></li>
+            {% endif %}
+            {% if request.endpoint == 'view.members' %}
+            <li class="main-menu-selected">zhinsta成员</li>
+            {% else %}
+            <li><a href="{{ url_for('view.members') }}">zhinsta成员</a></li>
+            {% endif %}
         </ul>
     </div>
-    -->
-    <p>用instagram登录Zhinsta后，你就成为Zhinsta的成员。这里展示所有成员，来认识在玩Zhinsta的人吧。</p>
     <div class="people">
         <ul>
             {% for user in users %}

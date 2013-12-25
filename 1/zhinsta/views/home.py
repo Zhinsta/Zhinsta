@@ -14,6 +14,7 @@ from ..settings import INSTAGRAM_CLIENT_SECRET
 from ..settings import INSTAGRAM_REDIRECT_URI
 from ..settings import INSTAGRAM_SCOPE
 from ..models.user import UserModel
+from ..models.user import RecommendModel
 from ..engines import db
 from ..utils import login_required
 from ..utils import has_login
@@ -33,7 +34,7 @@ class HomeView(views.MethodView):
     @error_handle
     def get(self):
         if has_login():
-            return redirect(url_for('view.members'))
+            return redirect(url_for('view.show'))
         return render('login.html')
 
 
@@ -282,3 +283,18 @@ class AboutView(views.MethodView):
     @error_handle
     def get(self):
         return render('about.html')
+
+
+class MembersRecommendView(views.MethodView):
+
+    @error_handle
+    def get(self):
+        total = RecommendModel.query.count()
+        current_page = request.args.get('page', 1)
+        pager = Pager(members_per_page, total)
+        pager.set_current_page(current_page)
+        users = (RecommendModel.query
+                 .order_by(RecommendModel.order.desc())
+                 .offset(pager.offset)
+                 .limit(pager.limit).all())
+        return render('members.html', users=users, pager=pager)
