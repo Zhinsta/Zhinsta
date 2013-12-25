@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% set body_class="page-tag" %}
+{% set body_class="page-feed" %}
 {% set menu_selected=3 %}
 {% block title %}
 新鲜事
@@ -7,7 +7,7 @@
 {% endblock %}
 {% block style %}
 <link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/static/css/tag.css"/>
+<link rel="stylesheet" href="/static/css/show.css"/>
 {% endblock %}
 {% block main %}
 <div class="main">
@@ -26,7 +26,7 @@
                     {{ pic.user.username }}
                 </a>
                 <p class="photo-info">
-                    {{ pic.created_time|time_since }}&nbsp;{{ pic.like_count }}<i class="icon-heart"></i>&nbsp;{{ pic.comment_count }}<i class="icon-comment"></i>
+                    {{ pic.created_time|time_since }}&nbsp;<a href="javascript:void(0);" class="jsLove3" data-mid="{{ pic.id }}"></a>&nbsp;{{ pic.comment_count }}<i class="icon-comment"></i>
                 </p>
             </li>
             {% endfor %}
@@ -36,4 +36,8 @@
         {% endif %}
     </div>
 </div>
+
+<script src="/static/js/tween.min.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/g.min.js"></script>
 {% endblock %}
