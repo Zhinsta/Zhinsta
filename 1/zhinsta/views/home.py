@@ -71,8 +71,8 @@ class OAuthCodeView(views.MethodView):
     @error_handle
     def get(self):
         if has_login():
-            return redirect(url_for('view.members'))
-        redirect_url = url_for('view.members')
+            return redirect(url_for('view.show'))
+        redirect_url = url_for('view.show')
         code = request.args.get('code', '')
         redirect_uri = INSTAGRAM_REDIRECT_URI
         if request.args.get('uri', ''):
