@@ -1,76 +1,22 @@
 .page-login {
-    .login {
-        position: relative;
-        top: 0;
-        left: 0;
-        padding-bottom: (2 / 3) * 100%; // 3:2
-        img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            width: 100%;
-        }
-        .login-button {
-            padding: 0.5em 1.5em 0.5em;
-            color: #FFF;
-            font-size: 2em;
-            background-color: rgb(219, 82, 47);
-            text-decoration: none;
-            border-radius: 2px;
-            -webkit-font-smoothing: antialiased;
-            /* Transitions */
-            -webkit-transition: 0.1s linear -webkit-box-shadow;
-            -moz-transition: 0.1s linear -moz-box-shadow;
-            -ms-transition: 0.1s linear box-shadow;
-            -o-transition: 0.1s linear box-shadow;
-            transition: 0.1s linear box-shadow;
-        }
-        .login-button:hover,
-        .login-button:focus {
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);
-            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
-            background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
-            background-image: -moz-linear-gradient(top, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.10));
-            background-image: -ms-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
-            background-image: -o-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
-            background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
-        }
-        .login-button:focus {
-            outline: 0;
-        }
-        .login-button:active {
-            box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
-        }
-        .login-info {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            z-index: 2;
-            margin: 3em 0 0 -320px;
-            width: 640px;
-            color: #FFF;
+    h1 {
+        margin: 1em 0;
+        text-align: center;
+    }
 
-            h1 {
-                font-weight: normal;
-                font-size: 5em;
-                text-align: center;
-            }
-            p {
-                text-align: center;
-                .pure-button {
-                }
-            }
-            div {
-                float: left;
-                width: 50%;
-                margin-top: 5em;
-                h2, p {
-                    font-weight: normal;
-                    margin-right: 10px;
-                    text-align: left;
-                }
-            }
+    .board {
+        padding: 1em;
+        color: #FFF;
+        background: #434A54;
+
+        a {
+            color: #FFF;
+            text-decoration: none;
         }
+    }
+    .board-hd {
+        margin: 0;
+        line-height: 2em;
+        font-size: 1em;
     }
 }
