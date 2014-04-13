@@ -10,18 +10,24 @@
     <script type="text/javascript" src="/js/less-1.3.3.min.js"></script>
 </head>
 <body class="page-welcome">
-    <div class="menu">
-        <div class="menu-border"></div>
-        <a href="#" class="menu-heading">Zhinsta</a>
-        <ul>
-            <li class="menu-selected"><a href="#">中文圈</a></li>
-            <li><a href="#">站台</a></li>
-        </ul>
-        <form class="menu-form">
-            <input type="text" placeholder="搜索">
-        </form>
-        <div class="menu-right">
-            <a href="#" class="menu-login">Instagram登录</a>
+    <div class="header">
+        <div class="header-main">
+            <a href="/" class="header-logo"><span>Zhinsta</span></a>
+            <ul class="header-nav">
+                <li><a href="/show/">展台</a></li>
+                <li class="header-selected"><a href="/members/recommend/">中文圈</a></li>
+                <li><a href="/feed/">新鲜事</a></li>
+            </ul>
+            <form class="header-search" action="/search/user/" method="GET">
+                <input type="text" placeholder="搜索" name="wd">
+            </form>
+
+            <div class="header-right">
+                <a href="/profile/28973930/" class="header-right-i">zmmbreeze</a>
+                <ul class="header-right-bd">
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
