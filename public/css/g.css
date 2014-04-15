@@ -72,6 +72,7 @@ h1, h2, h3, h4, h5, h6 {
     float: left;
     width: 2em;
     height: 2em;
+    text-indent: -9999px;
     background: url(logo@48x48.png) no-repeat;
 }
 .header-min .header-logo {
@@ -87,16 +88,6 @@ only screen and (min-device-pixel-ratio: 2) {
         background-image: url(logo@64x64.png);
         background-size: 32px 32px;
     }
-}
-.header-logo span {
-    display: block;
-    margin-top: 100%;
-    width: 100%;
-    font-size: 0.5em;
-    text-align: center;
-}
-.header-min .header-logo span {
-    display: none;
 }
 
 .header-nav {
