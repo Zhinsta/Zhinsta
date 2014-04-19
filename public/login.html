@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Zhinsta，instagram中文社区</title>
+    <meta name ="viewport" content ="initial-scale=1, user-scalable=no, width=device-width, minimal-ui">
     <link rel="stylesheet" href="/css/normalize.css"/>
-    <link rel="stylesheet" href="/css/g.css"/>
+    <link rel="stylesheet" href="/css/basic/g.css"/>
+    <link rel="stylesheet" media="(min-width: 960px)" href="/css/960/g.css"/>
     <link rel="stylesheet/less" href="/css/login.less"/>
     <script type="text/javascript" src="/js/less-1.3.3.min.js"></script>
     <meta name="baidu-tc-verification" content="0558abc210f88272286e6b8a216e48b7" />
 </head>
 <body class="page-login">
-    <div class="header">
+    <div class="header header-ontop">
         <div class="header-main">
             <a href="/" class="header-logo">Zhinsta</a>
             <ul class="header-nav">
@@ -28,13 +30,84 @@
         </div>
     </div>
 
-    <div class="main">
-        <h1>Instagram中文圈，发现精彩照片生活</h1>
+    <div class="container">
+        <div class="main">
+            <h1>Instagram中文圈，发现精彩照片生活</h1>
 
-        <div class="board">
-            <h2 class="board-hd"><a href="#">展台</a></h2>
-            <div class="board-bd">
-                
+            <div class="board">
+                <h2 class="board-hd"><a href="#">展台</a></h2>
+                <div class="board-bd">
+                    <div class="photos" id="photoList">
+                        <ul>
+                            <li class="photo">
+                                <a href="#" target="_blank" class="photo-pic">
+                                    <img width="216" height="216" src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
+                                </a>
+                                <a href="/profile.html" class="photo-author">
+                                    <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                                    敏明君敏明君敏明君敏明君
+                                </a>
+                                <span class="photo-info">
+                                    1小时前&nbsp;
+                                    <a href="javascript:void(0);" class="jsLove3" data-mid="123123"></a>
+                                </span>
+                            </li>
+                            <li class="photo">
+                                <a href="#" target="_blank" class="photo-pic">
+                                    <img width="216" height="216" src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
+                                </a>
+                                <a href="/profile.html" class="photo-author">
+                                    <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                                    敏明君敏明君敏明君敏明君
+                                </a>
+                                <span class="photo-info">
+                                    1小时前&nbsp;
+                                    <a href="javascript:void(0);" class="jsLove3" data-mid="123123"></a>
+                                </span>
+                            </li>
+                            <li class="photo">
+                                <a href="#" target="_blank" class="photo-pic">
+                                    <img width="216" height="216" src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
+                                </a>
+                                <a href="/profile.html" class="photo-author">
+                                    <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                                    敏明君敏明君敏明君敏明君
+                                </a>
+                                <span class="photo-info">
+                                    1小时前&nbsp;
+                                    <a href="javascript:void(0);" class="jsLove3" data-action="like" data-num="1" data-mid="123123"></a>
+                                </span>
+                            </li>
+                            <li class="photo">
+                                <a href="#" target="_blank" class="photo-pic">
+                                    <img width="216" height="216" src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
+                                </a>
+                                <a href="/profile.html" class="photo-author">
+                                    <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                                    敏明君敏明君敏明君敏明君
+                                </a>
+                                <span class="photo-info">
+                                    1小时前&nbsp;
+                                    <a href="javascript:void(0);" class="jsLove3" data-action="like" data-num="1" data-mid="123123"></a>
+                                </span>
+                            </li>
+                            <li class="photo">
+                                <a href="#" target="_blank" class="photo-pic">
+                                    <img width="216" height="216" src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
+                                </a>
+                                <a href="/profile.html" class="photo-author">
+                                    <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                                    敏明君敏明君敏明君敏明君
+                                </a>
+                                <span class="photo-info">
+                                    1小时前&nbsp;
+                                    <a href="javascript:void(0);" class="jsLove3" data-action="like" data-num="1" data-mid="123123"></a>
+                                </span>
+                            </li>
+                        </ul>
+                        <a href="#" class="more"><span>更多</span></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -66,11 +139,12 @@
                         <a href="#" target="_blank">关于我们</a>
                     </li>
                     <li class="footer-links-qq">
-                        <a href="#" target="_blank">QQ群：33165199（申请时注明你的InstagramID）</a>
                     </li>
                 </ul>
-                <div class="footer-copyright">
-                &copy;All Right Reserved. 2013-2014
+
+                <div class="footer-bt">
+                    <p class="footer-links-qq">QQ群：33165199（申请时注明你的InstagramID）</p>
+                    &copy;All Right Reserved. 2013-2014
                 </div>
             </div>
             <div class="footer-r">

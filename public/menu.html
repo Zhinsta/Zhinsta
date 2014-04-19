@@ -3,40 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>中文圈 - Zhinsta，instagram中文社区</title>
+    <meta name ="viewport" content ="initial-scale=1, user-scalable=no, width=device-width, minimal-ui">
     <script type="text/javascript" src="/js/modernizr.js"></script>
     <link rel="stylesheet" href="/css/normalize.css"/>
-    <link rel="stylesheet" href="/css/g.css"/>
+    <link rel="stylesheet" href="/css/basic/g.css"/>
+    <link rel="stylesheet" media="(min-width: 960px)" href="/css/960/g.css"/>
     <script type="text/javascript" src="/js/less-1.3.3.min.js"></script>
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/tween.min.js"></script>
     <script type="text/javascript" src="/js/g.js"></script>
 </head>
 <body>
-    <div class="header">
+    <div class="header header-ontop">
         <div class="header-main">
             <a href="/" class="header-logo">Zhinsta</a>
             <ul class="header-nav">
                 <li><a href="/show/">展台</a></li>
                 <li class="header-selected"><a href="/members/recommend/">中文圈</a></li>
-                <li><a href="/feed/">新鲜事</a></li>
-            </ul>
-            <form class="header-search" action="/search/user/" method="GET">
-                <input type="text" placeholder="搜索" name="wd">
-            </form>
-
-            <div class="header-right">
-                <a href="/login/" class="login-button">Instagram 登录</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="header header-min">
-        <div class="header-main">
-            <a href="/" class="header-logo">Zhinsta</a>
-            <ul class="header-nav">
-                <li><a href="/show/">展台</a></li>
-                <li class="header-selected"><a href="/members/recommend/">中文圈</a></li>
-                <li><a href="/feed/">新鲜事</a></li>
+                <li><a href="/feed/" class="header-nav-other">新鲜事</a></li>
             </ul>
             <form class="header-search" action="/search/user/" method="GET">
                 <input type="text" placeholder="搜索" name="wd">
@@ -54,7 +38,25 @@
             <ul class="header-nav">
                 <li><a href="/show/">展台</a></li>
                 <li class="header-selected"><a href="/members/recommend/">中文圈</a></li>
-                <li><a href="/feed/">新鲜事</a></li>
+                <li><a href="/feed/" class="header-nav-other">新鲜事</a></li>
+            </ul>
+            <form class="header-search" action="/search/user/" method="GET">
+                <input type="text" placeholder="搜索" name="wd">
+            </form>
+
+            <div class="header-right">
+                <a href="/login/" class="login-button">Instagram 登录</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="header header-ontop">
+        <div class="header-main">
+            <a href="/" class="header-logo">Zhinsta</a>
+            <ul class="header-nav">
+                <li><a href="/show/">展台</a></li>
+                <li class="header-selected"><a href="/members/recommend/">中文圈</a></li>
+                <li><a href="/feed/" class="header-nav-other">新鲜事</a></li>
             </ul>
             <form class="header-search" action="/search/user/" method="GET">
                 <input type="text" placeholder="搜索" name="wd">
@@ -69,13 +71,13 @@
         </div>
     </div>
 
-    <div class="header header-min">
+    <div class="header">
         <div class="header-main">
             <a href="/" class="header-logo">Zhinsta</a>
             <ul class="header-nav">
                 <li><a href="/show/">展台</a></li>
                 <li class="header-selected"><a href="/members/recommend/">中文圈</a></li>
-                <li><a href="/feed/">新鲜事</a></li>
+                <li><a href="/feed/" class="header-nav-other">新鲜事</a></li>
             </ul>
             <form class="header-search" action="/search/user/" method="GET">
                 <input type="text" placeholder="搜索" name="wd">
@@ -116,17 +118,18 @@
                     <li>
                         <a href="#" target="_blank">关于我们</a>
                     </li>
-                    <li class="footer-links-qq">
-                        <a href="#" target="_blank">QQ群：33165199（申请时注明你的InstagramID）</a>
+                    <li>
                     </li>
                 </ul>
-                <div class="footer-copyright">
-                &copy;All Right Reserved. 2013-2014
+
+                <div class="footer-bt">
+                    <p class="footer-links-qq">QQ群：33165199（申请时注明你的InstagramID）</p>
+                    &copy;All Right Reserved. 2013-2014
                 </div>
             </div>
             <div class="footer-r">
                 <div class="footer-weixin">
-                    <img src="css/qrcode.png" alt="" width="128"/>
+                    <img src="./assets/imgs/qrcode.png" alt="" width="128"/>
                     <span>微信：zhinsta</span>
                 </div>
             </div>
