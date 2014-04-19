@@ -1,0 +1,44 @@
+/* css for (min-width: 960px;) */
+
+/* header */
+.header.header-ontop {
+    font-size: 24px;
+}
+.header.header-ontop > * {
+    font-size: 24px;
+}
+
+.header-ontop .header-logo {
+    background-image: url(../../assets/imgs/logo@48x48.png);
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+    .header-ontop .header-logo {
+        background-image: url(../../assets/imgs/logo@96x96.png);
+    }
+}
+
+.header-nav {
+    margin-right: 1em;
+}
+
+.header-search {
+    float: left;
+    display: block;
+}
+.header-search input {
+    display: block;
+    width: 2em;
+    margin: 0;
+    padding: 0;
+    line-height: 2em;
+    outline: none;
+    font-size: inherit;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #CCC;
+}
+.header-search input:focus {
+    width: 12em;
+    border-bottom-color: #666;
+}
