@@ -1,6 +1,6 @@
 .photos {
     ul {
-        margin: 30px 0;
+        margin: 0;
         padding: 0;
         overflow-x: visible;
         overflow-y: hidden;
@@ -9,7 +9,7 @@
     li {
         position: relative;
         float: left;
-        margin: 0 10px 1em 10px;
+        margin: 0 0 2em;
         _display: inline;
         list-style: none;
     }
@@ -44,8 +44,7 @@
     }
     .photo-pic img {
         display: block;
-        width: 220px;
-        height: 220px;
+        width: 300px;
     }
     .photo-author,
     .photo-info {
@@ -78,13 +77,15 @@
         bottom: -32px;
         margin: 0;
         padding: 0.25em 9px 6px;
-        width: 200px;
-        height: 24px;
+        width: 100%;
+        height: 32px;
         line-height: 24px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         color: inherit;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
         &:hover {
             text-decoration: none;
         }
@@ -110,9 +111,11 @@
         left: 0;
         margin: 0;
         padding: 0.25em 0;
-        width: 218px;
+        width: 100%;
         text-align: center;
         word-wrap: break-word;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
         a {
             color: inherit;
             &:hover {
