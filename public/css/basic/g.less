@@ -1,4 +1,7 @@
 /* basic css */
+@head-font-size: 16px;
+
+/* basic css */
 html, body {
     color: #666;
     font-family:
@@ -26,13 +29,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* header */
 .header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
     padding: 1em 0;
-    font-size: 16px;
+    font-size: @head-font-size;
     background: #F5F7FA;
     border-bottom: 3px solid #E6E9ED;
 }
 .header > * {
-    font-size: 16px;
+    font-size: @head-font-size;
 }
 .header-main {
     margin: 0 auto;
@@ -156,6 +162,7 @@ only screen and (min-device-pixel-ratio: 2) {
 
 /* container & main */
 .container {
+    padding-top: @head-font-size * 4;
     background: #FFF;
 }
 .main {

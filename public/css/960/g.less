@@ -1,11 +1,12 @@
 /* css for (min-width: 960px;) */
+@head-font-size: 24px;
 
 /* header */
 .header.header-ontop {
-    font-size: 24px;
+    font-size: @head-font-size;
 }
 .header.header-ontop > * {
-    font-size: 24px;
+    font-size: @head-font-size;
 }
 
 .header-ontop .header-logo {
@@ -42,3 +43,11 @@ only screen and (min-device-pixel-ratio: 2) {
     width: 12em;
     border-bottom-color: #666;
 }
+
+
+/* container & main */
+.container {
+    padding-top: @head-font-size * 4;
+}
+
+@import "login.less";
