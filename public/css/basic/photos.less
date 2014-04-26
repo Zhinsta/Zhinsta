@@ -6,13 +6,6 @@
         overflow-y: hidden;
         zoom: 1;
     }
-    li {
-        position: relative;
-        float: left;
-        margin: 0 0 2em;
-        _display: inline;
-        list-style: none;
-    }
     .photos-noauth {
         margin: 60px 0;
         a {
@@ -28,7 +21,10 @@
     }
     .photo {
         position: relative;
-        float: left;
+        display: block;
+        width: 300px;
+        margin: 0 auto 2em;
+        list-style: none;
         color: inherit;
         text-decoration: inherit;
         overflow: hidden;
@@ -42,9 +38,10 @@
             }
         }
     }
+    .photo-pic,
     .photo-pic img {
         display: block;
-        width: 300px;
+        max-width: 100%;
     }
     .photo-author,
     .photo-info {
