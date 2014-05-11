@@ -7,7 +7,22 @@
 
     h2 {
         margin: 0;
-        font-size: @head-font-size;
+        font-size: @head-font-size * 1.5;
+        text-align: center;
+
+        a {
+            display: block;
+            color: @base-font-color;
+
+            &::before {
+                content: '~~~ ';
+                color: lighten(@base-font-color, 40%);
+            }
+            &::after {
+                content: ' ~~~';
+                color: lighten(@base-font-color, 40%);
+            }
+        }
 
         a:hover {
             text-decoration: none;

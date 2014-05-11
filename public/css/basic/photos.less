@@ -21,9 +21,10 @@
     }
     .photo {
         position: relative;
+        float: left;
+        margin: 10px;
+        width: 220px;
         display: block;
-        width: 300px;
-        margin: 0 auto 2em;
         list-style: none;
         color: inherit;
         text-decoration: inherit;
@@ -123,6 +124,23 @@
             padding: 2px !important;
         }
     }
+
+    .more {
+        display: block;
+        text-align: center;
+        font-size: @head-font-size * 1.5;
+        color: @base-font-color;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
 
-
+@media (max-width: 480px) {
+    .photos .photo {
+        float: none;
+        width: 300px;
+        margin: 0 auto 1em;
+    }
+}
