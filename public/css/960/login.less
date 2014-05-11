@@ -5,5 +5,16 @@
 
     h2 {
         font-size: @head-font-size;
+
+        a {
+            &::before {
+                content: '~~~~~~ ';
+                color: lighten(@base-font-color, 40%);
+            }
+            &::after {
+                content: ' ~~~~~~';
+                color: lighten(@base-font-color, 40%);
+            }
+        }
     }
 }
