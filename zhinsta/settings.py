@@ -3,7 +3,7 @@
 try:
     import sae.const
 
-    SECRET_KEY = 'SteinsGate' #生产环境应该保密
+    SECRET_KEY = 'SteinsGate'   # 生产环境应该保密
     MYSQL_DB = sae.const.MYSQL_DB
     MYSQL_USER = sae.const.MYSQL_USER
     MYSQL_PASS = sae.const.MYSQL_PASS
@@ -14,7 +14,7 @@ try:
     INSTAGRAM_CLIENT_SECRET = '8f0479ee76c548889200612149cd8633'
     INSTAGRAM_REDIRECT_URI = 'http://zhinsta.sinaapp.com/instagram/redirect/'
 except ImportError:
-    SECRET_KEY = 'SteinsGate' #生产环境应该保密
+    SECRET_KEY = 'SteinsGate'   # 生产环境应该保密
     MYSQL_DB = 'zhinsta'
     MYSQL_USER = 'root'
     MYSQL_PASS = ''

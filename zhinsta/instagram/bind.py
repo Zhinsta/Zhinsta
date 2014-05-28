@@ -8,7 +8,7 @@ re_path_template = re.compile('{\w+}')
 
 def encode_string(value):
     return value.encode('utf-8') \
-                        if isinstance(value, unicode) else str(value)
+        if isinstance(value, unicode) else str(value)
 
 
 class InstagramClientError(Exception):
@@ -71,8 +71,8 @@ def bind_method(**config):
                 if key in self.parameters:
                     raise InstagramClientError("Parameter %s already supplied" % key)
                 self.parameters[key] = encode_string(value)
-            if 'user_id' in self.accepts_parameters and not 'user_id' in self.parameters \
-               and not self.requires_target_user:
+            if 'user_id' in self.accepts_parameters and 'user_id' not in self.parameters \
+                    and not self.requires_target_user:
                 self.parameters['user_id'] = 'self'
 
         def _build_path(self):
@@ -93,6 +93,8 @@ def bind_method(**config):
             response, content = OAuth2Request(self.api).make_request(url, method=method, body=body, headers=headers)
             if response['status'] == '503':
                 raise InstagramAPIError(response['status'], "Rate limited", "Your client is making too many request per second")
+            elif response['status'] == '400':
+                raise InstagramAPIError(response['status'], 'Rate limited?', 'maybe too many request per second')   # I'm not sure
 
             try:
                 content_obj = simplejson.loads(content)
