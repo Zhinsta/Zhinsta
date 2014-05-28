@@ -1,24 +1,23 @@
 # -*- coding: utf-8 -*-
 
 import json
+import random
 import time
 import traceback
 from functools import wraps
 
-from flask import session
-from flask import request
 from flask import redirect
-from flask import url_for
 from flask import render_template
-
-from .instagram.client import InstagramAPI
-from .instagram.bind import InstagramAPIError
+from flask import request
+from flask import session
+from flask import url_for
 
 from .engines import db
-
-from .models.user import UserModel
+from .instagram.bind import InstagramAPIError
+from .instagram.client import InstagramAPI
 from .models.user import ShowModel
-from .settings import OPEN_ACCESS_TOKEN
+from .models.user import UserModel
+from .settings import OPEN_ACCESS_TOKENS
 
 
 def has_login():
@@ -37,7 +36,7 @@ def has_login():
 def open_visit(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        request.access_token = OPEN_ACCESS_TOKEN
+        request.access_token = random.choice(OPEN_ACCESS_TOKENS)
         return func(*args, **kwargs)
     return wrapper
 

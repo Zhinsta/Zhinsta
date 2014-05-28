@@ -25,4 +25,6 @@ except ImportError:
     INSTAGRAM_REDIRECT_URI = 'http://www.dev.zhinsta.com:5000/instagram/redirect/'
 
 INSTAGRAM_SCOPE = ['comments', 'relationships', 'likes']
-OPEN_ACCESS_TOKEN = '524431895.30fc022.4da293d4ccf044489f3f495727343a31'
+OPEN_ACCESS_TOKENS = [
+    '524431895.30fc022.4da293d4ccf044489f3f495727343a31',
+]
