@@ -1,9 +1,0 @@
-<uwsgi>
-    <pythonpath>/web/Zhinsta/1/zhinsta</pythonpath>
-    <module>zhinsta</module>
-    <callable>app</callable>
-    <socket>/tmp/uwsgi.sock</socket>
-    <master/>
-    <processes>4</processes>
-    <memory-report/>
-</uwsgi>

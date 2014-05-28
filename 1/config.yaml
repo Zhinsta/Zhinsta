@@ -1,7 +1,0 @@
----
-name: zhinsta
-version: 1
-handlers:
-- url: /static
-  static_dir: zhinsta/static
-...

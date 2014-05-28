@@ -1,1 +1,13 @@
+# python
 *.py[cod]
+
+# buildout
+.installed.cfg
+bin/
+parts/
+eggs/
+develop-eggs/
+zhinsta.egg-info/
+
+# editor
+*.sw[po]

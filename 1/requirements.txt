@@ -1,7 +1,0 @@
-werkzeug==0.7.1
-flask==0.7.2
-sqlalchemy==0.7.3
-flask-sqlalchemy==0.15
-jinja2==2.6
-MySQL-python==1.2.3
-alembic==0.6.0

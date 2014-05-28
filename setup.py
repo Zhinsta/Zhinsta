@@ -1,0 +1,25 @@
+# coding: utf-8
+
+from setuptools import setup, find_packages
+
+install_requires = [
+    'werkzeug',
+    'flask',
+    'sqlalchemy',
+    'flask-sqlalchemy',
+    'MySQL-python',
+]
+
+entry_points = {
+    'console_scripts': [
+        'run = zhinsta.app:run',
+    ]
+}
+
+setup(
+    name="zhinsta",
+    version="0.0.1",
+    packages=find_packages(),
+    install_requires=install_requires,
+    entry_points=entry_points,
+)
