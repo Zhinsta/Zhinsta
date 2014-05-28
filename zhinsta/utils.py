@@ -36,7 +36,7 @@ def has_login():
 
 def open_visit(func):
     @wraps(func)
-    def wrapper(*args, **kwargs): 
+    def wrapper(*args, **kwargs):
         request.access_token = OPEN_ACCESS_TOKEN
         return func(*args, **kwargs)
     return wrapper
@@ -85,27 +85,27 @@ class Pager(object):
     def __init__(self, limit, total, url=None):
         self.limit = limit
         self.total = total
-        self.total_page = (total-1)/limit+1
+        self.total_page = (total - 1) / limit + 1
         self.current_page = 1
         self.offset = 0
         if not url:
             url = url_for(request.endpoint)
         if '?' in url:
-            url = url+'&'
+            url = url + '&'
         else:
             if not url.endswith('/'):
-                url = url+'/'
-            url = url+'?'
-        self.url = url+'page='
+                url = url + '/'
+            url = url + '?'
+        self.url = url + 'page='
 
     def set_offset(self, offset):
         offset = int(offset)
-        if offset > self.total-1:
-            offset = self.total-1
+        if offset > self.total - 1:
+            offset = self.total - 1
         if offset < 0:
             offset = 0
         self.offset = offset
-        self.current_page = offset/self.limit + 1
+        self.current_page = offset / self.limit + 1
 
     def set_current_page(self, current_page):
         current_page = int(current_page)
@@ -114,7 +114,7 @@ class Pager(object):
         if current_page < 1:
             current_page = 1
         self.current_page = current_page
-        self.offset = (current_page-1)*self.limit
+        self.offset = (current_page - 1) * self.limit
 
     def __call__(self, length=5):
         start = 1
@@ -124,19 +124,19 @@ class Pager(object):
         if end > self.total_page:
             end = self.total_page
         pager = []
-        for url in range(start, end+1):
+        for url in range(start, end + 1):
             active = False
             if url == self.current_page:
                 active = True
-            pager.append({'url': self.url+str(url),
+            pager.append({'url': self.url + str(url),
                           'cnt': url,
                           'active': active})
-        pre_url = self.url+str(start)
+        pre_url = self.url + str(start)
         if self.current_page > start:
-            pre_url = self.url+str(self.current_page-1)
-        next_url = self.url+str(end)
+            pre_url = self.url + str(self.current_page - 1)
+        next_url = self.url + str(end)
         if self.current_page < self.total_page:
-            next_url = self.url+str(self.current_page+1)
+            next_url = self.url + str(self.current_page + 1)
         return render('pager.html', pager=pager,
                       pre_url=pre_url, next_url=next_url)
 
@@ -173,7 +173,7 @@ def api_error_handle(func):
             print e.message
             raise e
     return wrapper
-        
+
 
 def isfollow(ukey):
     api = InstagramAPI(access_token=session.get('access_token', ''))
@@ -194,7 +194,7 @@ def add_show(m):
     if showm:
         ret = True
     else:
-        hour = int(time.time()/7200)
+        hour = int(time.time() / 7200)
         showm = ShowModel(mid=m.id,
                           pic=m.images['low_resolution'].url,
                           user_pic=m.user.profile_picture,
