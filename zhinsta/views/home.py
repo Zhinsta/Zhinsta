@@ -77,7 +77,7 @@ class OAuthCodeView(views.MethodView):
         redirect_uri = INSTAGRAM_REDIRECT_URI
         if request.args.get('uri', ''):
             redirect_url = request.args.get('uri')
-            redirect_uri += '?uri='+redirect_url
+            redirect_uri += '?uri=' + redirect_url
         api = InstagramAPI(client_id=INSTAGRAM_CLIENT_ID,
                            client_secret=INSTAGRAM_CLIENT_SECRET,
                            redirect_uri=redirect_uri)
@@ -114,7 +114,7 @@ class LoginView(views.MethodView):
             return redirect(url_for('view.members'))
         redirect_uri = INSTAGRAM_REDIRECT_URI
         if request.args.get('uri', ''):
-            redirect_uri += '?uri='+request.args.get('uri')
+            redirect_uri += '?uri=' + request.args.get('uri')
         api = InstagramAPI(client_id=INSTAGRAM_CLIENT_ID,
                            client_secret=INSTAGRAM_CLIENT_SECRET,
                            redirect_uri=redirect_uri)

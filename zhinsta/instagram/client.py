@@ -27,161 +27,182 @@ class InstagramAPI(oauth2.OAuth2API):
         super(InstagramAPI, self).__init__(*args, **kwargs)
 
     media_popular = bind_method(
-                path="/media/popular",
-                accepts_parameters=MEDIA_ACCEPT_PARAMETERS,
-                root_class=Media)
+        path="/media/popular",
+        accepts_parameters=MEDIA_ACCEPT_PARAMETERS,
+        root_class=Media
+    )
 
     media_search = bind_method(
-                path="/media/search",
-                accepts_parameters=SEARCH_ACCEPT_PARAMETERS + ['lat', 'lng', 'min_timestamp', 'max_timestamp'],
-                root_class=Media)
+        path="/media/search",
+        accepts_parameters=SEARCH_ACCEPT_PARAMETERS + ['lat', 'lng', 'min_timestamp', 'max_timestamp'],
+        root_class=Media
+    )
 
     media_likes = bind_method(
-                path="/media/{media_id}/likes",
-                accepts_parameters=['media_id'],
-                root_class=User)
+        path="/media/{media_id}/likes",
+        accepts_parameters=['media_id'],
+        root_class=User
+    )
 
     like_media = bind_method(
-                path="/media/{media_id}/likes",
-                method="POST",
-                accepts_parameters=['media_id'],
-                response_type="empty")
+        path="/media/{media_id}/likes",
+        method="POST",
+        accepts_parameters=['media_id'],
+        response_type="empty"
+    )
 
     unlike_media = bind_method(
-                path="/media/{media_id}/likes",
-                method="DELETE",
-                accepts_parameters=['media_id'],
-                response_type="empty")
+        path="/media/{media_id}/likes",
+        method="DELETE",
+        accepts_parameters=['media_id'],
+        response_type="empty"
+    )
 
     create_media_comment = bind_method(
-                path="/media/{media_id}/comments",
-                method="POST",
-                accepts_parameters=['media_id', 'text'],
-                response_type="empty",
-                root_class=Comment)
+        path="/media/{media_id}/comments",
+        method="POST",
+        accepts_parameters=['media_id', 'text'],
+        response_type="empty",
+        root_class=Comment
+    )
 
     delete_comment = bind_method(
-                path="/media/{media_id}/comments/{comment_id}",
-                method="DELETE",
-                accepts_parameters=['media_id', 'comment_id'],
-                response_type="empty")
+        path="/media/{media_id}/comments/{comment_id}",
+        method="DELETE",
+        accepts_parameters=['media_id', 'comment_id'],
+        response_type="empty"
+    )
 
     media_comments = bind_method(
-                path="/media/{media_id}/comments",
-                method="GET",
-                accepts_parameters=['media_id'],
-                response_type="list",
-                root_class=Comment)
+        path="/media/{media_id}/comments",
+        method="GET",
+        accepts_parameters=['media_id'],
+        response_type="list",
+        root_class=Comment
+    )
 
     media = bind_method(
-                path="/media/{media_id}",
-                accepts_parameters=['media_id'],
-                response_type="entry",
-                root_class=Media)
+        path="/media/{media_id}",
+        accepts_parameters=['media_id'],
+        response_type="entry",
+        root_class=Media
+    )
 
     user_media_feed = bind_method(
-                path="/users/self/feed",
-                accepts_parameters=MEDIA_ACCEPT_PARAMETERS,
-                root_class=Media,
-                paginates=True)
+        path="/users/self/feed",
+        accepts_parameters=MEDIA_ACCEPT_PARAMETERS,
+        root_class=Media,
+        paginates=True
+    )
 
     user_liked_media = bind_method(
-                path="/users/self/media/liked",
-                accepts_parameters=MEDIA_ACCEPT_PARAMETERS,
-                root_class=Media,
-                paginates=True)
+        path="/users/self/media/liked",
+        accepts_parameters=MEDIA_ACCEPT_PARAMETERS,
+        root_class=Media,
+        paginates=True
+    )
 
     user_recent_media = bind_method(
-                path="/users/{user_id}/media/recent",
-                accepts_parameters=MEDIA_ACCEPT_PARAMETERS + ['user_id'],
-                root_class=Media,
-                paginates=True)
+        path="/users/{user_id}/media/recent",
+        accepts_parameters=MEDIA_ACCEPT_PARAMETERS + ['user_id'],
+        root_class=Media,
+        paginates=True
+    )
 
     user_search = bind_method(
-                path="/users/search",
-                accepts_parameters=SEARCH_ACCEPT_PARAMETERS,
-                root_class=User)
+        path="/users/search",
+        accepts_parameters=SEARCH_ACCEPT_PARAMETERS,
+        root_class=User
+    )
 
     user_follows = bind_method(
-                path="/users/{user_id}/follows",
-                accepts_parameters=["user_id"],
-                paginates=True,
-                root_class=User)
+        path="/users/{user_id}/follows",
+        accepts_parameters=["user_id"],
+        paginates=True,
+        root_class=User
+    )
 
     user_followed_by = bind_method(
-                path="/users/{user_id}/followed-by",
-                accepts_parameters=["user_id"],
-                paginates=True,
-                root_class=User)
+        path="/users/{user_id}/followed-by",
+        accepts_parameters=["user_id"],
+        paginates=True,
+        root_class=User
+    )
 
     user = bind_method(
-                path="/users/{user_id}",
-                accepts_parameters=["user_id"],
-                root_class=User,
-                response_type="entry")
+        path="/users/{user_id}",
+        accepts_parameters=["user_id"],
+        root_class=User,
+        response_type="entry"
+    )
 
     location_recent_media = bind_method(
-                path="/locations/{location_id}/media/recent",
-                accepts_parameters=MEDIA_ACCEPT_PARAMETERS + ['location_id'],
-                root_class=Media,
-                paginates=True)
+        path="/locations/{location_id}/media/recent",
+        accepts_parameters=MEDIA_ACCEPT_PARAMETERS + ['location_id'],
+        root_class=Media,
+        paginates=True
+    )
 
     location_search = bind_method(
-                path="/locations/search",
-                accepts_parameters=SEARCH_ACCEPT_PARAMETERS + ['lat', 'lng', 'foursquare_id'],
-                root_class=Location)
+        path="/locations/search",
+        accepts_parameters=SEARCH_ACCEPT_PARAMETERS + ['lat', 'lng', 'foursquare_id'],
+        root_class=Location
+    )
 
     location = bind_method(
-                path="/locations/{location_id}",
-                accepts_parameters=["location_id"],
-                root_class=Location,
-                response_type="entry")
+        path="/locations/{location_id}",
+        accepts_parameters=["location_id"],
+        root_class=Location,
+        response_type="entry"
+    )
 
     geography_recent_media = bind_method(
-                path="/geographies/{geography_id}/media/recent",
-                accepts_parameters=MEDIA_ACCEPT_PARAMETERS + ["geography_id"],
-                root_class=Media,
-                paginates=True)
+        path="/geographies/{geography_id}/media/recent",
+        accepts_parameters=MEDIA_ACCEPT_PARAMETERS + ["geography_id"],
+        root_class=Media,
+        paginates=True
+    )
 
     tag_recent_media = bind_method(
-                path="/tags/{tag_name}/media/recent",
-                accepts_parameters=MEDIA_ACCEPT_PARAMETERS + ['tag_name'],
-                root_class=Media,
-                paginates=True)
+        path="/tags/{tag_name}/media/recent",
+        accepts_parameters=MEDIA_ACCEPT_PARAMETERS + ['tag_name'],
+        root_class=Media,
+        paginates=True)
 
     tag_search = bind_method(
-                path="/tags/search",
-                accepts_parameters=SEARCH_ACCEPT_PARAMETERS,
-                root_class=Tag,
-                paginates=True)
+        path="/tags/search",
+        accepts_parameters=SEARCH_ACCEPT_PARAMETERS,
+        root_class=Tag,
+        paginates=True)
 
     tag = bind_method(
-                path="/tags/{tag_name}",
-                accepts_parameters=["tag_name"],
-                root_class=Tag,
-                response_type="entry")
+        path="/tags/{tag_name}",
+        accepts_parameters=["tag_name"],
+        root_class=Tag,
+        response_type="entry")
 
     user_incoming_requests = bind_method(
-                path="/users/self/requested-by",
-                root_class=User)
+        path="/users/self/requested-by",
+        root_class=User)
 
     change_user_relationship = bind_method(
-                method="POST",
-                path="/users/{user_id}/relationship",
-                root_class=Relationship,
-                accepts_parameters=["user_id", "action"],
-                paginates=True,
-                requires_target_user=True,
-                response_type="entry")
+        method="POST",
+        path="/users/{user_id}/relationship",
+        root_class=Relationship,
+        accepts_parameters=["user_id", "action"],
+        paginates=True,
+        requires_target_user=True,
+        response_type="entry")
 
     user_relationship = bind_method(
-                method="GET",
-                path="/users/{user_id}/relationship",
-                root_class=Relationship,
-                accepts_parameters=["user_id"],
-                paginates=False,
-                requires_target_user=True,
-                response_type="entry")
+        method="GET",
+        path="/users/{user_id}/relationship",
+        root_class=Relationship,
+        accepts_parameters=["user_id"],
+        paginates=False,
+        requires_target_user=True,
+        response_type="entry"
+    )
 
     def _make_relationship_shortcut(action):
         def _inner(self, *args, **kwargs):

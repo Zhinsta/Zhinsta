@@ -128,9 +128,11 @@ class Location(ApiModel):
         if 'latitude' in entry:
             point = Point(entry.get('latitude'),
                           entry.get('longitude'))
-        location = Location(entry.get('id', 0),
-                       point=point,
-                       name=entry.get('name', ''))
+        location = Location(
+            entry.get('id', 0),
+            point=point,
+            name=entry.get('name', '')
+        )
         return location
 
     def __unicode__(self):

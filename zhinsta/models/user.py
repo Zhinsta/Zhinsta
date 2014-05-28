@@ -35,7 +35,7 @@ class LikeModel(db.Model):
     date_created = db.Column(db.DateTime(),
                              index=True, nullable=False,
                              default=datetime.now)
-    
+
 
 class ShowModel(db.Model):
     __tablename__ = 'show'
