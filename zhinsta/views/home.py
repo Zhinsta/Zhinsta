@@ -6,8 +6,8 @@ from flask import redirect
 from flask import url_for
 from flask import session
 
-from ..instagram.client import InstagramAPI
-from ..instagram.bind import InstagramAPIError
+from instagram import InstagramAPI
+from instagram import InstagramAPIError
 
 from ..settings import INSTAGRAM_CLIENT_ID
 from ..settings import INSTAGRAM_CLIENT_SECRET

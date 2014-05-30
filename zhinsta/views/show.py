@@ -5,11 +5,11 @@ import time
 
 from flask import request
 from flask import views
+from instagram import InstagramAPI
 from sqlalchemy.sql import expression
 from sqlalchemy.sql import func
 
 from ..engines import db
-from ..instagram.client import InstagramAPI
 from ..models.user import LikeModel
 from ..models.user import ShowModel
 from ..settings import OPEN_ACCESS_TOKENS

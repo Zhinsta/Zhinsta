@@ -3,11 +3,11 @@
 from setuptools import setup, find_packages
 
 install_requires = [
-    'werkzeug',
-    'flask',
-    'sqlalchemy',
-    'flask-sqlalchemy',
     'MySQL-python',
+    'flask',
+    'flask-sqlalchemy',
+    'python-instagram',
+    'sqlalchemy',
 ]
 
 entry_points = {

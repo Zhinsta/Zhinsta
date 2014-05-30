@@ -5,8 +5,7 @@ import json
 from flask import views
 from flask import session
 from flask import request
-
-from ..instagram.client import InstagramAPI
+from instagram import InstagramAPI
 
 from ..engines import db
 from ..utils import login_required

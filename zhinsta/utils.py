@@ -11,10 +11,10 @@ from flask import render_template
 from flask import request
 from flask import session
 from flask import url_for
+from instagram import InstagramAPI
+from instagram import InstagramAPIError
 
 from .engines import db
-from .instagram.bind import InstagramAPIError
-from .instagram.client import InstagramAPI
 from .models.user import ShowModel
 from .models.user import UserModel
 from .settings import OPEN_ACCESS_TOKENS
