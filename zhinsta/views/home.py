@@ -9,22 +9,23 @@ from flask import session
 from instagram import InstagramAPI
 from instagram import InstagramAPIError
 
-from ..settings import INSTAGRAM_CLIENT_ID
-from ..settings import INSTAGRAM_CLIENT_SECRET
-from ..settings import INSTAGRAM_REDIRECT_URI
-from ..settings import INSTAGRAM_SCOPE
-from ..models.user import UserModel
-from ..models.user import RecommendModel
-from ..engines import db
-from ..utils import login_required
-from ..utils import has_login
-from ..utils import open_visit
-from ..utils import apierror
-from ..utils import error_handle
-from ..utils import notfound
-from ..utils import render
-from ..utils import Pager
-from ..utils import isfollow
+from zhinsta.cache import cache
+from zhinsta.engines import db
+from zhinsta.models.user import RecommendModel
+from zhinsta.models.user import UserModel
+from zhinsta.settings import INSTAGRAM_CLIENT_ID
+from zhinsta.settings import INSTAGRAM_CLIENT_SECRET
+from zhinsta.settings import INSTAGRAM_REDIRECT_URI
+from zhinsta.settings import INSTAGRAM_SCOPE
+from zhinsta.utils import Pager
+from zhinsta.utils import apierror
+from zhinsta.utils import error_handle
+from zhinsta.utils import has_login
+from zhinsta.utils import isfollow
+from zhinsta.utils import login_required
+from zhinsta.utils import notfound
+from zhinsta.utils import open_visit
+from zhinsta.utils import render
 
 members_per_page = 20
 
@@ -182,8 +183,16 @@ class MediaProfileView(views.MethodView):
     @login_required
     def get(self, mid):
         api = InstagramAPI(access_token=request.access_token)
-        media = api.media(mid)
-        likes = api.media_likes(media_id=mid)
+        media = cache.get('media:%s' % mid)
+        if not media:
+            print 'cache not hit!'
+            media = api.media(mid)
+            cache.set('media:%s' % mid, media, timeout=60 * 30)
+        likes = cache.get('media_likes:%s' % mid)
+        if not likes:
+            print 'cache not hit!'
+            likes = api.media_likes(media_id=mid)
+            cache.set('media_likes:%s' % mid, likes, timeout=60 * 30)
         isstar = False
         for i in likes:
             if request.ukey and request.ukey == i.id:

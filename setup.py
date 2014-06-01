@@ -3,10 +3,12 @@
 from setuptools import setup, find_packages
 
 install_requires = [
+    'Flask-Cache',
     'MySQL-python',
     'flask',
     'flask-sqlalchemy',
     'python-instagram',
+    'redis',
     'sqlalchemy',
 ]
 
