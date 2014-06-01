@@ -148,6 +148,8 @@ def error_handle(func):
         try:
             return func(*args, **kwargs)
         except InstagramAPIError, e:
+            if e.error_type == 'APINotAllowedError':
+                return render('profile-noauth.html', ukey=request.ukey)
             traceback.print_exc()
             print e.error_message
             return apierror()
