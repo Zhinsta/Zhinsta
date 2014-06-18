@@ -2,20 +2,34 @@
 @import "../variable.less";
 @head-font-size: 24px;
 
+h2 {
+    font-size: @head-font-size;
+
+    &::before {
+        content: '~~~~~~ ';
+        color: lighten(@base-font-color, 40%);
+    }
+    &::after {
+        content: ' ~~~~~~';
+        color: lighten(@base-font-color, 40%);
+    }
+}
+
 /* header */
-.header.header-ontop {
+.header {
+    transition: all .25s;
     font-size: @head-font-size;
 }
-.header.header-ontop > * {
+.header > * {
     font-size: @head-font-size;
 }
 
-.header-ontop .header-logo {
+.header-logo {
     background-image: url(../../assets/imgs/logo@48x48.png);
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (min-device-pixel-ratio: 2) {
-    .header-ontop .header-logo {
+    .header-logo {
         background-image: url(../../assets/imgs/logo@96x96.png);
     }
 }

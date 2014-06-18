@@ -1,4 +1,6 @@
 .people {
+    margin: 0 -5px;
+
     ul {
         margin: 0;
         padding: 0;
@@ -25,6 +27,8 @@
 
         img {
             display: block;
+            width: 150px;
+            height: 150px;
         }
 
         span {
@@ -59,6 +63,16 @@
         }
     }
 
+    .more {
+        display: block;
+        text-align: center;
+        font-size: @head-font-size * 1.5;
+        color: @base-font-color;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
     /*
     .people-collected,
     .people-collect {

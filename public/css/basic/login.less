@@ -10,6 +10,12 @@
         font-size: @head-font-size * 1.5;
         text-align: center;
 
+        &::before {
+            content: '';
+        }
+        &::after {
+            content: '';
+        }
         a {
             display: block;
             color: @base-font-color;
