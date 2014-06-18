@@ -1,0 +1,53 @@
+.page-media {
+    .media {
+        margin: 2em 0 0 0;
+        overflow: auto;
+    }
+    .media-l {
+        float: left;
+        img {
+            max-width: 100%;
+        }
+    }
+    .media-r {
+        float: left;
+        width: 300px;
+    }
+    .media-info {
+        border-bottom: 1px dashed #CCC;
+        margin-bottom: 1em;
+        p {
+            margin: 0 0 1em 0;
+            word-wrap: break-word;
+        }
+    }
+    .media-time,
+    .media-place {
+        font-size: 14px;
+    }
+    .media-desc {
+        &:before {
+            content: '\275D';
+        }
+        &:after {
+            content: '\275E';
+        }
+    }
+    .media-love {
+        border-bottom: 1px dashed #CCC;
+        padding-bottom: 1em;
+        margin-bottom: 1em;
+        a {
+            color: inherit;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        i {
+            margin-right: 2px;
+        }
+        p {
+            display: inline;
+        }
+    }
+}

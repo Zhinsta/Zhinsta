@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>中文圈 - Zhinsta，instagram中文社区</title>
+    <meta name ="viewport" content ="initial-scale=1, user-scalable=no, width=device-width, minimal-ui">
     <link rel="stylesheet" href="/css/normalize.css"/>
-    <link rel="stylesheet" href="/css/g.css"/>
-    <link rel="stylesheet/less" href="/css/other.less" />
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet/less" href="/css/basic/g.less"/>
+    <link rel="stylesheet/less" media="(min-width: 960px)" href="/css/960/g.less"/>
     <script type="text/javascript" src="/js/less-1.3.3.min.js"></script>
+    <meta name="baidu-tc-verification" content="0558abc210f88272286e6b8a216e48b7" />
 </head>
 <body class="page-about">
-    <div class="menu">
-        <div class="menu-border"></div>
-        <span class="menu-heading">Zhinsta</span>
-        <ul>
-            <li class="menu-selected"><a href="#">中文圈</a></li>
-            <li><a href="#">站台</a></li>
-        </ul>
-        <form class="menu-form">
-            <input type="text" placeholder="搜索">
-        </form>
-        <div class="menu-right">
-            <a href="#" class="menu-login">Instagram登录</a>
+    <div class="header" id="header">
+        <div class="header-main">
+            <a href="/" class="header-logo">Zhinsta</a>
+            <ul class="header-nav">
+                <li><a href="/show/">展台</a></li>
+                <li><a href="/members/recommend/">中文圈</a></li>
+                <li><a href="/feed/" class="header-nav-other">新鲜事</a></li>
+            </ul>
+            <form class="header-search" action="/search/user/" method="GET">
+                <input type="text" placeholder="搜索" name="wd">
+            </form>
+
+            <div class="header-right">
+                <a href="/login/" class="login-button">Instagram 登录</a>
+            </div>
+
+            <div id="loading"></div>
         </div>
     </div>
 
+    <div class="container">
     <div class="main">
         <div class="about">
             <p><em>ZHINSTA</em> 是一个中文Instagram社区，旨在帮助人们发现懂生活的人。</p>
@@ -36,24 +45,67 @@
 
             <p>你可以通过以下途径了解我们的最新动向</p>
             <ul>
-                <li>博客：<a href="http://zhinsta.diandian.com">http://zhinsta.diandian.com</a></li>
-                <li>weibo：<a href="http://weibo.com/zhinsta">http://weibo.com/zhinsta</a></li>
-                <li>豆瓣小站：<a href="http://site.douban.com/215856/">http://site.douban.com/215856/</a></li>
+                <li><a href="http://zhinsta.diandian.com">博客</a></li>
+                <li><a href="http://weibo.com/zhinsta">weibo</a></li>
+                <li><a href="http://site.douban.com/215856/">豆瓣小站</a></li>
             <li>QQ群：33165199（申请时注明你的InstagramID）</li>
-            <li>instagram：<a href="http://zhinsta.com/profile/448621019/">http://zhinsta.com/profile/448621019/</a></li>
+            <li><a href="http://zhinsta.com/profile/448621019/">Instagram官方帐号</a></li>
             </ul>
 
             <p>你可以通过邮箱联系我们
             zhinsta#gmail.com（请将#替换成@）</p>
         </div>
     </div>
+    </div>
+
 
     <div class="footer">
-        <p class="footer-name">Zhinsta，instagram中文社区</p>
-        <p class="copyright">
-          © All Right Reserved.2013
-        </p>
+        <h3>关注社交账号，全方位了解最新动向</h3>
+        <div class="footer-main">
+            <div class="footer-l">
+                <ul class="footer-links">
+                    <li>
+                        <a href="#" target="_blank">新浪微博</a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">豆瓣小站</a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">点点</a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">新浪微博</a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">Lofter</a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">Instagram</a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">关于我们</a>
+                    </li>
+                    <li class="footer-links-qq">
+                    </li>
+                </ul>
+
+                <div class="footer-bt">
+                    <p class="footer-links-qq">QQ群：33165199（申请时注明你的InstagramID）</p>
+                    &copy;All Right Reserved. 2013-2014
+                </div>
+            </div>
+            <div class="footer-r">
+                <div class="footer-weixin">
+                    <img src="./assets/imgs/qrcode.png" alt="" width="128"/>
+                    <span>微信：zhinsta</span>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/g.js"></script>
+    <script src="/js/mockup.js"></script>
 </body>
 </html>
 

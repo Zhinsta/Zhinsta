@@ -1,8 +1,5 @@
-@import "../variable.less";
-
-/* basic css */
 html, body {
-    color: @base-font-color;
+    color: #666;
     font-family:
         "ff-tisa-web-pro-1","ff-tisa-web-pro-2",
         "Lucida Grande",
@@ -16,7 +13,7 @@ html, body {
     background: #333;
 }
 a {
-    color: @link-font-color;
+    color: #069;
     text-decoration: none;
 }
 a:hover {
@@ -25,51 +22,36 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
 }
-h1 {
-    margin: 0 0 1em 0;
-    font-size: 2em;
-}
-h2 {
-    margin: 2em 0 0 0;
-    font-size: 1.5em;
-    text-align: center;
-
-    a {
-        color: @base-font-color;
-    }
-
-    &::before {
-        content: '~~~ ';
-        color: lighten(@base-font-color, 40%);
-    }
-    &::after {
-        content: ' ~~~';
-        color: lighten(@base-font-color, 40%);
-    }
-
-    a:hover {
-        text-decoration: none;
-    }
+.main {
+    max-width: 980px;
+    padding: 2em 0 4em;
+    margin: 0 auto;
+    overflow: auto;
+    background: #FFF;
 }
 
 /* header */
 .header {
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    padding: 1em 0;
-    font-size: @head-font-size;
+    height: 2em;
+    padding: 1em 0.5em;
+    font-size: 24px;
     background: #F5F7FA;
     border-bottom: 3px solid #E6E9ED;
 }
+.header.header-min {
+    padding: 1em;
+    font-size: 16px;
+}
 .header > * {
-    font-size: @head-font-size;
+    font-size: 24px;
+}
+.header.header-min > * {
+    font-size: 16px;
 }
 .header-main {
     margin: 0 auto;
-    padding: 0 10px;
+    max-width: 980px;
     height: 2em;
-    max-width: 960px;
 }
 .header a {
     color: #AAA;
@@ -93,32 +75,31 @@ h2 {
     width: 2em;
     height: 2em;
     text-indent: -9999px;
-    background: url(../../assets/imgs/logo@32x32.png) no-repeat;
+    background: url(logo@48x48.png) no-repeat;
+}
+.header-min .header-logo {
+    background: url(logo@32x32.png) no-repeat;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (min-device-pixel-ratio: 2) {
     .header-logo {
-        background-image: url(../../assets/imgs/logo@64x64.png);
-        background-size: 2em 2em;
+        background-image: url(logo@96x96.png);
+        background-size: 48px 48px;
+    }
+    .header-min .header-logo {
+        background-image: url(logo@64x64.png);
+        background-size: 32px 32px;
     }
 }
 
 .header-nav {
     float: left;
-    margin: 0;
+    margin: 0 24px 0 0;
     padding: 0;
 }
 .header-nav li {
     float: left;
     display: block;
-}
-.header-nav .header-nav-other {
-    display: none;
-}
-@media (min-width: 480px) {
-    .header-nav .header-nav-other {
-        display: block;
-    }
 }
 .header-nav a {
     display: block;
@@ -129,7 +110,23 @@ only screen and (min-device-pixel-ratio: 2) {
 }
 
 .header-search {
-    display: none;
+    float: left;
+}
+.header-search input {
+    display: block;
+    width: 2em;
+    margin: 0;
+    padding: 0;
+    line-height: 2em;
+    outline: none;
+    font-size: inherit;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #CCC;
+}
+.header-search input:focus {
+    width: 8em;
+    border-bottom-color: #666;
 }
 
 .header-right {
@@ -158,6 +155,35 @@ only screen and (min-device-pixel-ratio: 2) {
     background: #FFF;
     border: 1px solid #CCC;
 }
+.header-right-bd::before {
+    content: '';
+    position: absolute;
+    top: -19px;  /* 24px * 0.75 + 1 */
+    left: 50%;
+    z-index: 2;
+    margin-left: -0.5em;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border: 0.5em dashed transparent;
+    border-bottom: 0.5em solid #CCC;
+}
+.header-min .header-right-bd::before {
+    top: -13px;  /* 16px * 0.75 + 1 */
+}
+.header-right-bd::after {
+    content: '';
+    position: absolute;
+    top: -1em;
+    left: 50%;
+    z-index: 2;
+    margin-left: -0.5em;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border: 0.5em dashed transparent;
+    border-bottom: 0.5em solid #FFF;
+}
 .header-right-bd li,
 .header-right-bd a {
     display: block;
@@ -169,16 +195,9 @@ only screen and (min-device-pixel-ratio: 2) {
     padding: 0 1.5em;
     font-size: 0.75em;
 }
-
-/* loading */
-#loading {
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    width: 0%;
-    height: 3px;
-    opacity: 1;
-    background-color: #3BAFDA;
+.header-min .login-button {
+    display: block;
+    font-size: 1em;
 }
 
 /* login-button */
@@ -196,23 +215,11 @@ only screen and (min-device-pixel-ratio: 2) {
     outline: 0;
 }
 
-/* container & main */
-.container {
-    padding-top: @head-font-size * 4;
-    background: #FFF;
-}
-.main {
-    max-width: 960px;
-    padding: 2em 10px 4em;
-    margin: 0 auto;
-    overflow: auto;
-}
-
 /* footer */
 .footer {
     margin: 0;
-    padding: 2em 0 4em;
-    font-size: 14px;
+    padding: 2em 1em 4em;
+    font-size: 16px;
     color: #FFF;
     background: #333;
     border-top: 1px solid #222;
@@ -220,8 +227,7 @@ only screen and (min-device-pixel-ratio: 2) {
 .footer-main {
     position: relative;
     margin: 0 auto;
-    padding: 0 10px;
-    max-width: 960px;
+    max-width: 980px;
     overflow: hidden;
     color: #CCC;
 }
@@ -254,7 +260,16 @@ only screen and (min-device-pixel-ratio: 2) {
     color: #CCC;
     text-decoration: none;
 }
-
+.footer-links .footer-links-qq a {
+    width: 100%;
+}
+.footer-copyright {
+    float: left;
+    margin: 0;
+    line-height: 2em;
+    text-align: right;
+    color: #CCC;
+}
 .footer-weixin {
     float: right;
     overflow: hidden;
@@ -267,22 +282,8 @@ only screen and (min-device-pixel-ratio: 2) {
     display: block;
     width: 100%;
     line-height: 2em;
-    font-size: 12px;
+    font-size: 1em;
     text-align: center;
-}
-
-.footer-bt {
-    clear: both;
-    margin: 0;
-    padding-top: 1em;
-    min-width: 300px;
-    line-height: 2em;
-    text-align: left;
-    color: #CCC;
-}
-.footer-links-qq {
-    margin: 0;
-    line-height: 1.5;
 }
 
 /* pagination  */
@@ -319,17 +320,3 @@ only screen and (min-device-pixel-ratio: 2) {
     color: #069 !important;
     background: none !important;
 }
-
-/* module style */
-@import "photos.less";
-@import "people.less";
-@import "main-menu.less";
-@import "info.less";
-@import "comments.less";
-/*  page style */
-@import "login.less";
-@import "members.less";
-@import "media.less";
-@import "about.less";
-@import "tag.less";
-@import "welcome.less";
