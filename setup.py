@@ -6,8 +6,12 @@ install_requires = [
     'Flask-Cache',
     'MySQL-python',
     'flask',
+    'flask-wtf',
+    'flask-admin',
+    'flask-restful',
     'flask-sqlalchemy',
     'python-instagram',
+    'wtforms',
     'redis',
     'sqlalchemy',
 ]
