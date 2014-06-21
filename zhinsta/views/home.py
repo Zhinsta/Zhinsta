@@ -183,16 +183,8 @@ class MediaProfileView(views.MethodView):
     @login_required
     def get(self, mid):
         api = InstagramAPI(access_token=request.access_token)
-        media = cache.get('media:%s' % mid)
-        if not media:
-            print 'cache not hit!'
-            media = api.media(mid)
-            cache.set('media:%s' % mid, media, timeout=60 * 30)
-        likes = cache.get('media_likes:%s' % mid)
-        if not likes:
-            print 'cache not hit!'
-            likes = api.media_likes(media_id=mid)
-            cache.set('media_likes:%s' % mid, likes, timeout=60 * 30)
+        media = api.media(mid)
+        likes = api.media_likes(media_id=mid)
         isstar = False
         for i in likes:
             if request.ukey and request.ukey == i.id:
