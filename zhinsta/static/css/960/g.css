@@ -1,0 +1,81 @@
+/* css for (min-width: 960px;) */
+/* head font size */
+/* base word color */
+/* link color */
+h2 {
+  font-size: 24px;
+}
+h2::before {
+  content: '~~~~~~ ';
+  color: #cccccc;
+}
+h2::after {
+  content: ' ~~~~~~';
+  color: #cccccc;
+}
+/* header */
+.header {
+  transition: all .25s;
+  font-size: 24px;
+}
+.header > * {
+  font-size: 24px;
+}
+.header-logo {
+  background-image: url(../../assets/imgs/logo@48x48.png);
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  .header-logo {
+    background-image: url(../../assets/imgs/logo@96x96.png);
+  }
+}
+.header-nav {
+  margin-right: 1em;
+}
+.header-search {
+  float: left;
+  display: block;
+}
+.header-search input {
+  display: block;
+  width: 2em;
+  margin: 0;
+  padding: 0;
+  line-height: 2em;
+  outline: none;
+  font-size: inherit;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #CCC;
+}
+.header-search input:focus {
+  width: 12em;
+  border-bottom-color: #666;
+}
+/* container & main */
+.container {
+  padding-top: 96px;
+}
+.page-login h1 {
+  font-size: 48px;
+}
+.page-login h2 {
+  font-size: 24px;
+}
+.page-login h2::before {
+  content: '';
+}
+.page-login h2::after {
+  content: '';
+}
+.page-login h2 a::before {
+  content: '~~~~~~ ';
+  color: #cccccc;
+}
+.page-login h2 a::after {
+  content: ' ~~~~~~';
+  color: #cccccc;
+}
+.page-login .photos .photo:first-child {
+  width: 460px;
+}
