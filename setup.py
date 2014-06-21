@@ -6,6 +6,7 @@ install_requires = [
     'Flask-Cache',
     'MySQL-python',
     'flask',
+    'gevent',
     'flask-sqlalchemy',
     'python-instagram',
     'redis',
