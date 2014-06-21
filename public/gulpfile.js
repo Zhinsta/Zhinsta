@@ -13,4 +13,7 @@ gulp.task('default', function() {
     gulp.src('./js/*.js')
         .pipe(uglify())
         .pipe(gulp.dest('../zhinsta/static/js'));
+
+    gulp.src('./assets/imgs/*')
+        .pipe(gulp.dest('../zhinsta/static/assets/imgs'));
 });
