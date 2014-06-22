@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import gevent
+
 from flask import views
 from flask import request
 from flask import redirect
@@ -9,7 +11,6 @@ from flask import session
 from instagram import InstagramAPI
 from instagram import InstagramAPIError
 
-from zhinsta.cache import cache
 from zhinsta.engines import db
 from zhinsta.models.user import RecommendModel
 from zhinsta.models.user import UserModel
@@ -45,26 +46,37 @@ class ProfileView(views.MethodView):
     @open_visit
     @login_required
     def get(self, ukey):
+        next_url = request.args.get('next_url', None)
         api = InstagramAPI(access_token=request.access_token)
+
+        user = gevent.spawn(api.user, user_id=ukey)
+        feeds = gevent.spawn(api.user_recent_media, user_id=ukey, with_next_url=next_url)
+        if request.ukey:
+            isfollows = gevent.spawn(isfollow, ukey, api)
+        else:
+            isfollows = gevent.spawn(lambda x: False, ukey)
+
         try:
-            user = api.user(user_id=ukey)
+            gevent.joinall([user, feeds, isfollows])
         except InstagramAPIError, e:
             if e.error_type == 'APINotAllowedError':
                 return render('profile-noauth.html', ukey=ukey)
             return notfound(u'服务器暂时出问题了')
-        next_url = request.args.get('next_url', None)
-        feeds = api.user_recent_media(user_id=ukey,
-                                      with_next_url=next_url)
+        user, feeds, isfollows = user.value, feeds.value, isfollows.value
+
         next_url = feeds[1]
         feeds = feeds[0]
-        isfollows = False
-        if request.ukey:
-            isfollows = isfollow(ukey)
         isme = False
         if request.ukey and ukey == request.ukey:
             isme = True
-        return render('profile.html', user=user, feeds=feeds,
-                      isme=isme, isfollow=isfollows, next_url=next_url)
+        return render(
+            'profile.html',
+            user=user,
+            feeds=feeds,
+            isme=isme,
+            isfollow=isfollows,
+            next_url=next_url
+        )
 
 
 class OAuthCodeView(views.MethodView):

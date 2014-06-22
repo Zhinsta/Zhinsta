@@ -176,8 +176,9 @@ def api_error_handle(func):
     return wrapper
 
 
-def isfollow(ukey):
-    api = InstagramAPI(access_token=session.get('access_token', ''))
+def isfollow(ukey, api=None):
+    if not api:
+        api = InstagramAPI(access_token=session.get('access_token', ''))
     data = api.user_relationship(user_id=ukey)
     outgoing = data.outgoing_status
     if outgoing == 'follows':
