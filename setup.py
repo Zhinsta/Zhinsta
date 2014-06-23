@@ -9,6 +9,7 @@ install_requires = [
     'flask-wtf',
     'flask-admin',
     'flask-restful',
+    'gevent',
     'flask-sqlalchemy',
     'python-instagram',
     'wtforms',
