@@ -1,0 +1,69 @@
+/* css for (min-width: 960px;) */
+@import "../variable.less";
+@head-font-size: 24px;
+
+h2 {
+    font-size: @head-font-size;
+
+    &::before {
+        content: '~~~~~~ ';
+        color: lighten(@base-font-color, 40%);
+    }
+    &::after {
+        content: ' ~~~~~~';
+        color: lighten(@base-font-color, 40%);
+    }
+}
+
+/* header */
+.header {
+    transition: all .25s;
+    font-size: @head-font-size;
+}
+.header > * {
+    font-size: @head-font-size;
+}
+
+.header-logo {
+    background-image: url(../../assets/imgs/logo@48x48.png);
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+    .header-logo {
+        background-image: url(../../assets/imgs/logo@96x96.png);
+    }
+}
+
+.header-nav {
+    margin-right: 1em;
+}
+
+.header-search {
+    float: left;
+    display: block;
+}
+.header-search input {
+    display: block;
+    width: 2em;
+    margin: 0;
+    padding: 0;
+    line-height: 2em;
+    outline: none;
+    font-size: inherit;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #CCC;
+}
+.header-search input:focus {
+    width: 12em;
+    border-bottom-color: #666;
+}
+
+
+/* container & main */
+.container {
+    padding-top: @head-font-size * 4;
+}
+
+@import "photos.less";
+@import "login.less";

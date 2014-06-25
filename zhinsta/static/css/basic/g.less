@@ -1,0 +1,335 @@
+@import "../variable.less";
+
+/* basic css */
+html, body {
+    color: @base-font-color;
+    font-family:
+        "ff-tisa-web-pro-1","ff-tisa-web-pro-2",
+        "Lucida Grande",
+        "Hiragino Sans GB","Hiragino Sans GB W3",
+        "Microsoft YaHei",
+        "wenquanyi micro hei",
+        sans-serif,
+        "Apple Color Emoji";
+    font-size: 100%;
+    line-height: 1.5;
+    background: #333;
+}
+a {
+    color: @link-font-color;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+h1 {
+    margin: 0 0 1em 0;
+    font-size: 2em;
+}
+h2 {
+    margin: 2em 0 0 0;
+    font-size: 1.5em;
+    text-align: center;
+
+    a {
+        color: @base-font-color;
+    }
+
+    &::before {
+        content: '~~~ ';
+        color: lighten(@base-font-color, 40%);
+    }
+    &::after {
+        content: ' ~~~';
+        color: lighten(@base-font-color, 40%);
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+}
+
+/* header */
+.header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    padding: 1em 0;
+    font-size: @head-font-size;
+    background: #F5F7FA;
+    border-bottom: 3px solid #E6E9ED;
+}
+.header > * {
+    font-size: @head-font-size;
+}
+.header-main {
+    margin: 0 auto;
+    padding: 0 10px;
+    height: 2em;
+    max-width: 960px;
+}
+.header a {
+    color: #AAA;
+}
+.header a:hover,
+.header .header-selected a {
+    text-decoration: none;
+    color: #333;
+}
+.header a:active {
+    -webkit-transform: scale(1.06);
+    -ms-transform: scale(1.06);
+    transform: scale(1.06);
+    -webkit-transform-origin: center center;
+    -ms-transform-origin: center center;
+    transform-origin: center center;
+}
+
+.header-logo {
+    float: left;
+    width: 2em;
+    height: 2em;
+    text-indent: -9999px;
+    background: url(../../assets/imgs/logo@32x32.png) no-repeat;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+    .header-logo {
+        background-image: url(../../assets/imgs/logo@64x64.png);
+        background-size: 2em 2em;
+    }
+}
+
+.header-nav {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.header-nav li {
+    float: left;
+    display: block;
+}
+.header-nav .header-nav-other {
+    display: none;
+}
+@media (min-width: 480px) {
+    .header-nav .header-nav-other {
+        display: block;
+    }
+}
+.header-nav a {
+    display: block;
+    margin-left: 1em;
+    line-height: 2em;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+}
+
+.header-search {
+    display: none;
+}
+
+.header-right {
+    position: relative;
+    float: right;
+    height: 2em;
+    line-height: 2em;
+}
+.header-right:hover .header-right-i {
+    color: #333;
+}
+.header-right:hover .header-right-bd {
+    display: block;
+}
+.header-right-bd {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    margin: 0;
+    padding: 0.75em 0;
+    width: 100%;
+    list-style: none;
+    font-size: 0.75em;
+    text-align: center;
+    background: #FFF;
+    border: 1px solid #CCC;
+}
+.header-right-bd li,
+.header-right-bd a {
+    display: block;
+    line-height: 1em;
+}
+
+.header .login-button {
+    display: block;
+    padding: 0 1.5em;
+    font-size: 0.75em;
+}
+
+/* loading */
+#loading {
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 3px;
+    opacity: 1;
+    background-color: #3BAFDA;
+}
+
+/* login-button */
+.login-button {
+    padding: 0.5em 1.5em;
+    color: #FFF !important;
+    background-color: #E9573F;
+    -webkit-font-smoothing: antialiased;
+}
+.login-button:hover,
+.login-button:focus {
+    background-color: #FC6E51;
+}
+.login-button:focus {
+    outline: 0;
+}
+
+/* container & main */
+.container {
+    padding-top: @head-font-size * 4;
+    background: #FFF;
+}
+.main {
+    max-width: 960px;
+    padding: 2em 10px 4em;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+/* footer */
+.footer {
+    margin: 0;
+    padding: 2em 0 4em;
+    font-size: 14px;
+    color: #FFF;
+    background: #333;
+    border-top: 1px solid #222;
+}
+.footer-main {
+    position: relative;
+    margin: 0 auto;
+    padding: 0 10px;
+    max-width: 960px;
+    overflow: hidden;
+    color: #CCC;
+}
+.footer h3 {
+    margin: 0 0 1em 0;
+    text-align: center;
+}
+.footer-l {
+    float: left;
+    width: 70%;
+}
+.footer-r {
+    float: left;
+    width: 30%;
+}
+.footer-links {
+    padding: 0;
+    margin: 0;
+}
+.footer-links li {
+    float: left;
+    list-style: none;
+}
+.footer-links a {
+    display: block;
+    width: 7em;
+    line-height: 2em;
+    word-wrap: break-word;
+    font-size: 1em;
+    color: #CCC;
+    text-decoration: none;
+}
+
+.footer-weixin {
+    float: right;
+    overflow: hidden;
+}
+.footer-weixin img {
+    max-width: 100%;
+    display: block;
+}
+.footer-weixin span {
+    display: block;
+    width: 100%;
+    line-height: 2em;
+    font-size: 12px;
+    text-align: center;
+}
+
+.footer-bt {
+    clear: both;
+    margin: 0;
+    padding-top: 1em;
+    min-width: 300px;
+    line-height: 2em;
+    text-align: left;
+    color: #CCC;
+}
+.footer-links-qq {
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* pagination  */
+.pagination {
+    margin: 2em 0;
+    text-align: center;
+}
+.pagination li {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+.pagination li span,
+.pagination li a {
+    display: inline-block;
+    padding: 0.5em;
+}
+
+/* loved */
+.loved {
+    color: #FB264C !important;
+}
+
+/* tooltip */
+.tooltip {
+    font-size: 14px;
+}
+.tooltip a {
+    display: inline !important;
+    padding: 0 !important;
+    margin: 0 5px !important;
+    vertical-align: baseline !important;
+    font-size: inherit !important;
+    color: #069 !important;
+    background: none !important;
+}
+
+/* module style */
+@import "photos.less";
+@import "people.less";
+@import "main-menu.less";
+@import "info.less";
+@import "comments.less";
+/*  page style */
+@import "login.less";
+@import "members.less";
+@import "media.less";
+@import "about.less";
+@import "tag.less";
+@import "welcome.less";
