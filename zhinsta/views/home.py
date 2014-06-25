@@ -62,7 +62,8 @@ class ProfileView(views.MethodView):
         api = InstagramAPI(access_token=request.access_token)
 
         user = gevent.spawn(api.user, user_id=ukey)
-        feeds = gevent.spawn(api.user_recent_media, user_id=ukey, with_next_url=next_url)
+        feeds = gevent.spawn(api.user_recent_media,
+                             user_id=ukey, with_next_url=next_url)
         if request.ukey:
             isfollows = gevent.spawn(isfollow, ukey, api)
         else:
@@ -145,7 +146,13 @@ class LoginView(views.MethodView):
         api = InstagramAPI(client_id=INSTAGRAM_CLIENT_ID,
                            client_secret=INSTAGRAM_CLIENT_SECRET,
                            redirect_uri=redirect_uri)
-        redirect_uri = api.get_authorize_login_url(scope=INSTAGRAM_SCOPE)
+        redirect_uri = gevent.spawn(api.get_authorize_login_url,
+                                    scope=INSTAGRAM_SCOPE)
+        try:
+            gevent.joinall([redirect_uri])
+        except InstagramAPIError:
+            return notfound(u'服务器暂时出问题了')
+        redirect_uri = redirect_uri.value
         return redirect(redirect_uri)
 
 
@@ -186,7 +193,14 @@ class SearchUserView(views.MethodView):
     def get(self):
         wd = request.args.get('wd', '')
         api = InstagramAPI(access_token=request.access_token)
-        users = api.user_search(wd)
+        users = gevent.spawn(api.user_search, wd)
+        try:
+            gevent.joinall([users])
+        except InstagramAPIError, e:
+            if e.error_type == 'APINotAllowedError':
+                return render('search-user.html', wd=wd)
+            return notfound(u'服务器暂时出问题了')
+        users = users.value
         return render('search-user.html', users=users, wd=wd)
 
 
@@ -198,8 +212,15 @@ class SearchTagView(views.MethodView):
     def get(self):
         wd = request.args.get('wd', '')
         api = InstagramAPI(access_token=request.access_token)
-        tags = api.tag_search(wd)[0]
-        return render('search-tag.html', tags=tags, wd=wd)
+        tags = gevent.spawn(api.tag_search, wd)
+        try:
+            gevent.joinall([tags])
+        except InstagramAPIError, e:
+            if e.error_type == 'APINotAllowedError':
+                return render('search-tag.html', wd=wd)
+            return notfound(u'服务器暂时出问题了')
+        tags = tags.value
+        return render('search-tag.html', tags=tags[0], wd=wd)
 
 
 class MediaProfileView(views.MethodView):
@@ -209,16 +230,32 @@ class MediaProfileView(views.MethodView):
     @login_required
     def get(self, mid):
         api = InstagramAPI(access_token=request.access_token)
-        media = api.media(mid)
-        likes = api.media_likes(media_id=mid)
+        media = gevent.spawn(api.media, mid)
+        likes = gevent.spawn(api.media_likes, media_id=mid)
+        try:
+            gevent.joinall([media, likes])
+        except InstagramAPIError:
+            return notfound(u'服务器暂时出问题了')
+        media, likes = media.value, likes.value
+
+        ukey = media.user.id
+        isfollows = False
+        if request.ukey:
+            isfollows = gevent.spawn(isfollow, ukey, api)
+        else:
+            isfollows = gevent.spawn(lambda x: False, ukey)
+
+        try:
+            gevent.joinall([isfollows])
+        except InstagramAPIError:
+            return notfound(u'服务器暂时出问题了')
+        isfollows = isfollows.value
+
         isstar = False
         for i in likes:
             if request.ukey and request.ukey == i.id:
                 isstar = True
-        ukey = media.user.id
-        isfollows = False
-        if request.ukey:
-            isfollows = isfollow(ukey)
+
         isme = False
         if request.ukey and ukey == request.ukey:
             isme = True
@@ -232,60 +269,86 @@ class TagView(views.MethodView):
     @open_visit
     @login_required
     def get(self, name):
+        next_url = request.args.get('next_url', None)
+
         api = InstagramAPI(access_token=request.access_token)
         tag = api.tag(name)
-        next_url = request.args.get('next_url', None)
         media = api.tag_recent_media(tag_name=name,
                                      with_next_url=next_url)
+        tag = gevent.spawn(api.tag, name)
+        media = gevent.spawn(api.tag_recent_media,
+                             tag_name=name, with_next_url=next_url)
+        try:
+            gevent.joinall([tag, media])
+        except InstagramAPIError:
+            return notfound(u'服务器暂时出问题了')
+        tag, media = tag.value, media.value
+
         next_url = media[1]
         media = media[0]
         return render('tag.html', tag=tag, media=media, next_url=next_url)
 
 
-class FollowerView(views.MethodView):
+class FollowBaseView(object):
+
+    def _get_users(self, ukey, user_type='followed'):
+        next_url = request.args.get('next_url', None)
+        api = InstagramAPI(access_token=request.access_token)
+        user = gevent.spawn(api.user, ukey)
+        if user_type == 'following':
+            users = gevent.spawn(api.user_follows,
+                                 ukey, with_next_url=next_url)
+        else:
+            users = gevent.spawn(api.user_followed_by,
+                                 ukey, with_next_url=next_url)
+        isfollows = False
+        if request.ukey:
+            isfollows = gevent.spawn(isfollow, ukey, api)
+        else:
+            isfollows = gevent.spawn(lambda x: False, ukey)
+
+        try:
+            gevent.joinall([user, users, isfollows])
+        except InstagramAPIError:
+            return notfound(u'服务器暂时出问题了')
+        user, users, isfollows = user.value, users.value, isfollows.value
+
+        next_url = users[1]
+        users = users[0]
+
+        isme = False
+        if request.ukey and ukey == request.ukey:
+            isme = True
+        context = {
+            'user': user,
+            'users': users,
+            'next_url': next_url,
+            'isfollows': isfollows,
+            'isme': isme,
+        }
+        return context
+
+
+class FollowerView(views.MethodView, FollowBaseView):
 
     @error_handle
     @open_visit
     @login_required
     def get(self, ukey):
-        api = InstagramAPI(access_token=request.access_token)
-        user = api.user(ukey)
-        next_url = request.args.get('next_url', None)
-        users = api.user_followed_by(ukey, with_next_url=next_url)
-        next_url = users[1]
-        users = users[0]
-        isfollows = False
-        if request.ukey:
-            isfollows = isfollow(ukey)
-        isme = False
-        if request.ukey and ukey == request.ukey:
-            isme = True
-        return render('follower.html', user=user, users=users,
-                      message=u'关注者', isme=isme, isfollow=isfollows,
-                      next_url=next_url)
+        context = self._get_users(ukey)
+        context['message'] = u'关注者'
+        return render('follower.html', **context)
 
 
-class FollowingView(views.MethodView):
+class FollowingView(views.MethodView, FollowBaseView):
 
     @error_handle
     @open_visit
     @login_required
     def get(self, ukey):
-        api = InstagramAPI(access_token=request.access_token)
-        user = api.user(ukey)
-        next_url = request.args.get('next_url', None)
-        users = api.user_follows(ukey, with_next_url=next_url)
-        next_url = users[1]
-        users = users[0]
-        isfollows = False
-        if request.ukey:
-            isfollows = isfollow(ukey)
-        isme = False
-        if request.ukey and ukey == request.ukey:
-            isme = True
-        return render('follower.html', user=user, users=users,
-                      message=u'关注中', isme=isme, isfollow=isfollows,
-                      next_url=next_url)
+        context = self._get_users(ukey, user_type='following')
+        context['message'] = u'关注中'
+        return render('follower.html', **context)
 
 
 class WelcomeView(views.MethodView):
@@ -332,9 +395,17 @@ class FeedView(views.MethodView):
     @error_handle
     @login_required
     def get(self):
-        api = InstagramAPI(access_token=request.access_token)
         next_url = request.args.get('next_url', None)
-        feed = api.user_media_feed(with_next_url=next_url)
+
+        api = InstagramAPI(access_token=request.access_token)
+        feed = gevent.spawn(api.user_media_feed, with_next_url=next_url)
+
+        try:
+            gevent.joinall([feed])
+        except InstagramAPIError:
+            return notfound(u'服务器暂时出问题了')
+        feed = feed.value
+
         next_url = feed[1]
         media = feed[0]
         return render('feed.html', media=media, next_url=next_url)
