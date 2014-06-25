@@ -12,7 +12,7 @@ install_requires = [
     'gevent',
     'flask-sqlalchemy',
     'python-instagram',
-    'wtforms',
+    'wtforms==1.0.5',
     'redis',
     'sqlalchemy',
 ]
