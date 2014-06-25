@@ -9,18 +9,11 @@
 {% endif %}
 {{ super() }}
 {% endblock %}
-{% block style %}
-<script src="/static/js/modernizr.min.js"></script>
-<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/static/css/follower.css"/>
-{% endblock %}
 {% block main %}
 <div class="main">
     <div class="info">
         <div class="info-l">
-            <a href="{{ url_for('view.profile', ukey=user.id) }}">
-            <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
-            </a>
+            <img width="165" height="165" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
             <div class="info-l-txt">
                 <h1>
                     <a href="{{ url_for('view.profile', ukey=user.id) }}">{{ user.username }}</a>
@@ -76,6 +69,4 @@
 </div>
 
 <script src="/static/js/tween.min.js"></script>
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/g.min.js"></script>
 {% endblock %}

@@ -3,25 +3,43 @@
 {% block title %}
 Zhinsta - instagram中文圈，网页版
 {% endblock %}
-{% block style %}
-<link rel="stylesheet" href="/static/css/login.css"/>
-{% endblock %}
-{% block header %}
-<div class="login">
-    <img src="/static/assets/imgs/landing-page-bg.jpg" alt="" />
-    <div class="login-info">
-        <h1>发现懂生活的人</h1>
-        <p><a class="login-button" href="{{ url_for('view.login') }}">INSTAGRAM登录</a></p>
+{% block main %}
+<div class="main">
+    <h1>Instagram中文圈<span>，</span>发现精彩照片生活</h1>
+    <h2><a href="">展台</a></h2>
 
-        <div>
-            <h2>为你设计</h2>
-            <p>Zhinsta帮助你在茫茫人群中，发现instagram上你喜欢的中文用户。在这里展示自己，结识懂生活的人。</p>
-        </div>
+    <div class="photos" id="photoList">
+        <ul>
+            {% for m in medias %}
+            <li class="photo">
+                <a href="{{ url_for('view.media', mid=m.media) }}" class="photo-pic">
+                    <img src="{{ m._media_info.pic }}" alt="{{ m.media_username }}" />
+                </a>
+                <a href="{{ url_for('view.profile', ukey=m.ukey) }}" class="photo-author">
+                    <img src="{{ m.pic }}" alt="{{ m.username }}" width="32" height="32" />
+                    {{ m.username }}
+                </a>
+                <span class="photo-info">
+                    {{ m.date_created|time_since }}&nbsp;
+                    <a href="javascript:void(0);" class="jsLove3" data-mid="{{ m.mid }}"></a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-        <div>
-            <h2>由你组成</h2>
-            <p>Zhinsta由你组成，因你壮大。加入即成为一份子，还可以轻松帮助我们壮大社区。</p>
-        </div>
+    <h2><a href="">中文圈</a></h2>
+    <div class="people">
+        <ul>
+            {% for u in users %}
+            <li>
+                <a href="{{ url_for('view.profile', ukey=u.ukey) }}" class="people-photo">
+                    <img width="165" height="165" src="{{ u.pic }}" alt="{{ u.username }}" />
+                    <span>{{ u.username }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 {% endblock %}

@@ -5,6 +5,9 @@ import json
 from flask import views
 from flask import session
 from flask import request
+
+from flask.ext.restful import reqparse, Resource
+
 from instagram import InstagramAPI
 
 from ..engines import db
@@ -16,16 +19,29 @@ from ..models.user import FollowModel
 from ..models.user import LikeModel
 
 
-class HelloWorldView(views.MethodView):
+parser = reqparse.RequestParser()
+parser.add_argument('type', type=str, help="test")
 
-    @api_error_handle
+
+class HelloWorldView(Resource):
+
     def get(self):
-        ret_type = request.args.get('type', '')
+        args = parser.parse_args()
+        ret_type = args.get('type', '')
         if ret_type == 'json':
             return json.dumps({'result': 'hello!'})
         if ret_type == 'string':
             return 'hello!'
         return json_response('hello!')
+
+    def post(self):
+        return 'post'
+
+    def put(self):
+        return 'put'
+
+    def delete(self):
+        return 'delete'
 
 
 class FollowView(views.MethodView):

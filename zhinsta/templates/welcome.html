@@ -4,10 +4,6 @@
 欢迎页面
 {{ super() }}
 {% endblock %}
-{% block style %}
-<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet/less" href="/static/css/welcome.less"/>
-{% endblock %}
 {% block main %}
     <div class="main">
         <h1>欢迎你，{{ name }}</h1>
@@ -16,5 +12,3 @@
         <em>这里开始</em>
     </div>
 {% endblock %}
-
-

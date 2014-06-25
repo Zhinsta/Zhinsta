@@ -196,6 +196,7 @@ def add_show(m):
     if showm:
         ret = True
     else:
+        print '*' * 100
         hour = int(time.time() / 7200)
         showm = ShowModel(mid=m.id,
                           pic=m.images['low_resolution'].url,

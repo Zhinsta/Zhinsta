@@ -14,6 +14,8 @@ from instagram import InstagramAPIError
 from zhinsta.engines import db
 from zhinsta.models.user import RecommendModel
 from zhinsta.models.user import UserModel
+from zhinsta.models.user import LikeModel
+from zhinsta.models.user import AdminModel
 from zhinsta.settings import INSTAGRAM_CLIENT_ID
 from zhinsta.settings import INSTAGRAM_CLIENT_SECRET
 from zhinsta.settings import INSTAGRAM_REDIRECT_URI
@@ -37,7 +39,17 @@ class HomeView(views.MethodView):
     def get(self):
         if has_login():
             return redirect(url_for('view.show'))
-        return render('login.html')
+        medias = (LikeModel.query
+                  .options(db.joinedload('_media_info'))
+                  .filter(LikeModel.ukey == '448621019')
+                  .order_by(LikeModel.date_created.desc())
+                  .limit(5).all())
+        users = (RecommendModel.query
+                 .order_by(RecommendModel.order.desc())
+                 .limit(24).all())
+        return render('login.html',
+                      medias=medias,
+                      users=users)
 
 
 class ProfileView(views.MethodView):
@@ -112,10 +124,12 @@ class OAuthCodeView(views.MethodView):
             db.session.add(user)
             redirect_url = url_for('view.welcome')
         db.session.commit()
+        admin = AdminModel.query.get(user.ukey)
         session.permanent = True
         session['ukey'] = user.ukey
         session['username'] = user.username
         session['access_token'] = user.access_token
+        session['is_admin'] = True if admin else False
         return redirect(redirect_url)
 
 

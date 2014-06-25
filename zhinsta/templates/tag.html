@@ -4,10 +4,6 @@
 #{{ tag.name }}
 {{ super() }}
 {% endblock %}
-{% block style %}
-<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/static/css/tag.css"/>
-{% endblock %}
 {% block main %}
 <div class="main">
     <h1>#{{ tag.name }}</h1>
