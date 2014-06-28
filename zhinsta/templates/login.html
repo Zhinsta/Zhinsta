@@ -16,8 +16,8 @@ Zhinsta - instagram中文圈，网页版
                     <img src="{{ m._media_info.pic }}" alt="{{ m.media_username }}" />
                 </a>
                 <a href="{{ url_for('view.profile', ukey=m.ukey) }}" class="photo-author">
-                    <img src="{{ m.pic }}" alt="{{ m.username }}" width="32" height="32" />
-                    {{ m.username }}
+                    <img src="{{ m._media_info.user_pic }}" alt="{{ m._media_info.username }}" width="32" height="32" />
+                    {{ m._media_info.username }}
                 </a>
                 <span class="photo-info">
                     {{ m.date_created|time_since }}&nbsp;

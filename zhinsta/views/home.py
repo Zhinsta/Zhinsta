@@ -30,7 +30,7 @@ from zhinsta.utils import notfound
 from zhinsta.utils import open_visit
 from zhinsta.utils import render
 
-members_per_page = 20
+members_per_page = 48
 
 
 class HomeView(views.MethodView):

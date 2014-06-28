@@ -13,8 +13,8 @@ zhinsta_admin = Admin(name='Zhinsta后台管理',
                       index_view=ZhinstaAdminIndexView(),
                       url='/admin')
 
-zhinsta_admin.add_view(UserAdmin(name='用户列表'))
-zhinsta_admin.add_view(LikeAdmin(name='喜欢列表'))
-zhinsta_admin.add_view(ShowAdmin(name='展台列表'))
-zhinsta_admin.add_view(RecommendAdmin(name='推荐列表'))
-zhinsta_admin.add_view(ZhinstaAdmin(name='管理员列表'))
+zhinsta_admin.add_view(UserAdmin(name='用户'))
+zhinsta_admin.add_view(LikeAdmin(name='喜欢'))
+zhinsta_admin.add_view(ShowAdmin(name='展台'))
+zhinsta_admin.add_view(RecommendAdmin(name='推荐'))
+zhinsta_admin.add_view(ZhinstaAdmin(name='管理员'))

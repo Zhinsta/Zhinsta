@@ -1,5 +1,4 @@
 # -*-coding: utf-8 -*-
-#!/usr/bin/env python
 from __future__ import unicode_literals
 
 """
@@ -29,7 +28,9 @@ class LikeAdmin(BaseAdmin):
     form_columns = ['ukey', 'username', 'media', 'media_username']
 
     def _show_media(self, context, model, name):
-        return Markup('<img src=%s width=200 height=200>' % model.media)
+        return Markup('<a href="%s">%s</a>' % (
+            url_for('view.media', mid=model.media),
+            model.media))
 
     def _show_user(self, context, model, name):
         return Markup('<a href="%s">%s</a>' % (

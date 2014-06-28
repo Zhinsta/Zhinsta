@@ -4,8 +4,6 @@
 {{ user.username }}
 {{ super() }}
 {% endblock %}
-{% block style %}
-{% endblock %}
 {% block main %}
 <div class="main">
     <div class="info">
@@ -50,7 +48,7 @@
             {% for feed in feeds %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=feed.id) }}" class="photo-pic">
-                    <img width="200" height="200" src="{{ feed.images.low_resolution.url }}" alt="" />
+                    <img src="{{ feed.images.low_resolution.url }}" alt="" />
                 </a>
                 <a class="photo-author" href="{{ url_for('view.profile', ukey=user.id) }}">
                     <img src="{{ user.profile_picture }}" alt="{{ user.username }}" width="32" height="32" />
