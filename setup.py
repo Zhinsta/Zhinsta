@@ -16,6 +16,7 @@ install_requires = [
 entry_points = {
     'console_scripts': [
         'run = zhinsta.app:run',
+        'refresh = script.refresh_user:main'
     ]
 }
 
