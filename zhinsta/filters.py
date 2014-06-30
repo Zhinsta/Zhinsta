@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from urlparse import urlparse
 from datetime import datetime
 from datetime import timedelta
 
@@ -17,6 +18,12 @@ def timestamp(value):
 @app.template_filter()
 def parseisoformat(value):
     return datetime.parseisoformat(value)
+
+
+@app.template_filter()
+def iproxy(url):
+    url = urlparse(url)
+    return 'http://zhinsta.com:8080/' + url.netloc + url.path
 
 
 @app.template_filter()
