@@ -1,5 +1,5 @@
 # -*-coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 from __future__ import unicode_literals
 
 """
@@ -22,9 +22,9 @@ from zhinsta.models.user import RecommendModel
 
 class RecommendAdmin(BaseAdmin):
 
-    column_list = ('ukey', 'username', 'pic', 'order', 'date_created')
+    column_list = ('ukey', 'username', 'pic', 'order')
     column_searchable_list = ('username', 'ukey')
-    form_columns = ['ukey', 'username', 'pic']
+    form_columns = ['ukey', 'username', 'pic', 'order']
 
     def _show_pic(self, context, model, name):
         return Markup('<img src=%s width=90 height=90>' % model.pic)
