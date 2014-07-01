@@ -48,7 +48,7 @@
             {% for feed in feeds %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=feed.id) }}" class="photo-pic">
-                    <img src="{{ feed.images.low_resolution.url }}" alt="" />
+                    <img src="{{ feed.images.low_resolution.url | iproxy}}" alt="" />
                 </a>
                 <a class="photo-author" href="{{ url_for('view.profile', ukey=user.id) }}">
                     <img src="{{ user.profile_picture }}" alt="{{ user.username }}" width="32" height="32" />

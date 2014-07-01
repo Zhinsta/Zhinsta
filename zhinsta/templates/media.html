@@ -33,7 +33,7 @@
 
     <div class="media">
         <div class="media-l">
-            <img src="{{ media.get_standard_resolution_url() }}" alt="" />
+            <img src="{{ media.get_standard_resolution_url() | iproxy }}" alt="" />
         </div>
         <div class="media-r">
             <div class="media-info">

@@ -14,7 +14,7 @@
             {% for pic in media %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=pic.id) }}" class="photo-pic">
-                    <img width="200" height="200" src="{{ pic.images.low_resolution.url }}" alt="" />
+                    <img width="200" height="200" src="{{ pic.images.low_resolution.url | iproxy }}" alt="" />
                 </a>
                 <!-- TODO -->
                 <a href="{{ url_for('view.profile', ukey=pic.user.id) }}" class="photo-author">

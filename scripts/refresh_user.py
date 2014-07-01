@@ -8,7 +8,7 @@ home_dir = home_dir[:home_dir.rindex('/')]
 home_dir = home_dir[:home_dir.rindex('/')]
 sys.path.insert(0, home_dir)
 
-from zhinsta.instagram.client import InstagramAPI
+from instagram import InstagramAPI
 
 from zhinsta.settings import INSTAGRAM_CLIENT_ID
 from zhinsta.settings import INSTAGRAM_CLIENT_SECRET
@@ -25,13 +25,15 @@ api = InstagramAPI(client_id=INSTAGRAM_CLIENT_ID,
 def refresh_user_pic():
     users = UserModel.query.all()
     for user in users:
+        print user
         try:
             ret = urllib.urlopen(user.pic)
             if ret.code != 200:
+                print 'refresh!'
                 api = InstagramAPI(access_token=user.access_token)
                 new = api.user(user_id=user.ukey)
                 user.pic = new.profile_picture
-        except:
+        except Exception:
             pass
     db.session.commit()
 
@@ -39,11 +41,13 @@ def refresh_user_pic():
 def remove_unavailable_show_pic():
     shows = ShowModel.query.all()
     for show in shows:
+        print show
         try:
             ret = urllib.urlopen(show.pic)
             if ret.code != 200:
+                print 'hide!'
                 show.showable = 1
-        except:
+        except Exception:
             pass
     db.session.commit()
 
