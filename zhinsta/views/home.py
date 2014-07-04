@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import gevent
+import random
 
 from flask import views
 from flask import request
@@ -15,7 +16,9 @@ from zhinsta.engines import db
 from zhinsta.models.user import RecommendModel
 from zhinsta.models.user import UserModel
 from zhinsta.models.user import LikeModel
+from zhinsta.models.user import ShowModel
 from zhinsta.models.user import AdminModel
+from zhinsta.settings import OPEN_ACCESS_TOKENS
 from zhinsta.settings import INSTAGRAM_CLIENT_ID
 from zhinsta.settings import INSTAGRAM_CLIENT_SECRET
 from zhinsta.settings import INSTAGRAM_REDIRECT_URI
@@ -39,6 +42,18 @@ class HomeView(views.MethodView):
     def get(self):
         if has_login():
             return redirect(url_for('view.show'))
+        like = (LikeModel.query
+                .filter(LikeModel.ukey == '448621019')
+                .order_by(LikeModel.date_created.desc())
+                .limit(5).first())
+        access_token = random.choice(OPEN_ACCESS_TOKENS)
+        api = InstagramAPI(access_token=access_token)
+        media = gevent.spawn(api.media, like.media)
+        try:
+            gevent.joinall([media])
+        except InstagramAPIError:
+            return notfound(u'服务器暂时出问题了')
+        media = media.value
         medias = (LikeModel.query
                   .options(db.joinedload('_media_info'))
                   .filter(LikeModel.ukey == '448621019')
@@ -48,6 +63,7 @@ class HomeView(views.MethodView):
                  .order_by(RecommendModel.order.desc())
                  .limit(24).all())
         return render('login.html',
+                      media=media,
                       medias=medias,
                       users=users)
 

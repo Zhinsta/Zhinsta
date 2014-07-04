@@ -10,7 +10,20 @@ Zhinsta - instagram中文圈，网页版
 
     <div class="photos" id="photoList">
         <ul>
-            {% for m in medias %}
+            <li class="photo">
+                <a href="{{ url_for('view.media', mid=media.id) }}" class="photo-pic">
+                    <img src="{{ media.get_standard_resolution_url() | iproxy }}" alt="{{ media.user.username }}"  width="460" height="460" />
+                </a>
+                <a href="{{ url_for('view.profile', ukey=media.user.id) }}" class="photo-author">
+                    <img src="{{ media.user.profile_picture }}" alt="{{ media.user.username }}" width="32" height="32" />
+                    {{ media.user.username }}
+                </a>
+                <span class="photo-info">
+                    {{ media.created_time|time_since }}&nbsp;
+                    <a href="javascript:void(0);" class="jsLove3" data-mid="{{ media.mid }}"></a>
+                </span>
+            </li>
+            {% for m in medias[1:] %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=m.media) }}" class="photo-pic">
                     <img src="{{ m._media_info.pic }}" alt="{{ m.media_username }}" />
