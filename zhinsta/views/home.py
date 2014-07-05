@@ -351,6 +351,8 @@ class FollowerView(views.MethodView, FollowBaseView):
     @login_required
     def get(self, ukey):
         context = self._get_users(ukey)
+        if isinstance(context, tuple):
+            return context
         context['message'] = u'关注者'
         return render('follower.html', **context)
 
@@ -362,6 +364,8 @@ class FollowingView(views.MethodView, FollowBaseView):
     @login_required
     def get(self, ukey):
         context = self._get_users(ukey, user_type='following')
+        if isinstance(context, tuple):
+            return context
         context['message'] = u'关注中'
         return render('follower.html', **context)
 
