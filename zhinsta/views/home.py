@@ -93,7 +93,7 @@ class ProfileView(views.MethodView):
         user, feeds, isfollows = user.value, feeds.value, isfollows.value
 
         next_url = feeds[1] if next_url else None
-        feeds = feeds[0]
+        feeds = feeds[0] if feeds else []
         isme = False
         if request.ukey and ukey == request.ukey:
             isme = True
