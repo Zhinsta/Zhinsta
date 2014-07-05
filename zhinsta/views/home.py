@@ -48,11 +48,11 @@ class HomeView(views.MethodView):
         access_token = random.choice(OPEN_ACCESS_TOKENS)
         api = InstagramAPI(access_token=access_token)
         media = gevent.spawn(api.media, like.media)
+        gevent.joinall([media])
         try:
-            gevent.joinall([media])
+            media = media.get()
         except InstagramAPIError:
             return notfound(u'服务器暂时出问题了')
-        media = media.value
         medias = (LikeModel.query
                   .options(db.joinedload('_media_info'))
                   .filter(LikeModel.ukey == '448621019')
@@ -84,13 +84,13 @@ class ProfileView(views.MethodView):
         else:
             isfollows = gevent.spawn(lambda x: False, ukey)
 
+        gevent.joinall([user, feeds, isfollows])
         try:
-            gevent.joinall([user, feeds, isfollows])
+            user, feeds, isfollows = user.get(), feeds.get(), isfollows.get()
         except InstagramAPIError, e:
             if e.error_type == 'APINotAllowedError':
                 return render('profile-noauth.html', ukey=ukey)
             return notfound(u'服务器暂时出问题了')
-        user, feeds, isfollows = user.value, feeds.value, isfollows.value
 
         next_url = feeds[1] if feeds else None
         feeds = feeds[0] if feeds else []
@@ -163,11 +163,11 @@ class LoginView(views.MethodView):
                            redirect_uri=redirect_uri)
         redirect_uri = gevent.spawn(api.get_authorize_login_url,
                                     scope=INSTAGRAM_SCOPE)
+        gevent.joinall([redirect_uri])
         try:
-            gevent.joinall([redirect_uri])
+            redirect_uri = redirect_uri.get()
         except InstagramAPIError:
             return notfound(u'服务器暂时出问题了')
-        redirect_uri = redirect_uri.value
         return redirect(redirect_uri)
 
 
@@ -209,13 +209,13 @@ class SearchUserView(views.MethodView):
         wd = request.args.get('wd', '')
         api = InstagramAPI(access_token=request.access_token)
         users = gevent.spawn(api.user_search, wd)
+        gevent.joinall([users])
         try:
-            gevent.joinall([users])
+            users = users.get()
         except InstagramAPIError, e:
             if e.error_type == 'APINotAllowedError':
                 return render('search-user.html', wd=wd)
             return notfound(u'服务器暂时出问题了')
-        users = users.value
         return render('search-user.html', users=users, wd=wd)
 
 
@@ -228,13 +228,13 @@ class SearchTagView(views.MethodView):
         wd = request.args.get('wd', '')
         api = InstagramAPI(access_token=request.access_token)
         tags = gevent.spawn(api.tag_search, wd)
+        gevent.joinall([tags])
         try:
-            gevent.joinall([tags])
+            tags = tags.get()
         except InstagramAPIError, e:
             if e.error_type == 'APINotAllowedError':
                 return render('search-tag.html', wd=wd)
             return notfound(u'服务器暂时出问题了')
-        tags = tags.value
         return render('search-tag.html', tags=tags[0], wd=wd)
 
 
@@ -247,11 +247,11 @@ class MediaProfileView(views.MethodView):
         api = InstagramAPI(access_token=request.access_token)
         media = gevent.spawn(api.media, mid)
         likes = gevent.spawn(api.media_likes, media_id=mid)
+        gevent.joinall([media, likes])
         try:
-            gevent.joinall([media, likes])
+            media, likes = media.get(), likes.get()
         except InstagramAPIError:
             return notfound(u'服务器暂时出问题了')
-        media, likes = media.value, likes.value
 
         ukey = media.user.id
         isfollows = False
@@ -260,11 +260,11 @@ class MediaProfileView(views.MethodView):
         else:
             isfollows = gevent.spawn(lambda x: False, ukey)
 
+        gevent.joinall([isfollows])
         try:
-            gevent.joinall([isfollows])
+            isfollows = isfollows.get()
         except InstagramAPIError:
             return notfound(u'服务器暂时出问题了')
-        isfollows = isfollows.value
 
         isstar = False
         for i in likes:
@@ -293,11 +293,11 @@ class TagView(views.MethodView):
         tag = gevent.spawn(api.tag, name)
         media = gevent.spawn(api.tag_recent_media,
                              tag_name=name, with_next_url=next_url)
+        gevent.joinall([tag, media])
         try:
-            gevent.joinall([tag, media])
+            tag, media = tag.get(), media.get()
         except InstagramAPIError:
             return notfound(u'服务器暂时出问题了')
-        tag, media = tag.value, media.value
 
         next_url = media[1]
         media = media[0]
@@ -322,11 +322,11 @@ class FollowBaseView(object):
         else:
             isfollows = gevent.spawn(lambda x: False, ukey)
 
+        gevent.joinall([user, users, isfollows])
         try:
-            gevent.joinall([user, users, isfollows])
+            user, users, isfollows = user.get(), users.get(), isfollows.get()
         except InstagramAPIError:
             return notfound(u'服务器暂时出问题了')
-        user, users, isfollows = user.value, users.value, isfollows.value
 
         next_url = users[1]
         users = users[0]
@@ -415,11 +415,11 @@ class FeedView(views.MethodView):
         api = InstagramAPI(access_token=request.access_token)
         feed = gevent.spawn(api.user_media_feed, with_next_url=next_url)
 
+        gevent.joinall([feed])
         try:
-            gevent.joinall([feed])
+            feed = feed.get()
         except InstagramAPIError:
             return notfound(u'服务器暂时出问题了')
-        feed = feed.value
 
         next_url = feed[1]
         media = feed[0]
