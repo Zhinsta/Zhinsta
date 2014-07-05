@@ -92,7 +92,7 @@ class ProfileView(views.MethodView):
             return notfound(u'服务器暂时出问题了')
         user, feeds, isfollows = user.value, feeds.value, isfollows.value
 
-        next_url = feeds[1] if next_url else None
+        next_url = feeds[1] if feeds else None
         feeds = feeds[0] if feeds else []
         isme = False
         if request.ukey and ukey == request.ukey:
