@@ -16,7 +16,6 @@ from zhinsta.engines import db
 from zhinsta.models.user import RecommendModel
 from zhinsta.models.user import UserModel
 from zhinsta.models.user import LikeModel
-from zhinsta.models.user import ShowModel
 from zhinsta.models.user import AdminModel
 from zhinsta.settings import OPEN_ACCESS_TOKENS
 from zhinsta.settings import INSTAGRAM_CLIENT_ID
@@ -93,7 +92,7 @@ class ProfileView(views.MethodView):
             return notfound(u'服务器暂时出问题了')
         user, feeds, isfollows = user.value, feeds.value, isfollows.value
 
-        next_url = feeds[1]
+        next_url = feeds[1] if next_url else None
         feeds = feeds[0]
         isme = False
         if request.ukey and ukey == request.ukey:
