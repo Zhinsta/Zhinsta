@@ -4,18 +4,11 @@
 {{ user.username }}
 {{ super() }}
 {% endblock %}
-{% block style %}
-<script src="/static/js/modernizr.js"></script>
-<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/static/css/profile.css"/>
-{% endblock %}
 {% block main %}
 <div class="main">
     <div class="info">
         <div class="info-l">
-            <a href="{{ url_for('view.profile', ukey=user.id) }}">
-            <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name }}" />
-            </a>
+            <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.username }}" />
             <div class="info-l-txt">
                 <h1>
                     <a href="{{ url_for('view.profile', ukey=user.id) }}">{{ user.username }}</a>
@@ -50,16 +43,21 @@
         </ul>
     </div>
 
-    <div class="photos">
+    <div class="photos" id="photoList">
         <ul>
             {% for feed in feeds %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=feed.id) }}" class="photo-pic">
-                    <img width="200" height="200" src="{{ feed.images.low_resolution.url }}" alt="" />
+                    <img src="{{ feed.images.low_resolution.url | iproxy}}" alt="" />
                 </a>
-                <p class="photo-info">
-                    {{ feed.created_time|time_since }}&nbsp;{{ feed.like_count }}<i class="icon-heart"></i>&nbsp;{{ feed.comment_count }}<i class="icon-comment"></i>
-                </p>
+                <a class="photo-author" href="{{ url_for('view.profile', ukey=user.id) }}">
+                    <img src="{{ user.profile_picture }}" alt="{{ user.username }}" width="32" height="32" />
+                    {{ user.username }}
+                </a>
+                <span class="photo-info">
+                    {{ feed.created_time|time_since }}&nbsp;
+                    <a class="jsLove3" href="javascript:void(0);" data-mid="{{feed.id}}"></a>
+                </span>
             </li>
             {% endfor %}
         </ul>
@@ -69,7 +67,4 @@
     </div>
 </div>
 
-<script src="/static/js/tween.min.js"></script>
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/g.min.js"></script>
 {% endblock %}

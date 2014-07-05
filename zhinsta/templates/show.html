@@ -5,11 +5,6 @@
 展台
 {{ super() }}
 {% endblock %}
-{% block style %}
-<script src="/static/js/modernizr.min.js"></script>
-<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/static/css/show.css"/>
-{% endblock %}
 {% block main %}
 <div class="main">
     <h1>展台</h1>
@@ -34,7 +29,7 @@
             {% for m in medias %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=m.mid) }}" class="photo-pic">
-                    <img width="200" height="200" src="{{ m.pic }}" alt="" />
+                    <img src="{{ m.pic | iproxy }}" alt="" />
                 </a>
                 <a href="{{ url_for('view.profile', ukey=m.ukey) }}" class="photo-author">
                     <img src="{{ m.user_pic }}" alt="{{ m.username }}" width="32" height="32" />
@@ -51,7 +46,4 @@
     {{ pager()|safe }}
 </div>
 
-<script src="/static/js/tween.min.js"></script>
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/g.min.js"></script>
 {% endblock %}

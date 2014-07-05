@@ -5,11 +5,6 @@
 新鲜事
 {{ super() }}
 {% endblock %}
-{% block style %}
-<script src="/static/js/modernizr.min.js"></script>
-<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/static/css/show.css"/>
-{% endblock %}
 {% block main %}
 <div class="main">
     <h1>新鲜事</h1>
@@ -19,7 +14,7 @@
             {% for pic in media %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=pic.id) }}" class="photo-pic">
-                    <img width="200" height="200" src="{{ pic.images.low_resolution.url }}" alt="" />
+                    <img width="200" height="200" src="{{ pic.images.low_resolution.url | iproxy }}" alt="" />
                 </a>
                 <!-- TODO -->
                 <a href="{{ url_for('view.profile', ukey=pic.user.id) }}" class="photo-author">
@@ -38,7 +33,4 @@
     </div>
 </div>
 
-<script src="/static/js/tween.min.js"></script>
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/g.min.js"></script>
 {% endblock %}

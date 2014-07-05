@@ -9,14 +9,14 @@ from instagram import InstagramAPI
 from sqlalchemy.sql import expression
 from sqlalchemy.sql import func
 
-from ..engines import db
-from ..models.user import LikeModel
-from ..models.user import ShowModel
-from ..settings import OPEN_ACCESS_TOKENS
-from ..utils import Pager
-from ..utils import add_show
-from ..utils import error_handle
-from ..utils import render
+from zhinsta.engines import db
+from zhinsta.models.user import LikeModel
+from zhinsta.models.user import ShowModel
+from zhinsta.settings import OPEN_ACCESS_TOKENS
+from zhinsta.utils import Pager
+from zhinsta.utils import add_show
+from zhinsta.utils import error_handle
+from zhinsta.utils import render
 
 members_per_page = 20
 

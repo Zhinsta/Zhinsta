@@ -4,13 +4,9 @@
 搜索{{ wd }}标签
 {{ super() }}
 {% endblock %}
-{% block style %}
-<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/static/css/search.css"/>
-{% endblock %}
 {% block main %}
 <div class="main">
-    <h1>搜索“{{ wd }}”标签</h1>
+    <h1>搜索{{ wd }}标签</h1>
     <div class="main-menu">
         <ul>
             <li><a href="{{ url_for('view.search_user', wd=wd) }}">用户</a></li>

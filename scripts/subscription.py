@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.insert(0, os.getcwd())
 
-from zhinsta.instagram.client import InstagramAPI
+from instagram import InstagramAPI
 
 from zhinsta.settings import INSTAGRAM_CLIENT_ID
 from zhinsta.settings import INSTAGRAM_CLIENT_SECRET

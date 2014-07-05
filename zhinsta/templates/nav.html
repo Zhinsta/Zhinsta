@@ -1,0 +1,29 @@
+{% macro nav(url, name, endpoint) %}
+<li {% if request.endpoint == endpoint %}class="header-selected"{% endif %}><a href="{{ url }}">{{ name }}</a></li>
+{% endmacro %}
+{% block header %}
+<div id="header" class="header header-ontop">
+    <div class="header-main">
+        <a class="header-logo" href="{{ url_for('view.home') }}">Zhinsta</a>
+        <ul class="header-nav">
+            {{ nav(url_for('view.show'), '展台', 'view.show') }}
+            {{ nav(url_for('view.recommend'), '中文圈', 'view.recommend') }}
+            {{ nav(url_for('view.feed'), '新鲜事', 'view.feed') }}
+        </ul>
+        <form class="header-search" action="{{ url_for('view.search_user' )}}">
+           <input type="text" placeholder="搜索" name="wd">
+        </form>
+        <div class="header-right">
+            {% if has_login %}
+            <a href="{{ url_for('view.profile', ukey=ukey) }}" class="header-right-i">{{ username }}</a>
+            <ul class="header-right-bd">
+                <li><a href="{{ url_for('view.logout', uri=request.url) }}">退出登录</a></li>
+            </ul>
+            {% else %}
+            <a href="{{ url_for('view.login', uri=request.url) }}" class="login-button">Instagram 登录</a>
+            {% endif %}
+        </div>
+        <div id="loading"></div>
+    </div>
+</div>
+{% endblock %}

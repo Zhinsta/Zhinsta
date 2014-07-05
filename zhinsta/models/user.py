@@ -16,6 +16,14 @@ class UserModel(db.Model):
                              default=datetime.now)
 
 
+class AdminModel(db.Model):
+    __tablename__ = 'admin'
+    ukey = db.Column(db.VARCHAR(255), primary_key=True)
+    date_created = db.Column(db.DateTime(),
+                             index=True, nullable=False,
+                             default=datetime.now)
+
+
 class FollowModel(db.Model):
     __tablename__ = 'follow'
     ukey = db.Column(db.VARCHAR(128), primary_key=True)
@@ -35,6 +43,12 @@ class LikeModel(db.Model):
     date_created = db.Column(db.DateTime(),
                              index=True, nullable=False,
                              default=datetime.now)
+    _media_info = db.relationship(
+        'ShowModel',
+        primaryjoin='LikeModel.media==ShowModel.mid', uselist=False,
+        backref=db.backref(
+            'like', lazy='joined', innerjoin=True),
+        foreign_keys='[ShowModel.mid]', passive_deletes='all')
 
 
 class ShowModel(db.Model):

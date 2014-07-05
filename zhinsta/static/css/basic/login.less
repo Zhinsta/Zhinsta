@@ -1,0 +1,54 @@
+.page-login {
+    h1 {
+        margin: 0 0 1em 0;
+        text-align: center;
+        font-size: @head-font-size * 2;
+    }
+
+    h2 {
+        margin: 2em 0 0 0;
+        font-size: @head-font-size * 1.5;
+        text-align: center;
+
+        &::before {
+            content: '';
+        }
+        &::after {
+            content: '';
+        }
+        a {
+            display: block;
+            color: @base-font-color;
+
+            &::before {
+                content: '~~~ ';
+                color: lighten(@base-font-color, 40%);
+            }
+            &::after {
+                content: ' ~~~';
+                color: lighten(@base-font-color, 40%);
+            }
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+// 优化480px及以下宽度的标题显示
+@media (max-width: 480px) {
+    .page-login {
+        h1 {
+            span {
+                display: block;
+                height: 0;
+                visibility: hidden;
+            }
+        }
+
+        h2 {
+            
+        }
+    }
+}

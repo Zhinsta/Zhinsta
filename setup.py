@@ -12,7 +12,7 @@ install_requires = [
     'gevent',
     'flask-sqlalchemy',
     'python-instagram',
-    'wtforms',
+    'wtforms==1.0.5',
     'redis',
     'sqlalchemy',
 ]
@@ -20,6 +20,7 @@ install_requires = [
 entry_points = {
     'console_scripts': [
         'run = zhinsta.app:run',
+        'refresh = script.refresh_user:main'
     ]
 }
 

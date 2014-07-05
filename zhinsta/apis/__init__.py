@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint
+from flask.ext.restful import Api
 
 from .user import (HelloWorldView, FollowView, LikeView,
                    IslikeView)
 
 blueprint = Blueprint('apis', __name__)
 
-blueprint.add_url_rule('/helloworld/',
-                       view_func=HelloWorldView.as_view(b'helloworld'),
-                       endpoint='helloworld')
+api = Api(blueprint)
+
+api.add_resource(HelloWorldView, '/helloworld')
 
 blueprint.add_url_rule('/follow/',
                        view_func=FollowView.as_view(b'follow'),

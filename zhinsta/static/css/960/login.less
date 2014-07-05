@@ -1,0 +1,31 @@
+.page-login {
+    h1 {
+        font-size: @head-font-size * 2;
+    }
+
+    h2 {
+        font-size: @head-font-size;
+
+        &::before {
+            content: '';
+        }
+        &::after {
+            content: '';
+        }
+
+        a {
+            &::before {
+                content: '~~~~~~ ';
+                color: lighten(@base-font-color, 40%);
+            }
+            &::after {
+                content: ' ~~~~~~';
+                color: lighten(@base-font-color, 40%);
+            }
+        }
+    }
+
+    .photos .photo:first-child {
+        width: 460px;
+    }
+}

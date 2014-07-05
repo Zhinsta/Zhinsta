@@ -4,11 +4,6 @@
 {{ media.user.username }}的instagram照片
 {{ super() }}
 {% endblock %}
-{% block style %}
-<script src="/static/js/modernizr.js"></script>
-<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/static/css/media.css"/>
-{% endblock %}
 {% block main %}
 <div class="main">
     <div class="info">
@@ -38,7 +33,7 @@
 
     <div class="media">
         <div class="media-l">
-            <img src="{{ media.get_standard_resolution_url() }}" alt="" />
+            <img src="{{ media.get_standard_resolution_url() | iproxy }}" alt="" />
         </div>
         <div class="media-r">
             <div class="media-info">
@@ -97,7 +92,4 @@
     {% endif %}
 </div>
 
-<script src="/static/js/tween.min.js"></script>
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/g.min.js"></script>
 {% endblock %}
