@@ -22,6 +22,8 @@ from zhinsta.models.user import ShowModel
 
 class ShowAdmin(BaseAdmin):
 
+    column_list = ('mid', 'pic', 'ukey', 'user_pic', 'username',
+                   'date_created', 'showable', 'hour_tagged')
     column_searchable_list = ('username', 'ukey')
     form_columns = ['mid', 'pic', 'ukey', 'user_pic', 'username',
                     'date_created', 'showable', 'hour_tagged']
