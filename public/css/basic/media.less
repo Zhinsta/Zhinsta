@@ -4,7 +4,6 @@
         overflow: auto;
     }
     .media-l {
-        float: left;
         img {
             max-width: 100%;
         }
@@ -48,6 +47,20 @@
         }
         p {
             display: inline;
+        }
+    }
+}
+
+// 优化932px及以上宽度的media页
+// 612 + 10 + 300 + 10 * 2 = 942
+@media (min-width: 942px) {
+    .page-media {
+        .media-l {
+            float: left;
+            padding-right: 10px;
+        }
+        .media-r {
+            float: right;
         }
     }
 }

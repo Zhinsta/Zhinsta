@@ -749,9 +749,6 @@ h2 a:hover {
   margin: 2em 0 0 0;
   overflow: auto;
 }
-.page-media .media-l {
-  float: left;
-}
 .page-media .media-l img {
   max-width: 100%;
 }
@@ -793,6 +790,15 @@ h2 a:hover {
 }
 .page-media .media-love p {
   display: inline;
+}
+@media (min-width: 942px) {
+  .page-media .media-l {
+    float: left;
+    padding-right: 10px;
+  }
+  .page-media .media-r {
+    float: right;
+  }
 }
 .page-about .about {
   word-wrap: break-word;
