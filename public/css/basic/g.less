@@ -67,6 +67,7 @@ h2 {
     font-size: @head-font-size;
 }
 .header-main {
+    position: relative;
     margin: 0 auto;
     padding: 0 10px;
     height: 2em;
@@ -230,8 +231,9 @@ only screen and (min-device-pixel-ratio: 2) {
 }
 
 .header-right {
-    position: relative;
-    float: right;
+    position: absolute;;
+    top: 0;
+    right: 10px;
     height: 2em;
     line-height: 2em;
 }

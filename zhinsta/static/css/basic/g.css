@@ -63,6 +63,7 @@ h2 a:hover {
   font-size: 16px;
 }
 .header-main {
+  position: relative;
   margin: 0 auto;
   padding: 0 10px;
   height: 2em;
@@ -212,8 +213,9 @@ h2 a:hover {
   }
 }
 .header-right {
-  position: relative;
-  float: right;
+  position: absolute;
+  top: 0;
+  right: 10px;
   height: 2em;
   line-height: 2em;
 }
