@@ -753,8 +753,7 @@ h2 a:hover {
   max-width: 100%;
 }
 .page-media .media-r {
-  float: left;
-  width: 300px;
+  width: 600px;
 }
 .page-media .media-info {
   border-bottom: 1px dashed #CCC;
@@ -790,15 +789,6 @@ h2 a:hover {
 }
 .page-media .media-love p {
   display: inline;
-}
-@media (min-width: 942px) {
-  .page-media .media-l {
-    float: left;
-    padding-right: 10px;
-  }
-  .page-media .media-r {
-    float: right;
-  }
 }
 .page-about .about {
   word-wrap: break-word;
