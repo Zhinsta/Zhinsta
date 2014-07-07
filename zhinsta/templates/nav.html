@@ -7,6 +7,7 @@
         <a class="header-logo" href="{{ url_for('view.home') }}">Zhinsta</a>
         <a href="###" id="sideMenu" class="header-menu">MENU</a>
         <ul class="header-nav">
+            <li><a href="/">首页</a></li>
             {{ nav(url_for('view.show'), '展台', 'view.show') }}
             {{ nav(url_for('view.recommend'), '中文圈', 'view.recommend') }}
             {{ nav(url_for('view.feed'), '新鲜事', 'view.feed') }}
