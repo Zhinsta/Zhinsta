@@ -754,6 +754,7 @@ h2 a:hover {
 }
 .page-media .media-r {
   width: 600px;
+  max-width: 100%;
 }
 .page-media .media-info {
   border-bottom: 1px dashed #CCC;
