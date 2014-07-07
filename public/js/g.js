@@ -1,3 +1,13 @@
+$('#sideMenu').click(function () {
+    var $bd = $('body');
+    if ($bd.hasClass('menu-open')) {
+        $bd.removeClass('menu-open');
+    }
+    else {
+        $bd.addClass('menu-open');
+    }
+});
+
 if (typeof ukey === 'undefined') {
     ukey = '';
 }
@@ -191,8 +201,6 @@ $('#log').ajaxError(function(e) {
         toolTip(this[0], option);
     };
 })();
-
-
 
 $(function() {
     if (typeof gLogined !== 'undefined' && gLogined) {
