@@ -12,7 +12,7 @@ Zhinsta - instagram中文圈，网页版
         <ul>
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=media.id) }}" class="photo-pic">
-                    <img src="{{ media.get_standard_resolution_url() | iproxy }}" alt="{{ media.user.username }}"  width="460" height="460" />
+                    <img src="{{ media.get_standard_resolution_url() | iproxy }}" alt="{{ media.user.username }}" />
                 </a>
                 <a href="{{ url_for('view.profile', ukey=media.user.id) }}" class="photo-author">
                     <img src="{{ media.user.profile_picture }}" alt="{{ media.user.username }}" width="32" height="32" />
