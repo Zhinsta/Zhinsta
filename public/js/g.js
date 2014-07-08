@@ -384,12 +384,15 @@ $(function() {
         }
         me.starting = true;
 
-        me.$loading.css('width', 0);
-        me.$loading.css({
-            'transition': 'width 3s',
-            'width': '60%',
-            'opacity': '1'
-        });
+        me.$loading[0].style.cssText = '';
+        me.timeout = setTimeout(function () {
+            me.$loading.css({
+                'transition': 'width 3s',
+                'width': '60%',
+                'opacity': '1'
+            });
+            me.timeout = null;
+        }, 200);
     };
 
     Stopwatch.prototype.stop = function() {
@@ -399,12 +402,14 @@ $(function() {
         }
         me.starting = false;
 
-        setTimeout(function () {
-            me.$loading.css({
-                'transition': 'width 1s, opacity 1s',
-                'width': '100%',
-                'opacity': '0'
-            });
+        if (me.timeout) {
+            clearTimeout(me.timeout);
+            me.timeout = null;
+        }
+        me.$loading.css({
+            'transition': 'width 1s, opacity 1s',
+            'width': '100%',
+            'opacity': '0'
         });
     };
 
