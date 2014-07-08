@@ -91,6 +91,16 @@ h2 a:hover {
   height: 2em;
   text-indent: -9999px;
   background: url(../../assets/imgs/logo@32x32.png) no-repeat;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: -webkit-transform 1s;
+  -webkit-transition: transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+}
+.header-logo:hover {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
   .header-logo {
