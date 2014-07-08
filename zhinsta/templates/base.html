@@ -39,6 +39,9 @@
       ga('create', 'UA-43275722-1', 'zhinsta.com');
       ga('send', 'pageview');
     </script>
+    {% if has_login %}
+    <script>gLogined = true;</script>
+    {% endif %}
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/g.js"></script>
 </body>
