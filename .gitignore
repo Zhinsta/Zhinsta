@@ -14,3 +14,6 @@ zhinsta.egg-info/
 
 # tags
 tags
+
+# app
+zhinsta/settings_local.py
