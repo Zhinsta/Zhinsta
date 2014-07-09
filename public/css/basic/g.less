@@ -57,6 +57,7 @@ h2 {
     position: fixed;
     z-index: 1;
     width: 100%;
+    height: 2em;
     padding: 1em 0;
     font-size: @head-font-size;
     background: #F5F7FA;
@@ -66,6 +67,7 @@ h2 {
     font-size: @head-font-size;
 }
 .header-main {
+    position: relative;
     margin: 0 auto;
     padding: 0 10px;
     height: 2em;
@@ -94,6 +96,16 @@ h2 {
     height: 2em;
     text-indent: -9999px;
     background: url(../../assets/imgs/logo@32x32.png) no-repeat;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: -webkit-transform 1s;
+    -webkit-transition: transform 1s;
+    transition: -webkit-transform 1s;
+    transition: transform 1s;
+}
+.header-logo:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (min-device-pixel-ratio: 2) {
@@ -103,10 +115,26 @@ only screen and (min-device-pixel-ratio: 2) {
     }
 }
 
+.header-menu {
+    display: none;
+    float: left;
+    margin-left: 1em;
+    width: 6em;
+    height: 2em;
+    line-height: 2;
+    color: #AAA;
+}
+@media (max-width: 630px) {
+    .header-menu {
+        display: block;
+    }
+}
+
 .header-nav {
     float: left;
-    margin: 0;
+    margin: 0 1em 0 0;
     padding: 0;
+    overflow: hidden;
 }
 .header-nav li {
     float: left;
@@ -122,19 +150,100 @@ only screen and (min-device-pixel-ratio: 2) {
 }
 .header-nav a {
     display: block;
-    margin-left: 1em;
+    padding-left: 1em;
     line-height: 2em;
     font-weight: bold;
     -webkit-font-smoothing: antialiased;
 }
+@media (max-width: 630px) {
+    .header-nav {
+        width: 0;
+        height: 0;
+        -webkit-transition: width .5s;
+        transition: width .5s;
+    }
+    .menu-open {
+        .header-nav {
+            display: block;
+            position: absolute;
+            top: 67px;
+            left: 0;
+            margin-right: 0;
+            width: 200px;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .header-nav li {
+            float: none;
+            margin: .5em 0;
+            width: 200px;
+        }
+        .header-nav li a {
+            padding-top: .5em;
+            padding-bottom: .5em;
+        }
+
+        .header-nav a:hover,
+        .header-nav .header-selected a {
+            color: #FFF;
+            background-color: rgba(0, 0, 0, .5);
+        }
+
+        .header-nav .header-nav-other {
+            display: block;
+        }
+    }
+}
 
 .header-search {
-    display: none;
+    float: left;
+    overflow: hidden;
+}
+.header-search input {
+    display: block;
+    width: 2em;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 2em;
+    outline: none;
+    font-size: inherit;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #CCC;
+}
+.header-search input:focus {
+    width: 12em;
+    border-bottom-color: #666;
+}
+@media (max-width: 630px) {
+    .header-search {
+        width: 0;
+        height: 0;
+        -webkit-transition: width .5s;
+        transition: width .5s;
+    }
+    .menu-open {
+        .header-search {
+            display: block;
+            position: absolute;
+            top: 232px + 67px;
+            left: 0;
+            width: 200px;
+            height: auto;
+            padding: 0 1em;
+            box-sizing: border-box;
+            display: block;
+            overflow: hidden;
+        }
+    }
 }
 
 .header-right {
-    position: relative;
-    float: right;
+    position: absolute;;
+    top: 0;
+    right: 10px;
     height: 2em;
     line-height: 2em;
 }
@@ -198,9 +307,24 @@ only screen and (min-device-pixel-ratio: 2) {
 
 /* container & main */
 .container {
-    padding-top: @head-font-size * 4;
-    background: #FFF;
+    padding-top: @head-font-size * 4 + 3px;
+    overflow: hidden;
 }
+.container-inner {
+    background: #FFF;
+    -webkit-transition: -webkit-transform .5s;
+    -webkit-transition: transform .5s;
+    transition: -webkit-transform .5s;
+    transition: transform .5s;
+}
+@media (max-width: 630px) {
+    .menu-open .container-inner {
+        -webkit-transform: translateX(200px);
+        -moz-transform: translateX(200px);
+        transform: translateX(200px);
+    }
+}
+
 .main {
     max-width: 960px;
     padding: 2em 10px 4em;
@@ -215,7 +339,6 @@ only screen and (min-device-pixel-ratio: 2) {
     font-size: 14px;
     color: #FFF;
     background: #333;
-    border-top: 1px solid #222;
 }
 .footer-main {
     position: relative;

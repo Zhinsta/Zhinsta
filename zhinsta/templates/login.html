@@ -6,13 +6,13 @@ Zhinsta - instagram中文圈，网页版
 {% block main %}
 <div class="main">
     <h1>Instagram中文圈<span>，</span>发现精彩照片生活</h1>
-    <h2><a href="">展台</a></h2>
+    <h2><a href="{{ url_for('view.show') }}">展台</a></h2>
 
     <div class="photos" id="photoList">
         <ul>
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=media.id) }}" class="photo-pic">
-                    <img src="{{ media.get_standard_resolution_url() | iproxy }}" alt="{{ media.user.username }}"  width="460" height="460" />
+                    <img src="{{ media.get_standard_resolution_url() | iproxy }}" alt="{{ media.user.username }}" />
                 </a>
                 <a href="{{ url_for('view.profile', ukey=media.user.id) }}" class="photo-author">
                     <img src="{{ media.user.profile_picture }}" alt="{{ media.user.username }}" width="32" height="32" />
@@ -20,13 +20,13 @@ Zhinsta - instagram中文圈，网页版
                 </a>
                 <span class="photo-info">
                     {{ media.created_time|time_since }}&nbsp;
-                    <a href="javascript:void(0);" class="jsLove3" data-mid="{{ media.mid }}"></a>
+                    <a href="javascript:void(0);" class="jsLove3" data-mid="{{ media.id }}"></a>
                 </span>
             </li>
             {% for m in medias[1:] %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=m.media) }}" class="photo-pic">
-                    <img src="{{ m._media_info.pic }}" alt="{{ m.media_username }}" />
+                    <img src="{{ m._media_info.pic | iproxy }}" alt="{{ m.media_username }}" />
                 </a>
                 <a href="{{ url_for('view.profile', ukey=m.ukey) }}" class="photo-author">
                     <img src="{{ m._media_info.user_pic }}" alt="{{ m._media_info.username }}" width="32" height="32" />
@@ -34,20 +34,20 @@ Zhinsta - instagram中文圈，网页版
                 </a>
                 <span class="photo-info">
                     {{ m.date_created|time_since }}&nbsp;
-                    <a href="javascript:void(0);" class="jsLove3" data-mid="{{ m.mid }}"></a>
+                    <a href="javascript:void(0);" class="jsLove3" data-mid="{{ m.media }}"></a>
                 </span>
             </li>
             {% endfor %}
         </ul>
     </div>
 
-    <h2><a href="">中文圈</a></h2>
+    <h2><a href="{{url_for('view.recommend') }}">中文圈</a></h2>
     <div class="people">
         <ul>
             {% for u in users %}
             <li>
                 <a href="{{ url_for('view.profile', ukey=u.ukey) }}" class="people-photo">
-                    <img width="165" height="165" src="{{ u.pic }}" alt="{{ u.username }}" />
+                    <img width="165" height="165" src="{{ u.pic | iproxy }}" alt="{{ u.username }}" />
                     <span>{{ u.username }}</span>
                 </a>
             </li>

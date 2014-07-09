@@ -15,5 +15,8 @@ zhinsta.egg-info/
 # tags
 tags
 
+# gulp
+public/node_modules
+
 # app
 zhinsta/settings_local.py

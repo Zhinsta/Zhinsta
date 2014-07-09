@@ -39,8 +39,6 @@ class HomeView(views.MethodView):
 
     @error_handle
     def get(self):
-        if has_login():
-            return redirect(url_for('view.show'))
         like = (LikeModel.query
                 .filter(LikeModel.ukey == '448621019')
                 .order_by(LikeModel.date_created.desc())

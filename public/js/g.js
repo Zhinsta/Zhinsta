@@ -1,3 +1,13 @@
+$('#sideMenu').click(function () {
+    var $bd = $('body');
+    if ($bd.hasClass('menu-open')) {
+        $bd.removeClass('menu-open');
+    }
+    else {
+        $bd.addClass('menu-open');
+    }
+});
+
 if (typeof ukey === 'undefined') {
     ukey = '';
 }
@@ -159,16 +169,15 @@ $('#log').ajaxError(function(e) {
                                 pointSStyle: 'position:absolute;border-width:9px;border-color:transparent;border-style:dashed;width:0;height:0;font-size:0;'+pointSStyles[direction],
                                 pointBStyle: 'position:absolute;border-width:10px;border-color:transparent;border-style:dashed;width:0;height:0;font-size:0;'+pointBStyles[direction]
                             }));
-            $con.css('position','relative');
             // 显示toolTip
             function show() {
                 $toolTip.css({
-                    top: position[0],
-                    left: position[1],
+                    top: conOffset.top + position[0],
+                    left: conOffset.left + position[1],
                     width: width
                 });
                 $( 'b', $toolTip ).css( offsets[direction], offset );
-                $con.append( $toolTip );
+                $('body').append( $toolTip );
             }
             // 移除此toolTip
             function remove() {
@@ -188,12 +197,10 @@ $('#log').ajaxError(function(e) {
             };
         };
 
-    $.fn.tooltip = function(container, option) {
-        toolTip(container || this[0], option);
+    $.fn.tooltip = function(option) {
+        toolTip(this[0], option);
     };
 })();
-
-
 
 $(function() {
     if (typeof gLogined !== 'undefined' && gLogined) {
@@ -251,7 +258,7 @@ $(function() {
     /**
      * like & unlike
      */
-    $('body').on('click', '.jsLove,.jsLove2', function(e) {
+    $('body').on('click', '.jsLove', function(e) {
         e.preventDefault();
         if (this.sign) {
             return;
@@ -259,10 +266,9 @@ $(function() {
         this.sign = true;
 
         if (typeof gLogined === 'undefined' || !gLogined) {
-            var after = $('<span></span>').insertBefore(this);
-            $(this).tooltip(after, {
+            $(this).tooltip({
                 msg: '请先<a href="/">登录</a>',
-                position: [-36, 0],
+                position: [-50, 0],
                 offset: 8,
                 width: 80,
                 direction: 'down'
@@ -331,10 +337,9 @@ $(function() {
         this.sign = true;
 
         if (typeof gLogined === 'undefined' || !gLogined) {
-            var after = $('<span>&nbsp;</span>').insertAfter(this);
-            $(this).tooltip(after, {
+            $(this).tooltip({
                 msg: '请先<a href="/">登录</a>',
-                position: [32, -60],
+                position: [32, 0],
                 offset: 10,
                 width: 80
             });
@@ -379,11 +384,15 @@ $(function() {
         }
         me.starting = true;
 
-        me.$loading.css({
-            'transition': 'width 3s',
-            'width': '60%',
-            'opacity': '1'
-        });
+        me.$loading[0].style.cssText = '';
+        me.timeout = setTimeout(function () {
+            me.$loading.css({
+                'transition': 'width 3s',
+                'width': '60%',
+                'opacity': '1'
+            });
+            me.timeout = null;
+        }, 200);
     };
 
     Stopwatch.prototype.stop = function() {
@@ -393,6 +402,10 @@ $(function() {
         }
         me.starting = false;
 
+        if (me.timeout) {
+            clearTimeout(me.timeout);
+            me.timeout = null;
+        }
         me.$loading.css({
             'transition': 'width 1s, opacity 1s',
             'width': '100%',
