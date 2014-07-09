@@ -1,5 +1,4 @@
 # -*-coding: utf-8 -*-
-#!/usr/bin/env python
 from __future__ import unicode_literals
 
 """
@@ -18,6 +17,7 @@ from base import BaseAdmin
 
 from zhinsta.engines import db
 from zhinsta.models.user import ShowModel
+from zhinsta.filters import iproxy
 
 
 class ShowAdmin(BaseAdmin):
@@ -29,7 +29,7 @@ class ShowAdmin(BaseAdmin):
                     'date_created', 'showable', 'hour_tagged']
 
     def _show_pic(self, context, model, name):
-        return Markup('<img src=%s width=200 height=200>' % model.pic)
+        return Markup('<img src=%s width=200 height=200>' % iproxy(model.pic))
 
     def _show_user(self, context, model, name):
         return Markup('<a href="%s">%s</a>' % (
@@ -39,7 +39,7 @@ class ShowAdmin(BaseAdmin):
     def _show_user_pic(self, context, model, name):
         return Markup('<a href="%s"><img src=%s width=90 height=90></a>' % (
             url_for('view.profile', ukey=model.ukey),
-            model.user_pic))
+            iproxy(model.user_pic)))
 
     column_formatters = {
         'username': _show_user,

@@ -10,5 +10,6 @@ app = Flask(__name__)
 app.secret_key = SECRET_KEY
 app.permanent_session_lifetime = timedelta(days=30)
 
+
 def run():
     app.run(debug=True)
