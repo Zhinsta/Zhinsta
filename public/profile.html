@@ -15,9 +15,11 @@
     <div class="header" id="header">
         <div class="header-main">
             <a href="/" class="header-logo">Zhinsta</a>
+            <a href="###" id="sideMenu" class="header-menu">MENU</a>
             <ul class="header-nav">
+                <li><a href="/">首页</a></li>
                 <li><a href="/show/">展台</a></li>
-                <li><a href="/members/recommend/">中文圈</a></li>
+                <li class="header-selected"><a href="/members/recommend/">中文圈</a></li>
                 <li><a href="/feed/" class="header-nav-other">新鲜事</a></li>
             </ul>
             <form class="header-search" action="/search/user/" method="GET">
@@ -27,108 +29,122 @@
             <div class="header-right">
                 <a href="/login/" class="login-button">Instagram 登录</a>
             </div>
-
-            <div id="loading"></div>
         </div>
+        <div id="loading"></div>
     </div>
 
     <div class="container">
-    <div class="main">
-        <div class="info">
-            <div class="info-l">
-                <img width="150" height="150" src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="" />
-                <div class="info-l-txt">
-                    <h1>
-                        <a href="./">mzhou</a>
-                        <a href="javascript:void(0);" class="jsFollow info-follow" data-ukey="206530502" data-action="follow" title="关注TA">未关注</a>
-                    </h1>
-                    <p>简介啊的撒旦撒旦jjiiojoi</p>
-                    <p><i class="icon-cloud"></i><a href="http://mzhou.me" target="_blank">http://mzhou.me</a></p>
-                    <p><i class="icon-plus"></i><a href="#" class="js-collect">收录到中文圈</a></p>
-                    <p><i class="icon-bookmark"></i>已收录到中文圈</p>
+    <div class="container-inner">
+        <div class="main">
+            <div class="info">
+                <div class="info-l">
+                    <img width="150" height="150" src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="" />
+                    <div class="info-l-txt">
+                        <h1>
+                            <a href="./">mzhou</a>
+                            <a href="javascript:void(0);" class="jsFollow info-follow" data-ukey="206530502" data-action="follow" title="关注TA">未关注</a>
+                        </h1>
+                        <p>简介啊的撒旦撒旦jjiiojoi</p>
+                        <p><i class="icon-cloud"></i><a href="http://mzhou.me" target="_blank">http://mzhou.me</a></p>
+                        <p><i class="icon-plus"></i><a href="#" class="js-collect">收录到中文圈</a></p>
+                        <p><i class="icon-bookmark"></i>已收录到中文圈</p>
+                    </div>
                 </div>
+                <ul class="info-r">
+                    <li>
+                        <span>2310</span>
+                        <a href="#">关注者</a>
+                    </li>
+                    <li>
+                        <span>23111</span>
+                        <a href="#">关注中</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="info-r">
-                <li>
-                    <span>2310</span>
-                    <a href="#">关注者</a>
-                </li>
-                <li>
-                    <span>23111</span>
-                    <a href="#">关注中</a>
-                </li>
-            </ul>
-        </div>
 
-        <div class="photos" id="photoList">
-            <ul>
-                <li class="photo">
-                    <a href="#" target="_blank" class="photo-pic">
-                        <!-- 第一张图片是大图 -->
-                        <img src="http://origincache-prn.fbcdn.net/10299694_1466587203576309_368477989_n.jpg" alt="" />
-                    </a>
-                    <a href="/profile.html" class="photo-author">
-                        <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
-                        敏明君敏明君敏明君敏明君
-                    </a>
-                    <span class="photo-info">
-                        1小时前&nbsp;
-                        <a href="javascript:void(0);" class="jsLove3" data-mid="123123"></a>
-                    </span>
-                </li>
-                <li class="photo">
-                    <a href="#" target="_blank" class="photo-pic">
-                        <img   src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
-                    </a>
-                    <a href="/profile.html" class="photo-author">
-                        <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
-                        敏明君敏明君敏明君敏明君
-                    </a>
-                    <span class="photo-info">
-                        1小时前&nbsp;
-                        <a href="javascript:void(0);" class="jsLove3" data-mid="123123"></a>
-                    </span>
-                </li>
-                <li class="photo">
-                    <a href="#" target="_blank" class="photo-pic">
-                        <img   src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
-                    </a>
-                    <a href="/profile.html" class="photo-author">
-                        <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
-                        敏明君敏明君敏明君敏明君
-                    </a>
-                    <span class="photo-info">
-                        1小时前&nbsp;
-                        <a href="javascript:void(0);" class="jsLove3" data-action="like" data-num="1" data-mid="123123"></a>
-                    </span>
-                </li>
-                <li class="photo">
-                    <a href="#" target="_blank" class="photo-pic">
-                        <img   src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
-                    </a>
-                    <a href="/profile.html" class="photo-author">
-                        <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
-                        敏明君敏明君敏明君敏明君
-                    </a>
-                    <span class="photo-info">
-                        1小时前&nbsp;
-                        <a href="javascript:void(0);" class="jsLove3" data-action="like" data-num="1" data-mid="123123"></a>
-                    </span>
-                </li>
-                <li class="photo">
-                    <a href="#" target="_blank" class="photo-pic">
-                        <img   src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
-                    </a>
-                    <a href="/profile.html" class="photo-author">
-                        <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
-                        敏明君敏明君敏明君敏明君
-                    </a>
-                    <span class="photo-info">
-                        1小时前&nbsp;
-                        <a href="javascript:void(0);" class="jsLove3" data-action="like" data-num="1" data-mid="123123"></a>
-                    </span>
-                </li>
-            </ul>
+            <div class="tantropmi">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- profile页广告 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3880667676094519"
+                     data-ad-slot="5681129589"
+                     data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div class="photos" id="photoList">
+                <ul>
+                    <li class="photo">
+                        <a href="#" target="_blank" class="photo-pic">
+                            <!-- 第一张图片是大图 -->
+                            <img src="http://origincache-prn.fbcdn.net/10299694_1466587203576309_368477989_n.jpg" alt="" />
+                        </a>
+                        <a href="/profile.html" class="photo-author">
+                            <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                            敏明君敏明君敏明君敏明君
+                        </a>
+                        <span class="photo-info">
+                            1小时前&nbsp;
+                            <a href="javascript:void(0);" class="jsLove3" data-mid="123123"></a>
+                        </span>
+                    </li>
+                    <li class="photo">
+                        <a href="#" target="_blank" class="photo-pic">
+                            <img   src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
+                        </a>
+                        <a href="/profile.html" class="photo-author">
+                            <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                            敏明君敏明君敏明君敏明君
+                        </a>
+                        <span class="photo-info">
+                            1小时前&nbsp;
+                            <a href="javascript:void(0);" class="jsLove3" data-mid="123123"></a>
+                        </span>
+                    </li>
+                    <li class="photo">
+                        <a href="#" target="_blank" class="photo-pic">
+                            <img   src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
+                        </a>
+                        <a href="/profile.html" class="photo-author">
+                            <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                            敏明君敏明君敏明君敏明君
+                        </a>
+                        <span class="photo-info">
+                            1小时前&nbsp;
+                            <a href="javascript:void(0);" class="jsLove3" data-action="like" data-num="1" data-mid="123123"></a>
+                        </span>
+                    </li>
+                    <li class="photo">
+                        <a href="#" target="_blank" class="photo-pic">
+                            <img   src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
+                        </a>
+                        <a href="/profile.html" class="photo-author">
+                            <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                            敏明君敏明君敏明君敏明君
+                        </a>
+                        <span class="photo-info">
+                            1小时前&nbsp;
+                            <a href="javascript:void(0);" class="jsLove3" data-action="like" data-num="1" data-mid="123123"></a>
+                        </span>
+                    </li>
+                    <li class="photo">
+                        <a href="#" target="_blank" class="photo-pic">
+                            <img   src="http://distilleryimage1.s3.amazonaws.com/f76bbc88e12811e2b12422000a1f901a_6.jpg" alt="" />
+                        </a>
+                        <a href="/profile.html" class="photo-author">
+                            <img src="http://images.ak.instagram.com/profiles/profile_28973930_75sq_1373863380.jpg" alt="敏明君" width="32" height="32" />
+                            敏明君敏明君敏明君敏明君
+                        </a>
+                        <span class="photo-info">
+                            1小时前&nbsp;
+                            <a href="javascript:void(0);" class="jsLove3" data-action="like" data-num="1" data-mid="123123"></a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     </div>
