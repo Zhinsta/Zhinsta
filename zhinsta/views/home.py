@@ -17,6 +17,7 @@ from zhinsta.models.user import RecommendModel
 from zhinsta.models.user import UserModel
 from zhinsta.models.user import LikeModel
 from zhinsta.models.user import AdminModel
+from zhinsta.models.user import ShowModel
 from zhinsta.settings import OPEN_ACCESS_TOKENS
 from zhinsta.settings import INSTAGRAM_CLIENT_ID
 from zhinsta.settings import INSTAGRAM_CLIENT_SECRET
@@ -50,11 +51,11 @@ class HomeView(views.MethodView):
         media = media.get()
         if isinstance(media, InstagramAPIError):
             return notfound(u'服务器暂时出问题了')
-        medias = (LikeModel.query
-                  .options(db.joinedload('_media_info'))
-                  .filter(LikeModel.ukey == '448621019')
-                  .order_by(LikeModel.date_created.desc())
-                  .limit(5).all())
+        likes = (LikeModel.query
+                 .filter(LikeModel.ukey == '448621019')
+                 .order_by(LikeModel.date_created.desc())
+                 .limit(5).all())
+        medias = ShowModel.query.filter(ShowModel.mid.in_([x for x in likes]))
         users = (RecommendModel.query
                  .order_by(RecommendModel.order.desc())
                  .limit(24).all())
