@@ -55,7 +55,7 @@ class HomeView(views.MethodView):
                  .filter(LikeModel.ukey == '448621019')
                  .order_by(LikeModel.date_created.desc())
                  .limit(5).all())
-        medias = ShowModel.query.filter(ShowModel.mid.in_([x for x in likes]))
+        medias = ShowModel.query.filter(ShowModel.mid.in_([x.media for x in likes]))
         users = (RecommendModel.query
                  .order_by(RecommendModel.order.desc())
                  .limit(24).all())
