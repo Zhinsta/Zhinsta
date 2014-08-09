@@ -83,9 +83,9 @@ class ProfileView(views.MethodView):
 
         gevent.joinall([user, feeds, isfollows])
         user, feeds, isfollows = user.get(), feeds.get(), isfollows.get()
-        may_errors = [user, feeds, isfollows]
-        if any([isinstance(e, InstagramAPIError) for e in may_errors]):
-            if any([e.error_type == 'APINotAllowedError' for e in may_errors]):
+        errors = [isinstance(e, InstagramAPIError) for e in (user, feeds, isfollow)]
+        if errors:
+            if any([e.error_type == 'APINotAllowedError' for e in errors]):
                 return render('profile-noauth.html', ukey=ukey)
             return notfound(u'服务器暂时出问题了')
 
