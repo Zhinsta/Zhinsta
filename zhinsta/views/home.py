@@ -2,13 +2,13 @@
 
 import gevent
 import random
+from gevent.util import wrap_errors
 
 from flask import views
 from flask import request
 from flask import redirect
 from flask import url_for
 from flask import session
-
 from instagram import InstagramAPI
 from instagram import InstagramAPIError
 
@@ -45,11 +45,10 @@ class HomeView(views.MethodView):
                 .limit(5).first())
         access_token = random.choice(OPEN_ACCESS_TOKENS)
         api = InstagramAPI(access_token=access_token)
-        media = gevent.spawn(api.media, like.media)
+        media = gevent.spawn(wrap_errors(InstagramAPIError, api.media), like.media)
         gevent.joinall([media])
-        try:
-            media = media.get()
-        except InstagramAPIError:
+        media = media.get()
+        if isinstance(media, InstagramAPIError):
             return notfound(u'服务器暂时出问题了')
         medias = (LikeModel.query
                   .options(db.joinedload('_media_info'))
@@ -74,8 +73,8 @@ class ProfileView(views.MethodView):
         next_url = request.args.get('next_url', None)
         api = InstagramAPI(access_token=request.access_token)
 
-        user = gevent.spawn(api.user, user_id=ukey)
-        feeds = gevent.spawn(api.user_recent_media,
+        user = gevent.spawn(wrap_errors(InstagramAPIError, api.user), user_id=ukey)
+        feeds = gevent.spawn(wrap_errors(InstagramAPIError, api.user_recent_media),
                              user_id=ukey, with_next_url=next_url)
         if request.ukey:
             isfollows = gevent.spawn(isfollow, ukey, api)
@@ -83,10 +82,10 @@ class ProfileView(views.MethodView):
             isfollows = gevent.spawn(lambda x: False, ukey)
 
         gevent.joinall([user, feeds, isfollows])
-        try:
-            user, feeds, isfollows = user.get(), feeds.get(), isfollows.get()
-        except InstagramAPIError, e:
-            if e.error_type == 'APINotAllowedError':
+        user, feeds, isfollows = user.get(), feeds.get(), isfollows.get()
+        may_errors = [user, feeds, isfollows]
+        if any([isinstance(e, InstagramAPIError) for e in may_errors]):
+            if any([isinstance(e.error_type == 'APINotAllowedError') for e in may_errors]):
                 return render('profile-noauth.html', ukey=ukey)
             return notfound(u'服务器暂时出问题了')
 
