@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 
 try:
-    from zhinsta.settings_local import *  # NOQA
-except ImportError:
-    print 'local settings not found'
-    pass
-
-try:
     import sae.const
 
     SECRET_KEY = 'SteinsGate'   # 生产环境应该保密
@@ -34,3 +28,9 @@ INSTAGRAM_SCOPE = ['comments', 'relationships', 'likes']
 OPEN_ACCESS_TOKENS = [
     '524431895.30fc022.4da293d4ccf044489f3f495727343a31',
 ]
+
+try:
+    from zhinsta.settings_local import *  # NOQA
+except ImportError:
+    print 'local settings not found'
+    pass
