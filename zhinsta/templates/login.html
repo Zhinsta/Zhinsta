@@ -23,7 +23,7 @@ Zhinsta - instagram中文圈，网页版
                     <a href="javascript:void(0);" class="jsLove3" data-mid="{{ media.id }}"></a>
                 </span>
             </li>
-            {% for m in medias[1:] %}
+            {% for m in medias[2:] %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=m.mid) }}" class="photo-pic">
                     <img src="{{ m.pic | iproxy }}" alt="{{ m.username }}" />
