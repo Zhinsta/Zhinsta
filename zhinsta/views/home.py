@@ -40,21 +40,17 @@ class HomeView(views.MethodView):
 
     @error_handle
     def get(self):
-        like = (LikeModel.query
-                .filter(LikeModel.ukey == '448621019')
-                .order_by(LikeModel.date_created.desc())
-                .limit(5).first())
+        likes = (LikeModel.query
+                 .filter(LikeModel.ukey == '448621019')
+                 .order_by(LikeModel.date_created.desc())
+                 .limit(5).all())
         access_token = random.choice(OPEN_ACCESS_TOKENS)
         api = InstagramAPI(access_token=access_token)
-        media = gevent.spawn(wrap_errors(InstagramAPIError, api.media), like.media)
+        media = gevent.spawn(wrap_errors(InstagramAPIError, api.media), likes[0].media)
         gevent.joinall([media])
         media = media.get()
         if isinstance(media, InstagramAPIError):
             return notfound(u'服务器暂时出问题了')
-        likes = (LikeModel.query
-                 .filter(LikeModel.ukey == '448621019')
-                 .order_by(LikeModel.date_created.desc())
-                 .limit(6).all())
         medias = ShowModel.query.filter(ShowModel.mid.in_([x.media for x in likes]))
         users = (RecommendModel.query
                  .order_by(RecommendModel.order.desc())
