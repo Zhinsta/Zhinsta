@@ -47,7 +47,8 @@ class LikeModel(db.Model):
         'ShowModel',
         primaryjoin='LikeModel.media==ShowModel.mid', uselist=False,
         backref=db.backref(
-            'like', lazy='joined', innerjoin=True),
+            'likes', lazy='joined', innerjoin=True, uselist=True,
+        ),
         foreign_keys='[ShowModel.mid]', passive_deletes='all')
 
 
