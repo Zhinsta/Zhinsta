@@ -3,8 +3,8 @@
 from flask import Blueprint
 from flask.ext.restful import Api
 
-from .user import (HelloWorldView, FollowView, LikeView,
-                   IslikeView)
+from .user import HelloWorldView, FollowView
+from .media import LikeView, IslikeView, CommentView
 
 blueprint = Blueprint('apis', __name__)
 
@@ -23,3 +23,7 @@ blueprint.add_url_rule('/like/',
 blueprint.add_url_rule('/islike/',
                        view_func=IslikeView.as_view(b'islike'),
                        endpoint='islike')
+
+blueprint.add_url_rule('/comment/',
+                       view_func=CommentView.as_view(b'comment'),
+                       endpoint='comment')

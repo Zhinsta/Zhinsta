@@ -79,7 +79,7 @@
         <ul>
             {% for comment in media.comments %}
             <li>
-                <a href="{{ url_for('view.profile', ukey=comment.user.id) }}" title="{{ comment.user.username }}">
+                <a href="{{ url_for('view.profile', ukey=comment.user.id) }}" title="{{ comment.user.username }}" data-mid={{ media.id }} data-cid='{{comment.id}}'>
                     <img src="{{ comment.user.profile_picture }}" alt="{{ comment.user.full_name }}" />
                 </a>
                 <div class="comment">

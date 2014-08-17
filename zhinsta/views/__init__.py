@@ -2,13 +2,13 @@
 
 from flask import Blueprint
 
-from .home import (HomeView, OAuthCodeView, LoginView,
-                   LogoutView, ProfileView, MembersView,
-                   SearchUserView, SearchTagView, MediaProfileView,
-                   TagView, FollowerView, FollowingView,
-                   WelcomeView, AboutView, FeedView,
-                   MembersRecommendView)
-from .show import (RealtimeView, ShowView)
+from .home import HomeView, WelcomeView, AboutView, MembersRecommendView
+from .user import (OAuthCodeView, LoginView, LogoutView,
+                   ProfileView, MembersView, FollowerView,
+                   FollowingView, FeedView)
+from .media import TagView, MediaProfileView
+from .search import SearchUserView, SearchTagView
+from .show import RealtimeView, ShowView
 
 blueprint = Blueprint('view', __name__)
 
