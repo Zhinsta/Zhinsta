@@ -11,6 +11,7 @@ zhinsta.egg-info/
 
 # editor
 *.sw[po]
+.idea/
 
 # tags
 tags
