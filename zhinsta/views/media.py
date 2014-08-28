@@ -35,7 +35,7 @@ class MediaProfileView(views.MethodView):
         if errors:
             if any([e.error_type == 'APINotAllowedError' for e in errors]):
                 return render('profile-noauth.html', ukey=request.ukey)
-            app.logger.error([e.error_type for e in errors])
+            app.logger.error([str(e) for e in errors])
             return notfound(u'服务器暂时出问题了')
 
         ukey = media.user.id
