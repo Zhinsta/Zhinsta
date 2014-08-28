@@ -2,7 +2,9 @@
 
 import logging
 
-logging.basicConfig()
+logging.basicConfig(
+    format='[%(levelname)1.1s %(asctime)s %(module)s:%(lineno)d] %(message)s'
+)
 
 from datetime import timedelta
 

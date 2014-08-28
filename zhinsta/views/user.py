@@ -139,7 +139,7 @@ class ProfileView(views.MethodView):
                 return render('profile-noauth.html', ukey=ukey)
             if any([e.error_type == 'APINotFoundError' for e in errors]):
                 return notfound(u'用户不存在')
-            app.logger.error(errors)
+            app.logger.error([e.error_type for e in errors])
             return apierror(u'服务器暂时出问题了')
 
         next_url = feeds[1] if feeds else None
