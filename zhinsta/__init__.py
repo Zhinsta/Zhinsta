@@ -2,10 +2,10 @@
 
 from flask import Flask  # NOQA
 
-from . import views
-from . import apis
-from .admin import zhinsta_admin
-from .app import app
+from zhinsta import views
+from zhinsta import apis
+from zhinsta.admin import zhinsta_admin
+from zhinsta.app import app
 import filters           # NOQA
 
 zhinsta_admin.init_app(app)

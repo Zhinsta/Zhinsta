@@ -11,6 +11,7 @@ from flask import session
 from instagram import InstagramAPI
 from instagram import InstagramAPIError
 
+from zhinsta.app import app
 from zhinsta.engines import db
 from zhinsta.models.user import UserModel
 from zhinsta.models.user import AdminModel
@@ -18,7 +19,7 @@ from zhinsta.settings import INSTAGRAM_CLIENT_ID
 from zhinsta.settings import INSTAGRAM_CLIENT_SECRET
 from zhinsta.settings import INSTAGRAM_REDIRECT_URI
 from zhinsta.settings import INSTAGRAM_SCOPE
-from zhinsta.utils import Pager
+from zhinsta.utils import Pager, get_errors
 from zhinsta.utils import apierror
 from zhinsta.utils import error_handle
 from zhinsta.utils import has_login
@@ -27,6 +28,7 @@ from zhinsta.utils import login_required
 from zhinsta.utils import notfound
 from zhinsta.utils import open_visit
 from zhinsta.utils import render
+from zhinsta.utils import spawn
 
 members_per_page = 48
 
@@ -124,9 +126,9 @@ class ProfileView(views.MethodView):
                              api.user_recent_media),
                              user_id=ukey, with_next_url=next_url)
         if request.ukey:
-            isfollows = gevent.spawn(isfollow, ukey, api)
+            isfollows = spawn(isfollow, ukey, api)
         else:
-            isfollows = gevent.spawn(lambda x: False, ukey)
+            isfollows = spawn(lambda x: False, ukey)
 
         gevent.joinall([user, feeds, isfollows])
         user, feeds, isfollows = user.get(), feeds.get(), isfollows.get()
@@ -135,7 +137,10 @@ class ProfileView(views.MethodView):
         if errors:
             if any([e.error_type == 'APINotAllowedError' for e in errors]):
                 return render('profile-noauth.html', ukey=ukey)
-            return notfound(u'服务器暂时出问题了')
+            if any([e.error_type == 'APINotFoundError' for e in errors]):
+                return notfound(u'用户不存在')
+            app.logger.error(errors)
+            return apierror(u'服务器暂时出问题了')
 
         next_url = feeds[1] if feeds else None
         feeds = feeds[0] if feeds else []
@@ -172,23 +177,24 @@ class FollowBaseView(object):
     def _get_users(self, ukey, user_type='followed'):
         next_url = request.args.get('next_url', None)
         api = InstagramAPI(access_token=request.access_token)
-        user = gevent.spawn(api.user, ukey)
+        user = spawn(api.user, ukey)
         if user_type == 'following':
-            users = gevent.spawn(api.user_follows,
+            users = spawn(api.user_follows,
                                  ukey, with_next_url=next_url)
         else:
-            users = gevent.spawn(api.user_followed_by,
+            users = spawn(api.user_followed_by,
                                  ukey, with_next_url=next_url)
         isfollows = False
         if request.ukey:
-            isfollows = gevent.spawn(isfollow, ukey, api)
+            isfollows = spawn(isfollow, ukey, api)
         else:
-            isfollows = gevent.spawn(lambda x: False, ukey)
+            isfollows = spawn(lambda x: False, ukey)
 
         gevent.joinall([user, users, isfollows])
-        try:
-            user, users, isfollows = user.get(), users.get(), isfollows.get()
-        except InstagramAPIError:
+        user, users, isfollows = user.get(), users.get(), isfollows.get()
+        errors = get_errors(user, users, isfollows)
+        if errors:
+            app.logger.error(errors)
             return notfound(u'服务器暂时出问题了')
 
         next_url = users[1]

@@ -6,6 +6,8 @@ import time
 import traceback
 from functools import wraps
 
+import gevent
+from gevent.util import wrap_errors
 from flask import redirect
 from flask import render_template
 from flask import request
@@ -207,3 +209,11 @@ def add_show(m):
         db.session.add(showm)
         db.session.commit()
     return ret
+
+
+def spawn(fn, *args, **kwargs):
+    return gevent.spawn(wrap_errors(InstagramAPIError, fn), *args, **kwargs)
+
+
+def get_errors(*rs):
+    return [e for e in rs if isinstance(e, InstagramAPIError)]
