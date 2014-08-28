@@ -7,12 +7,15 @@ from flask import request
 from instagram import InstagramAPI
 from instagram import InstagramAPIError
 
+from zhinsta.app import app
 from zhinsta.utils import error_handle
 from zhinsta.utils import isfollow
 from zhinsta.utils import login_required
 from zhinsta.utils import notfound
 from zhinsta.utils import open_visit
 from zhinsta.utils import render
+from zhinsta.utils import spawn
+from zhinsta.utils import get_errors
 
 members_per_page = 48
 
@@ -24,26 +27,24 @@ class MediaProfileView(views.MethodView):
     @login_required
     def get(self, mid):
         api = InstagramAPI(access_token=request.access_token)
-        media = gevent.spawn(api.media, mid)
-        likes = gevent.spawn(api.media_likes, media_id=mid)
+        media = spawn(api.media, mid)
+        likes = spawn(api.media_likes, media_id=mid)
         gevent.joinall([media, likes])
-        try:
-            media, likes = media.get(), likes.get()
-        except InstagramAPIError:
+        media, likes = media.get(), likes.get()
+        errors = get_errors(media, likes)
+        if errors:
+            if any([e.error_type == 'APINotAllowedError' for e in errors]):
+                return render('profile-noauth.html', ukey=request.ukey)
+            app.logger.error([e.error_type for e in errors])
             return notfound(u'服务器暂时出问题了')
 
         ukey = media.user.id
         isfollows = False
         if request.ukey:
-            isfollows = gevent.spawn(isfollow, ukey, api)
-        else:
-            isfollows = gevent.spawn(lambda x: False, ukey)
-
-        gevent.joinall([isfollows])
-        try:
-            isfollows = isfollows.get()
-        except InstagramAPIError:
-            return notfound(u'服务器暂时出问题了')
+            try:
+                isfollows = isfollow(ukey, api)
+            except InstagramAPIError:
+                return notfound(u'服务器暂时出问题了')
 
         isstar = False
         for i in likes:
