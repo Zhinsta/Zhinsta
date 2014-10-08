@@ -38,7 +38,6 @@ class SimilarUserView(views.MethodView):
     def _get_users(self, ukey, token, next_url=None, user_type='followed_by'):
         # 每次取50
         api = InstagramAPI(access_token=token)
-        user = spawn(api.user, ukey)
         if user_type == 'follows':
             # 关注的人
             users = spawn(api.user_follows, ukey, with_next_url=next_url)
@@ -46,9 +45,9 @@ class SimilarUserView(views.MethodView):
             # 关注我的人
             users = spawn(api.user_followed_by, ukey, with_next_url=next_url)
 
-        gevent.joinall([user, users])
-        user, users = user.get(), users.get()
-        errors = get_errors(user, users)
+        gevent.joinall([users])
+        users = users.get()
+        errors = get_errors(users)
         if errors:
             app.logger.error(str(e) for e in errors)
             return [], None
