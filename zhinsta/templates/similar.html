@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% set body_class="page-search-user" %}
+{% block title %}
+相似用户用户
+{{ super() }}
+{% endblock %}
+{% block main %}
+<div class="main">
+    <h1>关注ta的用户也关注</h1>
+    {% if similars %}
+    <div class="people">
+        <ul>
+            {% for user in similars %}
+            <li>
+                <a href="{{ url_for('view.profile', ukey=user.id) }}" class="people-photo">
+                    <img width="165" height="165" src="{{ user.profile_picture | iproxy }}" alt="{{ user.full_name }}" />
+                    <span>{{ user.username }}</span>
+                </a>
+                <!--
+                <a href="javascript:void(0);" class="people-collected"><i title="已收录到中文圈" class="icon-bookmark"></i></a>
+                -->
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <div class="error">
+    抱歉没有任何结果......
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

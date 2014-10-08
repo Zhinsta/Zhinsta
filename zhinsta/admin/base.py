@@ -1,5 +1,5 @@
-# -*-coding: utf-8 -*-
 #!/usr/bin/env python
+# -*-coding: utf-8 -*-
 from __future__ import unicode_literals
 
 """
@@ -16,20 +16,14 @@ import gevent
 from instagram import InstagramAPI
 from instagram import InstagramAPIError
 
-from flask import session, redirect, url_for, request
+from flask import session, redirect, url_for
 from flask.ext.admin import AdminIndexView, expose
 from flask.ext.admin.contrib import sqla
 
 from zhinsta.engines import db
+from zhinsta.utils import is_admin
 from zhinsta.utils import notfound
 from zhinsta.models.user import AdminModel, RecommendModel
-
-
-def is_admin():
-    ukey = session.get('ukey', '')
-    if not ukey:
-        return False
-    return True if session.get('is_admin', False) else False
 
 
 class ZhinstaAdminIndexView(AdminIndexView):

@@ -175,6 +175,7 @@ class MembersView(views.MethodView):
 class FollowBaseView(object):
 
     def _get_users(self, ukey, user_type='followed'):
+        print request.access_token
         next_url = request.args.get('next_url', None)
         api = InstagramAPI(access_token=request.access_token)
         user = spawn(api.user, ukey)

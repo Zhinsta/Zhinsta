@@ -217,3 +217,10 @@ def spawn(fn, *args, **kwargs):
 
 def get_errors(*rs):
     return [e for e in rs if isinstance(e, InstagramAPIError)]
+
+
+def is_admin():
+    ukey = session.get('ukey', '')
+    if not ukey:
+        return False
+    return True if session.get('is_admin', False) else False

@@ -9,6 +9,7 @@ from .user import (OAuthCodeView, LoginView, LogoutView,
 from .media import TagView, MediaProfileView
 from .search import SearchUserView, SearchTagView
 from .show import RealtimeView, ShowView
+from .similar import SimilarUserView
 
 blueprint = Blueprint('view', __name__)
 
@@ -70,3 +71,6 @@ blueprint.add_url_rule('/instagram/realtime/',
 blueprint.add_url_rule('/feed/',
                        view_func=FeedView.as_view(b'feed'),
                        endpoint='feed')
+blueprint.add_url_rule('/similar/<ukey>/',
+                       view_func=SimilarUserView.as_view(b'similar'),
+                       endpoint='similar')
