@@ -23,7 +23,7 @@ def parseisoformat(value):
 @app.template_filter()
 def iproxy(url):
     url = urlparse(url)
-    return 'http://zhinsta.com:8080/' + url.netloc + url.path
+    return 'http://zhinsta.com:8000/' + url.netloc + url.path
 
 
 @app.template_filter()
