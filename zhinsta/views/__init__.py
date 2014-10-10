@@ -9,7 +9,7 @@ from .user import (OAuthCodeView, LoginView, LogoutView,
 from .media import TagView, MediaProfileView
 from .search import SearchUserView, SearchTagView
 from .show import RealtimeView, ShowView
-from .similar import SimilarUserView
+from .similar import SimilarUserView, RecommendUserView
 
 blueprint = Blueprint('view', __name__)
 
@@ -74,3 +74,6 @@ blueprint.add_url_rule('/feed/',
 blueprint.add_url_rule('/similar/<ukey>/',
                        view_func=SimilarUserView.as_view(b'similar'),
                        endpoint='similar')
+blueprint.add_url_rule('/recommend/<ukey>/',
+                       view_func=RecommendUserView.as_view(b'recommend_user'),
+                       endpoint='recommend_user')

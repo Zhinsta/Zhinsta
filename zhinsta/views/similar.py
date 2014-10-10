@@ -33,7 +33,7 @@ from zhinsta.utils import error_handle
 from zhinsta.utils import login_required
 
 
-class SimilarUserView(views.MethodView):
+class SimilarUserBase(object):
 
     def _get_users(self, ukey, token, next_url=None, user_type='followed_by'):
         # 每次取50
@@ -83,6 +83,9 @@ class SimilarUserView(views.MethodView):
                     if id != ukey]
         return similars[:limit]
 
+
+class SimilarUserView(views.MethodView, SimilarUserBase):
+
     @error_handle
     @open_visit
     @login_required
@@ -110,6 +113,45 @@ class SimilarUserView(views.MethodView):
                 all_follows.extend(follows.get())
         else:
             for user in followed_by:
+                user_follow = self._get_limit_users(user.id, token, y, 'follows')
+                if isinstance(user_follow, list):
+                    all_follows.extend(user_follow)
+        similars = self._get_similar_users(ukey, all_follows)
+
+        context = {'similars': similars[:12]}
+        return render('similar.html', **context)
+
+
+class RecommendUserView(views.MethodView, SimilarUserBase):
+
+    @error_handle
+    @open_visit
+    @login_required
+    def get(self, ukey):
+        admin = is_admin()
+        if not admin:
+            return notfound(u'页面不存在')
+        x = int(request.args.get('x', 200))
+        y = int(request.args.get('y', 100))
+        is_fast = request.args.get('is_fast', False)
+        ukey = ukey or request.ukey
+        # 获取我关注的人列表
+        token = request.access_token
+        followings = self._get_limit_users(ukey, token, x, 'follows')
+        # 关注我的人关注的人
+        all_follows = []
+        if is_fast:
+            # 使用gevent 提高速度 貌似有问题数量多了会报错
+            user_follows = []
+            for user in followings:
+                user_follow = spawn(self._get_limit_users,
+                                    user.id, token, y, 'follows')
+                user_follows.append(user_follow)
+            gevent.joinall(user_follows)
+            for follows in user_follows:
+                all_follows.extend(follows.get())
+        else:
+            for user in followings:
                 user_follow = self._get_limit_users(user.id, token, y, 'follows')
                 if isinstance(user_follow, list):
                     all_follows.extend(user_follow)
