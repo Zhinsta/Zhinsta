@@ -179,11 +179,9 @@ class FollowBaseView(object):
         api = InstagramAPI(access_token=request.access_token)
         user = spawn(api.user, ukey)
         if user_type == 'following':
-            users = spawn(api.user_follows,
-                                 ukey, with_next_url=next_url)
+            users = spawn(api.user_follows, ukey, with_next_url=next_url)
         else:
-            users = spawn(api.user_followed_by,
-                                 ukey, with_next_url=next_url)
+            users = spawn(api.user_followed_by, ukey, with_next_url=next_url)
         isfollows = False
         if request.ukey:
             isfollows = spawn(isfollow, ukey, api)
@@ -194,7 +192,7 @@ class FollowBaseView(object):
         user, users, isfollows = user.get(), users.get(), isfollows.get()
         errors = get_errors(user, users, isfollows)
         if errors:
-            app.logger.error(str(e) for e in errors)
+            app.logger.error([str(e) for e in errors])
             return notfound(u'服务器暂时出问题了')
 
         next_url = users[1]
@@ -237,7 +235,6 @@ class FollowingView(views.MethodView, FollowBaseView):
             return context
         context['message'] = u'关注中'
         return render('follower.html', **context)
-
 
 
 class FeedView(views.MethodView):
