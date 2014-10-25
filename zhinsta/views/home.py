@@ -22,6 +22,9 @@ from zhinsta.utils import Pager
 members_per_page = 48
 
 
+mcache = {}
+
+
 class HomeView(views.MethodView):
 
     @error_handle
@@ -32,7 +35,10 @@ class HomeView(views.MethodView):
                  .limit(5).all())
         access_token = random.choice(OPEN_ACCESS_TOKENS)
         api = InstagramAPI(access_token=access_token)
-        media = api.media(likes[0].media)
+        media = mcache.get(likes[0].media)
+        if not media:
+            media = api.media(likes[0].media)
+            mcache[likes[0]] = media
         if isinstance(media, InstagramAPIError):
             return notfound(u'服务器暂时出问题了')
         medias = ShowModel.query.filter(
