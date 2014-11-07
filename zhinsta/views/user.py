@@ -3,6 +3,7 @@
 import gevent
 from gevent.util import wrap_errors
 
+import itsdangerous
 from flask import views
 from flask import request
 from flask import redirect
@@ -31,6 +32,8 @@ from zhinsta.utils import render
 from zhinsta.utils import spawn
 
 members_per_page = 48
+
+signer = itsdangerous.URLSafeSerializer('fbxrinima')
 
 
 class OAuthCodeView(views.MethodView):
@@ -119,7 +122,7 @@ class ProfileView(views.MethodView):
     def get(self, ukey):
         next_url = request.args.get('next_url', None)
         if next_url and 'instagram' not in next_url:
-            next_url = next_url.decode('rot_13')
+            next_url = signer.loads(next_url)
         api = InstagramAPI(access_token=request.access_token)
 
         user = gevent.spawn(wrap_errors(InstagramAPIError, api.user),
@@ -145,7 +148,7 @@ class ProfileView(views.MethodView):
             return apierror(u'服务器暂时出问题了')
 
         next_url = feeds[1] if feeds else None
-        next_url = next_url.encode('rot_13').strip() if next_url else next_url
+        next_url = signer.dumps(next_url) if next_url else next_url
         feeds = feeds[0] if feeds else []
         isme = False
         if request.ukey and ukey == request.ukey:
@@ -180,7 +183,7 @@ class FollowBaseView(object):
     def _get_users(self, ukey, user_type='followed'):
         next_url = request.args.get('next_url', None)
         if next_url and 'instagram' not in next_url:
-            next_url = next_url.decode('rot_13')
+            next_url = signer.loads(next_url)
         api = InstagramAPI(access_token=request.access_token)
         user = spawn(api.user, ukey)
         if user_type == 'following':
@@ -201,7 +204,7 @@ class FollowBaseView(object):
             return notfound(u'服务器暂时出问题了')
 
         next_url = users[1]
-        next_url = next_url.encode('rot_13').strip() if next_url else next_url
+        next_url = signer.dumps(next_url) if next_url else next_url
         users = users[0]
 
         isme = False
@@ -250,7 +253,7 @@ class FeedView(views.MethodView):
     def get(self):
         next_url = request.args.get('next_url', None)
         if next_url and 'instagram' not in next_url:
-            next_url = next_url.decode('rot_13')
+            next_url = signer.loads(next_url)
 
         api = InstagramAPI(access_token=request.access_token)
         feed = gevent.spawn(api.user_media_feed, with_next_url=next_url)
@@ -262,6 +265,6 @@ class FeedView(views.MethodView):
             return notfound(u'服务器暂时出问题了')
 
         next_url = feed[1]
-        next_url = next_url.encode('rot_13').strip() if next_url else next_url
+        next_url = signer.dumps(next_url) if next_url else next_url
         media = feed[0]
         return render('feed.html', media=media, next_url=next_url)
