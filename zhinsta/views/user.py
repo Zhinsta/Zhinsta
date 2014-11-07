@@ -184,11 +184,9 @@ class FollowBaseView(object):
         api = InstagramAPI(access_token=request.access_token)
         user = spawn(api.user, ukey)
         if user_type == 'following':
-            users = spawn(api.user_follows,
-                                 ukey, with_next_url=next_url)
+            users = spawn(api.user_follows, ukey, with_next_url=next_url)
         else:
-            users = spawn(api.user_followed_by,
-                                 ukey, with_next_url=next_url)
+            users = spawn(api.user_followed_by, ukey, with_next_url=next_url)
         isfollows = False
         if request.ukey:
             isfollows = spawn(isfollow, ukey, api)
@@ -202,7 +200,8 @@ class FollowBaseView(object):
             app.logger.error(str(e) for e in errors)
             return notfound(u'服务器暂时出问题了')
 
-        next_url = users[1].encode('base64').strip()
+        next_url = users[1]
+        next_url = next_url.encode('base64').strip() if next_url else next_url
         users = users[0]
 
         isme = False
@@ -244,7 +243,6 @@ class FollowingView(views.MethodView, FollowBaseView):
         return render('follower.html', **context)
 
 
-
 class FeedView(views.MethodView):
 
     @error_handle
@@ -263,6 +261,7 @@ class FeedView(views.MethodView):
         except InstagramAPIError:
             return notfound(u'服务器暂时出问题了')
 
-        next_url = feed[1].encode('base64').strip()
+        next_url = feed[1]
+        next_url = next_url.encode('base64').strip() if next_url else next_url
         media = feed[0]
         return render('feed.html', media=media, next_url=next_url)
