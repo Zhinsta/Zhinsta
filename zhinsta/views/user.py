@@ -144,7 +144,8 @@ class ProfileView(views.MethodView):
             app.logger.error([str(e) for e in errors])
             return apierror(u'服务器暂时出问题了')
 
-        next_url = feeds[1].encode('base64') if feeds else None
+        next_url = feeds[1] if feeds else None
+        next_url = next_url.encode('base64').strip() if next_url else next_url
         feeds = feeds[0] if feeds else []
         isme = False
         if request.ukey and ukey == request.ukey:
@@ -199,7 +200,7 @@ class FollowBaseView(object):
             app.logger.error([str(e) for e in errors])
             return notfound(u'服务器暂时出问题了')
 
-        next_url = users[1].encode('base64')
+        next_url = users[1].encode('base64').strip()
         users = users[0]
 
         isme = False
@@ -259,6 +260,6 @@ class FeedView(views.MethodView):
         except InstagramAPIError:
             return notfound(u'服务器暂时出问题了')
 
-        next_url = feed[1].encode('base64')
+        next_url = feed[1].encode('base64').strip()
         media = feed[0]
         return render('feed.html', media=media, next_url=next_url)
