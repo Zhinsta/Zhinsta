@@ -197,7 +197,7 @@ class FollowBaseView(object):
         user, users, isfollows = user.get(), users.get(), isfollows.get()
         errors = get_errors(user, users, isfollows)
         if errors:
-            app.logger.error(str(e) for e in errors)
+            app.logger.error(str(e) for e in list(errors))
             return notfound(u'服务器暂时出问题了')
 
         next_url = users[1]
