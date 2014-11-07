@@ -118,7 +118,7 @@ class ProfileView(views.MethodView):
     @login_required
     def get(self, ukey):
         next_url = request.args.get('next_url', None)
-        if next_url:
+        if next_url and 'instagram' not in next_url:
             next_url = next_url.decode('base64')
         api = InstagramAPI(access_token=request.access_token)
 
@@ -179,7 +179,7 @@ class FollowBaseView(object):
 
     def _get_users(self, ukey, user_type='followed'):
         next_url = request.args.get('next_url', None)
-        if next_url:
+        if next_url and 'instagram' not in next_url:
             next_url = next_url.decode('base64')
         api = InstagramAPI(access_token=request.access_token)
         user = spawn(api.user, ukey)
@@ -249,7 +249,7 @@ class FeedView(views.MethodView):
     @login_required
     def get(self):
         next_url = request.args.get('next_url', None)
-        if next_url:
+        if next_url and 'instagram' not in next_url:
             next_url = next_url.decode('base64')
 
         api = InstagramAPI(access_token=request.access_token)
