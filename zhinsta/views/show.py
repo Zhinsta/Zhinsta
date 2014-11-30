@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import random
-import time
 
 from flask import request
 from flask import views
 from instagram import InstagramAPI
-from sqlalchemy.sql import expression
-from sqlalchemy.sql import func
 
-from zhinsta.engines import db
-from zhinsta.models.user import LikeModel
 from zhinsta.models.user import ShowModel
+from zhinsta.models import redis
 from zhinsta.settings import OPEN_ACCESS_TOKENS
 from zhinsta.utils import Pager
 from zhinsta.utils import add_show
@@ -38,21 +34,8 @@ class ShowView(views.MethodView):
                  .offset(pager.offset)
                  .limit(pager.limit).all())
         else:
-            subquery = (db.session.query(LikeModel.media,
-                                         func.count(1).label('count'))
-                        .group_by(LikeModel.media).subquery())
-            now = int(time.time() / 7200)
-            order = expression.label('hacker', (subquery.c.count + 1.0) / (now - ShowModel.hour_tagged + 2.0) / (now - ShowModel.hour_tagged + 2.0))
-            medias =\
-                (db.session.query(ShowModel)
-                 .filter(ShowModel.showable == 0)
-                 .outerjoin(subquery, ShowModel.mid == subquery.c.media)
-                 .filter(ShowModel.mid != None)     # NOQA
-                 .order_by(order.desc())
-                 .order_by(ShowModel.date_tagged.desc())
-                 .order_by(ShowModel.date_created.desc())
-                 .offset(pager.offset)
-                 .limit(pager.limit).all())
+            mids = redis.lrange('zhinsta:show:list', pager.offset, pager.offset + pager.limit - 1)
+            medias = [ShowModel.query.get(x) for x in mids]
         return render('show.html', medias=medias, pager=pager)
 
 
