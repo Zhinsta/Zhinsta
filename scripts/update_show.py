@@ -40,7 +40,6 @@ def update_redis():
     return len(mids)
 
 if __name__ == '__main__':
-    while True:
-        count = update_redis()
-        print 'updated! total {} items in show list.'.format(count)
-        time.sleep(60 * 5)
+    count = update_redis()
+    print 'updated! total {} items in show list.'.format(count)
+    time.sleep(60 * 5)
