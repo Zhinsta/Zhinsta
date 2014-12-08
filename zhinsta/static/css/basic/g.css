@@ -437,12 +437,14 @@ h2 a:hover {
 .photos .photos-noauth a:hover {
   background-color: #6ECB9A;
 }
+.photos .photo.tantropmi {
+  height: 220px;
+}
 .photos .photo {
   position: relative;
   float: left;
   margin: 10px;
   width: 220px;
-  height: 220px;
   display: block;
   list-style: none;
   color: inherit;
@@ -554,8 +556,10 @@ h2 a:hover {
   .photos .photo {
     float: none;
     width: 300px;
-    height: 300px;
     margin: 0 auto 1em;
+  }
+  .photos .photo.tantropmi {
+    height: 300px;
   }
 }
 .people {
