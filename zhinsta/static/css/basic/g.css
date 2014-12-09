@@ -866,9 +866,13 @@ h2 a:hover {
 }
 .page-media .media {
   margin: 2em 0 0 0;
-  overflow: auto;
+  overflow: hidden;
+}
+.page-media .media .tantropmi {
+  margin: 1em 0;
 }
 .page-media .media-l img {
+  display: block;
   max-width: 100%;
 }
 .page-media .media-r {
