@@ -9,6 +9,7 @@ from .user import (OAuthCodeView, LoginView, LogoutView,
 from .media import TagView, MediaProfileView
 from .search import SearchUserView, SearchTagView
 from .show import RealtimeView, ShowView
+from .sitemap import ShowSitemapView, LikeSitemapView, UserSitemapView
 
 blueprint = Blueprint('view', __name__)
 
@@ -70,3 +71,14 @@ blueprint.add_url_rule('/instagram/realtime/',
 blueprint.add_url_rule('/feed/',
                        view_func=FeedView.as_view(b'feed'),
                        endpoint='feed')
+
+
+blueprint.add_url_rule(
+    '/user/sitemap.xml', endpoint='user_sitemap',
+    view_func=UserSitemapView.as_view(b'user_sitemap'))
+blueprint.add_url_rule(
+    '/like/sitemap.xml', endpoint='like_sitemap',
+    view_func=LikeSitemapView.as_view(b'like_sitemap'))
+blueprint.add_url_rule(
+    '/show/sitemap.xml', endpoint='show_media',
+    view_func=ShowSitemapView.as_view(b'show_sitemap'))

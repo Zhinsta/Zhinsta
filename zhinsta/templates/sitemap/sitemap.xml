@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset {% if not baiducustom %}xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"{% endif %}>
+{% for item in items %}
+<url>
+    <loc>{{ item.location }}</loc>
+    {% if item.lastmod %}<lastmod>{{ item.lastmod.strftime("%Y-%m-%d") }}</lastmod>{% endif %}
+    {% if item.changefreq %}<changefreq>{{ item.changefreq }}</changefreq>{% endif %}
+    {% if item.priority %}<priority>{{ item.priority }}</priority>{% endif %}
+    {%- block tail scoped -%}
+    {%- if baiducustom == 'y' -%}
+    <data>
+        <display>
+            <originality>{{ item.originality }}</originality>
+            <title>{{ item.title }}</title>
+            <release_time>{{ item.date_created.strftime("%Y-%m-%d %H:%M:%S") }}</release_time>
+            <source>{{ item.source }}</source>
+			<source_name>zhinsta</source_name>
+            {% if item.category %}<category>{{ item.category }}</category>{% endif %}
+            {% if item.author %}<author>{{ item.author }}</author>{% endif %}
+            {% if item.image %}<image>{{ item.image }}</image>{% endif %}
+        </display>
+    </data>
+    {%- endif -%}
+    {%- endblock %}
+</url>
+{%- endfor %}
+</urlset>

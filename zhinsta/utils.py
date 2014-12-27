@@ -108,6 +108,23 @@ class Pager(object):
         self.offset = offset
         self.current_page = offset / self.limit + 1
 
+    @property
+    def current_offset(self):
+        current_page = request.args.get('page', 1)
+        try:
+            current_page = int(current_page)
+        except ValueError:
+            current_page = 1
+        if current_page < 1:
+            current_page = 1
+        elif current_page > self.total_page > 0:
+            current_page = self.total_page
+
+        if current_page == 1:
+            offset = 0
+        offset = (current_page - 1) * self.limit
+        return offset
+
     def set_current_page(self, current_page):
         current_page = int(current_page)
         if current_page > self.total_page:
