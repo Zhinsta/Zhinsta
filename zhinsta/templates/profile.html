@@ -43,6 +43,7 @@
         </ul>
     </div>
 
+    <!--
     <div class="tantropmi" style="margin-bottom:1em;">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- profile页广告 -->
@@ -55,9 +56,11 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
+    -->
 
     <div class="photos" id="photoList">
         <ul>
+            <!--
             <li class="photo tantropmi">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- profile页广告（图片列表） -->
@@ -70,6 +73,7 @@
                 (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </li>
+            -->
             {% for feed in feeds %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=feed.id) }}" class="photo-pic">
