@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% set body_class="page-profile" %}
 {% block title %}
-{{ user.username }}-instagram 网页版-中文圈-明星账号
+{{ user.full_name}} @{{ user.username }}-instagram 网页版-中文圈-明星账号
 {{ super() }}
 {% endblock %}
+{% block keywords%}{{ user.full_name}}, @{{ user.username }}, {{super()}}{% endblock %}
+{% block description%}{{ user.full_name}}, @{{ user.username }}的instagram照片, {{super()}}{% endblock %}
 {% block main %}
 <div class="main">
     <div class="info">
         <div class="info-l">
-            <img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.username }}" />
+			<img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name}} @{{ user.username }} on instagram" />
             <div class="info-l-txt">
                 <h1>
                     <a href="{{ url_for('view.profile', ukey=user.id) }}">{{ user.username }}</a>
