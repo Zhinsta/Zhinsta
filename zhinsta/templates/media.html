@@ -101,6 +101,13 @@
             </li>
             {% endfor %}
         </ul>
+		{% if has_login %}
+		<form class="comments-form" action="" method="POST">
+			{{ form.csrf_token }}
+			<p>{{ form.content(required=true, placeholder="留下些评论吧") }}</p>
+			<p><button type="submit">提交</button></p>
+		</form>
+		{% endif %}
     </div>
     {% endif %}
 </div>
