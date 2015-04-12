@@ -14,11 +14,11 @@
             {% for pic in media %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=pic.id) }}" class="photo-pic">
-                    <img src="{{ pic.images.low_resolution.url | iproxy }}" alt="" />
+					<img src="{{ pic.images.low_resolution.url | iproxy }}" alt="{{ pic.user.full_name }} @{{ pic.user.username }} on instagram {{ tag.name }}" />
                 </a>
                 <!-- TODO -->
                 <a href="{{ url_for('view.profile', ukey=pic.user.id) }}" class="photo-author">
-                    <img src="{{ pic.user.profile_picture }}" alt="{{ pic.user.full_name }}" width="32" height="32" />
+					<img src="{{ pic.user.profile_picture }}" alt="{{ pic.user.full_name }} @{{ pic.user.username }} on instagram {{ tag.name }}" width="32" height="32" />
                     {{ pic.user.username }}
                 </a>
                 <span class="photo-info">

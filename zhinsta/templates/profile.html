@@ -10,7 +10,7 @@
 <div class="main">
     <div class="info">
         <div class="info-l">
-			<img width="150" height="150" src="{{ user.profile_picture }}" alt="{{ user.full_name}} @{{ user.username }} on instagram" />
+			<img width="150" height="150" src="{{ user.profile_picture | iproxy }}" alt="{{ user.full_name}} @{{ user.username }} on instagram" />
             <div class="info-l-txt">
                 <h1>
                     <a href="{{ url_for('view.profile', ukey=user.id) }}">{{ user.username }}</a>
@@ -79,10 +79,10 @@
             {% for feed in feeds %}
             <li class="photo">
                 <a href="{{ url_for('view.media', mid=feed.id) }}" class="photo-pic">
-                    <img src="{{ feed.images.low_resolution.url | iproxy}}" alt="" />
+                    <img src="{{ feed.images.low_resolution.url | iproxy}}" alt="{{ user.full_name}} @{{ user.username }} on instagram" />
                 </a>
                 <a class="photo-author" href="{{ url_for('view.profile', ukey=user.id) }}">
-                    <img src="{{ user.profile_picture }}" alt="{{ user.username }}" width="32" height="32" />
+                    <img src="{{ user.profile_picture }}" alt="{{ user.full_name}} @{{ user.username }} on instagram" width="32" height="32" />
                     {{ user.username }}
                 </a>
                 <span class="photo-info">
