@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import random
+
 from urlparse import urlparse
 from datetime import datetime
 from datetime import timedelta
@@ -23,7 +25,7 @@ def parseisoformat(value):
 @app.template_filter()
 def iproxy(url):
     url = urlparse(url)
-    return 'http://img1.zhinsta.com:8000/' + (url.netloc + url.path).encode('base64').strip()
+    return 'http://img{}.zhinsta.com:8000/{}'.format(random.choice([1, 2]), (url.netloc + url.path).encode('base64').strip())
 
 
 @app.template_filter()
