@@ -25,7 +25,7 @@ def parseisoformat(value):
 @app.template_filter()
 def iproxy(url):
     url = urlparse(url)
-    return 'http://img{}.zhinsta.com:8000/{}'.format(random.choice([1, 2]), (url.netloc + url.path).encode('base64').strip())
+    return 'http://img{}.zhinsta.com:8000/{}'.format(random.choice([1, 2, 3]), (url.netloc + url.path).encode('base64').strip())
 
 
 @app.template_filter()
