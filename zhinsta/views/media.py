@@ -60,7 +60,10 @@ class MediaProfileView(views.MethodView):
     @login_required
     def get(self, mid):
         api = InstagramAPI(access_token=request.access_token)
-        media_info = self._get_media(api, mid)
+        result = self._get_media(api, mid)
+        if not isinstance(result, dict):
+            return result
+        media_info = result
         form = MediaCommentForm()
         return render('media.html', form=form, **media_info)
 
