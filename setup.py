@@ -4,6 +4,7 @@ from setuptools import setup, find_packages
 
 install_requires = [
     'Flask-Cache',
+    'pyDes',
     'MySQL-python',
     'flask',
     'flask-admin',

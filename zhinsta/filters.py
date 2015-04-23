@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
 import random
 
 from urlparse import urlparse
 from datetime import datetime
 from datetime import timedelta
 
+import pyDes
+
 from .app import app
+
+
+URL_CRYPT_KEY = os.environ['ZHINSTA_CRYPT_KEY']
 
 
 @app.template_filter()
@@ -25,7 +31,10 @@ def parseisoformat(value):
 @app.template_filter()
 def iproxy(url):
     url = urlparse(url)
-    return 'http://img{}.zhinsta.com:8000/{}'.format(random.choice([1, 2]), (url.netloc + url.path).encode('base64').strip())
+    src = url.netloc + url.path
+    cipher = pyDes.des(URL_CRYPT_KEY, padmode=pyDes.PAD_PKCS5)
+    dst = cipher.encript(src, padmode=pyDes.PAD_PKCS5)
+    return 'http://img{}.zhinsta.com:8000/{}'.format(random.choice([1, 2]), dst.encode('base64').strip())
 
 
 @app.template_filter()
