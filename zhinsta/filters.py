@@ -30,6 +30,8 @@ def parseisoformat(value):
 
 @app.template_filter()
 def iproxy(url):
+    if isinstance(url, unicode):
+        url = url.encode('utf-8')
     url = urlparse(url)
     src = url.netloc + url.path
     cipher = pyDes.des(URL_CRYPT_KEY, padmode=pyDes.PAD_PKCS5)
