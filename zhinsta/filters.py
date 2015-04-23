@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import os
 import random
-
+import base64
 from urlparse import urlparse
 from datetime import datetime
 from datetime import timedelta
@@ -33,8 +33,8 @@ def iproxy(url):
     url = urlparse(url)
     src = url.netloc + url.path
     cipher = pyDes.des(URL_CRYPT_KEY, padmode=pyDes.PAD_PKCS5)
-    dst = cipher.encript(src, padmode=pyDes.PAD_PKCS5)
-    return 'http://img{}.zhinsta.com:8000/{}'.format(random.choice([1, 2]), dst.encode('base64').strip())
+    dst = cipher.encrypt(src, padmode=pyDes.PAD_PKCS5)
+    return 'http://img{}.zhinsta.com:8000/{}'.format(random.choice([1, 2]), base64.urlsafe_b64encode(dst).strip())
 
 
 @app.template_filter()
