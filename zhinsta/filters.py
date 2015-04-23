@@ -32,7 +32,10 @@ def parseisoformat(value):
 def iproxy(url):
     if isinstance(url, unicode):
         url = url.encode('utf-8')
-    url = urlparse(url)
+    try:
+        url = urlparse(url)
+    except Exception:
+        return url
     src = url.netloc + url.path
     cipher = pyDes.des(URL_CRYPT_KEY, padmode=pyDes.PAD_PKCS5)
     dst = cipher.encrypt(src, padmode=pyDes.PAD_PKCS5)
