@@ -35,7 +35,7 @@
 
     <div class="media">
         <div class="media-l">
-            <img src="{{ media.get_standard_resolution_url() | iproxy }}" alt="" />
+			<img src="{{ media.get_standard_resolution_url() | iproxy }}" alt="{{ media.user.full_name}} @{{ media.user.username }} on instagram {% for tag in (media.tags or []) %} {{ tag.name }} {% endfor %}" />
         </div>
         <div class="media-r">
             <div class="media-info">
